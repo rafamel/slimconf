@@ -26,9 +26,16 @@ interface On {
 
 type ConfigCb = (envObj: EnvObj, on: On) => void;
 
+interface ConfigObj {
+  [prop: any]: any;
+  get: (any) => any;
+  set: (any) => any;
+  environment: (envObj: EnvObj) => ConfigObj;
+}
+
 export default function config(
   setup?: void | Setup,
   configCb: ConfigCb
-): object;
+): ConfigObj;
 
-export function requireEnv(arr: string[]): void;
+export function requireEnv(...vars: string[]): void;
