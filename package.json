@@ -21,11 +21,13 @@
     "lint:test": "nps lint.test",
     "lint:md": "nps lint.md",
     "lint:scripts": "nps lint.scripts",
+    "lint:typings": "nps lint.typings",
     "test": "nps test",
     "test:watch": "nps test.watch",
     "validate": "nps validate",
     "update": "nps update",
     "clean": "nps clean",
+    "docs": "nps docs",
     "nps": "nps",
     "jake": "jake"
   },
@@ -49,7 +51,6 @@
     "babel-plugin-transform-decorators-legacy": "^1.3.5",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
-    "babel-register": "^6.26.0",
     "concurrently": "^3.6.1",
     "coveralls": "^3.0.2",
     "cross-env": "^5.2.0",
@@ -73,7 +74,12 @@
     "npx": "^10.2.0",
     "onchange": "^4.1.0",
     "prettier": "^1.15.2",
-    "shx": "^0.3.2"
+    "shx": "^0.3.2",
+    "tslint": "^5.11.0",
+    "tslint-config-prettier": "^1.17.0",
+    "typedoc": "^0.13.0",
+    "typedoc-plugin-external-module-name": "^1.1.3",
+    "typescript": "^3.2.2"
   },
   "dependencies": {},
   "jest": {
