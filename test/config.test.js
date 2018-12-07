@@ -101,16 +101,19 @@ describe(`- Environment`, () => {
         default: 3,
         test: 4
       }),
-      else: 5
+      else: 5,
+      env
     }));
     const c2 = c1.environment({ env: 'hello' });
 
     expect(c1.some).toBe(1);
     expect(c1.other).toBe(4);
     expect(c1.else).toBe(5);
+    expect(c1.env).toBe('test');
     expect(c2.some).toBe(2);
     expect(c2.other).toBe(3);
     expect(c2.else).toBe(5);
+    expect(c2.env).toBe('goodbye');
   });
   test(`Works with setup (2)`, () => {
     const setup = {
@@ -122,7 +125,7 @@ describe(`- Environment`, () => {
       },
       inst: 'one'
     };
-    const c1 = config(setup, ({ env }, on) => ({
+    const c1 = config(setup, ({ env, inst }, on) => ({
       some: on.env({
         default: 1,
         goodbye: on.inst({
@@ -134,7 +137,9 @@ describe(`- Environment`, () => {
         default: 3,
         one: 4
       }),
-      else: 5
+      else: 5,
+      env,
+      inst
     }));
 
     const c2 = c1.environment({ env: 'hello' });
@@ -144,18 +149,26 @@ describe(`- Environment`, () => {
     expect(c1.some).toBe(1);
     expect(c1.other).toBe(4);
     expect(c1.else).toBe(5);
+    expect(c1.env).toBe('test');
+    expect(c1.inst).toBe('one');
 
     expect(c2.some).toBe(2);
     expect(c2.other).toBe(4);
     expect(c2.else).toBe(5);
+    expect(c2.env).toBe('goodbye');
+    expect(c2.inst).toBe('one');
 
     expect(c3.some).toBe(1);
     expect(c3.other).toBe(3);
     expect(c3.else).toBe(5);
+    expect(c3.env).toBe('test');
+    expect(c3.inst).toBe('two');
 
     expect(c4.some).toBe(10);
     expect(c4.other).toBe(3);
     expect(c4.else).toBe(5);
+    expect(c4.env).toBe('goodbye');
+    expect(c4.inst).toBe('two');
   });
   test(`Merges default`, () => {
     const setup = {
