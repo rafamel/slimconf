@@ -1,4 +1,4 @@
-import iConfig, { requireEnv as iRequireEnv } from '~/index';
+import { config as iConfig, requireEnv as iRequireEnv } from '~/index';
 import config from '~/config';
 import requireEnv from '~/require-env';
 

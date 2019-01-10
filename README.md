@@ -1,6 +1,6 @@
 # slimconf
 
-[![Version](https://img.shields.io/github/package-json/v/rafamel/slimconf.svg)](https://github.com/rafamel/slimconf)
+[![Version](https://img.shields.io/npm/v/slimconf.svg)](https://www.npmjs.com/package/slimconf)
 [![Build Status](https://travis-ci.org/rafamel/slimconf.svg)](https://travis-ci.org/rafamel/slimconf)
 [![Coverage](https://img.shields.io/coveralls/rafamel/slimconf.svg)](https://coveralls.io/github/rafamel/slimconf)
 [![Dependencies](https://david-dm.org/rafamel/slimconf/status.svg)](https://david-dm.org/rafamel/slimconf)
@@ -51,7 +51,7 @@ const setup = {
 File: `config.js`:
 
 ```javascript
-import config from 'slimconf';
+import { config } from 'slimconf';
 
 const setup = {
   env: {
