@@ -48,7 +48,7 @@ export default function config(setup, callback) {
   if (!setup) setup = {};
   const setupKeys = Object.keys(setup).sort();
   const initial = Object.entries(setup).reduce((acc, [key, value]) => {
-    acc[key] = typeof value === 'string' ? value : value.default;
+    acc[key] = typeof value === 'object' ? value.default : value;
     return acc;
   }, {});
   return environment(initial);
