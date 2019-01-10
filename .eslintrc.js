@@ -18,8 +18,8 @@ module.exports = {
       1,
       { terms: ['xxx', 'fixme', 'todo', 'refactor'], location: 'start' }
     ],
+    'no-unused-vars': 1, // Set as warning
     'no-console': 1,
-    'jsx-a11y/no-autofocus': 0,
     'no-restricted-globals': [2, 'fetch'].concat(globals),
     // eslint-plugin-babel
     'babel/no-invalid-this': 1,
@@ -31,6 +31,10 @@ module.exports = {
     // babel-plugin-module-resolver
     'import/resolver': {
       'babel-module': {}
+    },
+    // eslint-import-resolver-typescript
+    'import/resolver': {
+      typescript: {}
     }
   }
 };
