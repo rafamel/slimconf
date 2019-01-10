@@ -45,6 +45,27 @@ describe(`- Basic`, () => {
     expect(c.else).toBe(5);
   });
 
+  test(`Works with setup when undefined`, () => {
+    const setup = {
+      env: undefined
+    };
+    const c = config(setup, ({ env }, on) => ({
+      some: on.env({
+        default: 1,
+        hello: 2
+      }),
+      other: on.env({
+        default: 3,
+        test: 4
+      }),
+      else: 5
+    }));
+
+    expect(c.some).toBe(1);
+    expect(c.other).toBe(3);
+    expect(c.else).toBe(5);
+  });
+
   test(`Get works with no setup & throws when key doesn't exist`, () => {
     const c = config(null, () => ({ some: { a: 1, b: 2 }, other: 3 }));
 

@@ -9,7 +9,7 @@ export default function config(
       // prettier-ignore
       const map =
         setup &&
-        typeof setup[key] !== 'string' && 
+        typeof setup[key] === 'object' && 
         // @ts-ignore
         setup[key].hasOwnProperty('map') ? setup[key].map : (x: any) => x;
       acc[key] = map(obj[key]);
