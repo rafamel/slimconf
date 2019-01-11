@@ -16,9 +16,10 @@ describe(`- Basic`, () => {
     expect(c2.other).toBe(3);
   });
 
-  test(`Throws with keys get, set, environment`, () => {
+  test(`Throws with keys get, set, environment, pure`, () => {
     expect(() => config(null, () => ({ some: 1, get: 2 }))).toThrowError();
     expect(() => config(null, () => ({ some: 1, set: 2 }))).toThrowError();
+    expect(() => config(null, () => ({ some: 1, pure: 2 }))).toThrowError();
     expect(() =>
       config(null, () => ({ some: 1, environment: 2 }))
     ).toThrowError();
@@ -89,6 +90,20 @@ describe(`- Basic`, () => {
     expect(c.get('some.b')).toBe(2);
     expect(c.get('other')).toBe(5);
     expect(() => c.set('not')).toThrowError();
+  });
+});
+
+describe(`- Pure`, () => {
+  test(`Works`, () => {
+    const c = config(null, () => ({
+      other: 3
+    })).pure();
+
+    expect(c).toHaveProperty('other', 3);
+    expect(c.get).toBe(undefined);
+    expect(c.set).toBe(undefined);
+    expect(c.environment).toBe(undefined);
+    expect(c.pure).toBe(undefined);
   });
 });
 

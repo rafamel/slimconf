@@ -44,6 +44,7 @@ const setup = {
   
 * `get(path: string)`: Will return the value at `path` for the current environment, if it exists -otherwise it will throw. Example: `obj.get('logs.transports')`.
 * `set(path: string, value: any)`: Will set the value at `path` for the current environment, if it exists -otherwise it will throw. Example: `obj.set('logs.transports', { console: false, file: false })`.
+* `pure()`: Will return the configuration object without any of these method (`get()`, `set()`, `pure()`, and `environment()`).
 * `environment(obj: object)`: Will return the configuration for a specific environment that might not be the current. As an example, we could access the configuration for a production environment when in a development environment: `obj.environment({ env: 'production' })`.
 
 #### Usage example

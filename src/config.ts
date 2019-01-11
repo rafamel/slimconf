@@ -21,10 +21,11 @@ export default function config(
       if (
         configObj.hasOwnProperty('get') ||
         configObj.hasOwnProperty('set') ||
+        configObj.hasOwnProperty('pure') ||
         configObj.hasOwnProperty('environment')
       ) {
         throw Error(
-          'slimconfig config can\'t have keys "get", "set", or "environment"'
+          'slimconfig config can\'t have keys "get", "set", "pure", or "environment"'
         );
       }
       environments[id] = {
@@ -34,6 +35,14 @@ export default function config(
         },
         set<T>(path: string, value: T): T {
           return set(this, path.split('.'), value);
+        },
+        pure(): { [id: string]: any } {
+          const o = { ...this };
+          delete o.get;
+          delete o.set;
+          delete o.pure;
+          delete o.environment;
+          return o;
         },
         environment(o: IEnv): IConfig {
           if (!o) return environment(initial);

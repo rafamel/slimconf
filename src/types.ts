@@ -24,5 +24,6 @@ export interface IConfig {
   environment: (o: IEnv) => IConfig;
   get: (path: string) => any;
   set: <T>(path: string, value: T) => T;
+  pure: () => { [id: string]: any };
   [id: string]: any;
 }
