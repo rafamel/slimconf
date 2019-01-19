@@ -3,5 +3,6 @@ module.exports = {
   DOCS_DIR: 'docs',
   CONFIG_DIR: __dirname,
   EXTENSIONS: 'js,mjs,jsx,ts,tsx',
-  TYPESCRIPT: true
+  TYPESCRIPT: true,
+  DOCS_ON_BUILD: false
 };
