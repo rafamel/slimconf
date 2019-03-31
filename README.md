@@ -52,7 +52,7 @@ const setup = {
 File: `config.js`:
 
 ```javascript
-import { config } from 'slimconf';
+import config from 'slimconf';
 
 const setup = {
   env: {
