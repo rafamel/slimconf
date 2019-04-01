@@ -1,4 +1,4 @@
-import { TEnvFilter, ISetup, TFn, IOfType, TOn, TConfig } from '~/types';
+import { TEnvAssign, ISetup, TFn, IOfType, TOn, TConfig } from '~/types';
 import hash from './hash';
 import get from '../get';
 import set from '../set';
@@ -6,19 +6,19 @@ import verify from '../verify';
 
 export default function environment<S extends ISetup, C extends IOfType<any>>(
   environments: IOfType<TConfig<S, C>>,
-  initial: TEnvFilter<S>,
-  filter: TEnvFilter<S>,
+  initial: TEnvAssign<S>,
+  assign: TEnvAssign<S>,
   setup: S,
   fn: TFn<S, C>
 ): TConfig<S, C> {
-  filter = initial === filter ? initial : Object.assign({}, initial, filter);
+  assign = initial === assign ? initial : Object.assign({}, initial, assign);
   const keys = Object.keys(setup);
 
   const envs = keys.reduce((acc: { [P in keyof S]?: string }, key: string) => {
     const value = setup[key];
     const map =
       typeof value === 'object' && value.map ? value.map : (x?: string) => x;
-    const env = map(filter[key]);
+    const env = map(assign[key]);
     // eslint-disable-next-line eqeqeq
     acc[key] = env == undefined ? 'default' : env;
     return acc;
@@ -36,7 +36,7 @@ export function create<S extends ISetup, C extends IOfType<any>>(
   id: string,
   envs: { [P in keyof S]: string },
   environments: any,
-  initial: TEnvFilter<S>,
+  initial: TEnvAssign<S>,
   setup: S,
   fn: TFn<S, C>
 ): void {
@@ -58,8 +58,8 @@ export function create<S extends ISetup, C extends IOfType<any>>(
       delete o.environment;
       return o;
     },
-    environment(filter?: TEnvFilter<S>): TConfig<S, C> {
-      return environment(environments, initial, filter || initial, setup, fn);
+    environment(assign?: TEnvAssign<S>): TConfig<S, C> {
+      return environment(environments, initial, assign || initial, setup, fn);
     }
   });
 }
