@@ -1,4 +1,4 @@
-import requireEnv from '../src/require-env';
+import requireEnv from '~/require-env';
 
 test(`Doesn't throw for existing environment variables`, () => {
   expect(() => requireEnv('NODE_ENV')).not.toThrow();

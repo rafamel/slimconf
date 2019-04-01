@@ -1,9 +1,9 @@
-import config from '../src/config';
+import slim from '../src/slim';
 
 describe(`- Basic`, () => {
   test(`Works with no setup`, () => {
-    const c1 = config(null, () => ({ some: { a: 1, b: 2 }, other: 3 }));
-    const c2 = config(undefined, () => ({ some: { a: 1, b: 2 }, other: 3 }));
+    const c1 = slim(null, () => ({ some: { a: 1, b: 2 }, other: 3 }));
+    const c2 = slim(undefined, () => ({ some: { a: 1, b: 2 }, other: 3 }));
 
     expect(c1).toHaveProperty('some');
     expect(c1.some.a).toBe(1);
@@ -17,11 +17,11 @@ describe(`- Basic`, () => {
   });
 
   test(`Throws with keys get, set, environment, pure`, () => {
-    expect(() => config(null, () => ({ some: 1, get: 2 }))).toThrowError();
-    expect(() => config(null, () => ({ some: 1, set: 2 }))).toThrowError();
-    expect(() => config(null, () => ({ some: 1, pure: 2 }))).toThrowError();
+    expect(() => slim(null, () => ({ some: 1, get: 2 }))).toThrowError();
+    expect(() => slim(null, () => ({ some: 1, set: 2 }))).toThrowError();
+    expect(() => slim(null, () => ({ some: 1, pure: 2 }))).toThrowError();
     expect(() =>
-      config(null, () => ({ some: 1, environment: 2 }))
+      slim(null, () => ({ some: 1, environment: 2 }))
     ).toThrowError();
   });
 
@@ -29,7 +29,7 @@ describe(`- Basic`, () => {
     const setup = {
       env: 'test'
     };
-    const c = config(setup, ({ env }, on) => ({
+    const c = slim(setup, ({ env }, on) => ({
       some: on.env({
         default: 1,
         hello: 2
@@ -50,7 +50,7 @@ describe(`- Basic`, () => {
     const setup = {
       env: undefined
     };
-    const c = config(setup, ({ env }, on) => ({
+    const c = slim(setup, ({ env }, on) => ({
       some: on.env({
         default: 1,
         hello: 2
@@ -68,7 +68,7 @@ describe(`- Basic`, () => {
   });
 
   test(`Get works with no setup & throws when key doesn't exist`, () => {
-    const c = config(null, () => ({ some: { a: 1, b: 2 }, other: 3 }));
+    const c = slim(null, () => ({ some: { a: 1, b: 2 }, other: 3 }));
 
     expect(c).toHaveProperty('some');
     expect(c.get('some').a).toBe(1);
@@ -81,7 +81,7 @@ describe(`- Basic`, () => {
   });
 
   test(`Set works with no setup & throws when key doesn't exist`, () => {
-    const c = config(null, () => ({ some: { a: 1, b: 2 }, other: 3 }));
+    const c = slim(null, () => ({ some: { a: 1, b: 2 }, other: 3 }));
 
     c.set('some.a', 4);
     c.set('other', 5);
@@ -95,7 +95,7 @@ describe(`- Basic`, () => {
 
 describe(`- Pure`, () => {
   test(`Works`, () => {
-    const c = config(null, () => ({
+    const c = slim(null, () => ({
       other: 3
     })).pure();
 
@@ -109,7 +109,7 @@ describe(`- Pure`, () => {
 
 describe(`- Environment`, () => {
   test(`Works with no setup`, () => {
-    const c = config(null, () => ({
+    const c = slim(null, () => ({
       some: { a: 1, b: 2 },
       other: 3
     })).environment();
@@ -128,7 +128,7 @@ describe(`- Environment`, () => {
         }
       }
     };
-    const c1 = config(setup, ({ env }, on) => ({
+    const c1 = slim(setup, ({ env }, on) => ({
       some: on.env({
         default: 1,
         goodbye: 2
@@ -161,7 +161,7 @@ describe(`- Environment`, () => {
       },
       inst: 'one'
     };
-    const c1 = config(setup, ({ env, inst }, on) => ({
+    const c1 = slim(setup, ({ env, inst }, on) => ({
       some: on.env({
         default: 1,
         goodbye: on.inst({
@@ -210,7 +210,7 @@ describe(`- Environment`, () => {
     const setup = {
       env: 'test'
     };
-    const c1 = config(setup, ({ env }, on) => ({
+    const c1 = slim(setup, ({ env }, on) => ({
       some: on.env({
         default: {
           one: 1,
@@ -233,7 +233,7 @@ describe(`- Environment`, () => {
     const setup = {
       env: 'test'
     };
-    const c1 = config(setup, ({ env }, on) => ({
+    const c1 = slim(setup, ({ env }, on) => ({
       some: on.env({
         default: {
           one: 1,
