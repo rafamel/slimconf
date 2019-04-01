@@ -18,6 +18,6 @@ module.exports = config(undefined, () => ({
     // Build project on version bump. Boolean.
     build: true,
     // Generate docs from TS on version bump. Boolean.
-    docs: false
+    docs: true
   }
 }));

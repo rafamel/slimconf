@@ -8,6 +8,9 @@ function slim<S extends ISetup, C extends IOfType<any>>(
   fn: TFn<S, C>
 ): TConfig<S, C>;
 function slim<C extends IOfType<any>>(config: C): TBareConfig<C>;
+/**
+ * `slim` is the default function exported by `slimconf`
+ */
 function slim<S extends ISetup, C extends IOfType<any>>(
   a: S | C,
   fn?: TFn<S, C>

@@ -8,7 +8,7 @@ export default function verify(obj: IOfType<any>): void {
     obj.hasOwnProperty('environment')
   ) {
     throw Error(
-      'slimconfig config can\'t have keys "get", "set", "pure", or "environment"'
+      `config can't have keys "get", "set", "pure", or "environment"`
     );
   }
 }
