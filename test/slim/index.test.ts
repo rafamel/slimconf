@@ -105,7 +105,7 @@ describe(`full`, () => {
         barbaz: on.env({ test: 6 })
       }));
       const c2 = slim(
-        { env: { default: null, map: () => undefined } },
+        { env: { from: null, map: () => undefined } },
         (_, on) => ({
           foo: on.env({ default: 1, production: 2 }),
           bar: on.env({ default: 3, test: 4 }),
@@ -187,7 +187,7 @@ describe(`full`, () => {
     test(`succeeds`, () => {
       const setup = {
         env: {
-          default: 'test',
+          from: 'test',
           map(env: string) {
             return env === 'hello' ? 'goodbye' : env;
           }
@@ -207,7 +207,7 @@ describe(`full`, () => {
     test(`succeeds (deep)`, () => {
       const setup = {
         env: {
-          default: 'test',
+          from: 'test',
           map(env: string) {
             return env === 'hello' ? 'goodbye' : env;
           }
