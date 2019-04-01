@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>slimconf 0.3.0</title>
+	<title>slimconf 0.4.0</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">slimconf 0.3.0</a>
+					<a href="index.html" class="title">slimconf 0.4.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -54,7 +54,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1> slimconf 0.3.0</h1>
+			<h1> slimconf 0.4.0</h1>
 		</div>
 	</div>
 </header>
@@ -86,7 +86,7 @@
 				<p><a href="https://www.npmjs.com/package/slimconf"><code>npm install slimconf</code></a></p>
 				<h2 id="usage">Usage</h2>
 				<h3 id="slim"><code>slim</code></h3>
-				<p><code>slim</code> is the default function exported by <code>slimconf</code> - <a href="https://rafamel.github.io/slimconf/globals.html#requireenv">see docs.</a></p>
+				<p><code>slim</code> is the default function exported by <code>slimconf</code> - <a href="https://rafamel.github.io/slimconf/globals.html#slim">see docs.</a></p>
 				<h4 id="with-no-environment-variables">With no environment variables</h4>
 				<p>When the configuration doesn&#39;t depend on environment variables, it&#39;s possible to just call <code>slim</code> as follows:</p>
 				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> slim <span class="hljs-keyword">from</span> <span class="hljs-string">'slimconf'</span>;
@@ -109,7 +109,7 @@ config.pure(); <span class="hljs-comment">// { foo: { bar: 'baz' }, baz: 'foobar
 					<li><code>fn</code> should be a configuration object returning function - <a href="https://rafamel.github.io/slimconf/globals.html#tfn">see docs.</a></li>
 				</ul>
 				<h5 id="fundamentals">Fundamentals</h5>
-				<p>If our configuration depended on <code>process.env.NODE_ENV</code> and <code>process.env.FOO_ENV</code>, we&#39;d use <code>slim()</code> as follows:</p>
+				<p>If our configuration depended on <code>process.env.NODE_ENV</code> and <code>process.env.FOO_ENV</code>, we&#39;d use <code>slim</code> as follows:</p>
 				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> slim <span class="hljs-keyword">from</span> <span class="hljs-string">'slimconf'</span>;
 
 <span class="hljs-keyword">const</span> setup = {
