@@ -8,7 +8,7 @@ export default function full<S extends ISetup, C extends IOfType<any>>(
   const environments: IOfType<TConfig<S, C>> = {};
   const initial: TEnvFilter<S> = Object.entries(setup).reduce(
     (acc: TEnvFilter<S>, [key, value]) => {
-      acc[key] = typeof value === 'object' ? value.default : value;
+      acc[key] = typeof value === 'object' ? value.from : value;
       return acc;
     },
     {}
