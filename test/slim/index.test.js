@@ -1,4 +1,4 @@
-import slim from '../src/slim';
+import slim from '~/slim';
 
 describe(`- Basic`, () => {
   test(`Works with no setup`, () => {
