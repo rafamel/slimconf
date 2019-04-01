@@ -1,12 +1,12 @@
 # slimconf
 
 [![Version](https://img.shields.io/npm/v/slimconf.svg)](https://www.npmjs.com/package/slimconf)
-[![Build Status](https://travis-ci.org/rafamel/slimconf.svg)](https://travis-ci.org/rafamel/slimconf)
+[![Build Status](https://img.shields.io/travis/rafamel/slimconf.svg)](https://travis-ci.org/rafamel/slimconf)
 [![Coverage](https://img.shields.io/coveralls/rafamel/slimconf.svg)](https://coveralls.io/github/rafamel/slimconf)
-[![Dependencies](https://david-dm.org/rafamel/slimconf/status.svg)](https://david-dm.org/rafamel/slimconf)
-[![Vulnerabilities](https://snyk.io/test/npm/slimconf/badge.svg)](https://snyk.io/test/npm/slimconf)
-[![Issues](https://img.shields.io/github/issues/rafamel/slimconf.svg)](https://github.com/rafamel/slimconf/issues)
+[![Dependencies](https://img.shields.io/david/rafamel/slimconf.svg)](https://david-dm.org/rafamel/slimconf)
+[![Vulnerabilities](https://img.shields.io/snyk/vulnerabilities/npm/slimconf.svg)](https://snyk.io/test/npm/slimconf)
 [![License](https://img.shields.io/github/license/rafamel/slimconf.svg)](https://github.com/rafamel/slimconf/blob/master/LICENSE)
+[![Types](https://img.shields.io/npm/types/slimconf.svg)](https://www.npmjs.com/package/slimconf)
 
 <!-- markdownlint-disable MD036 -->
 **A slim configuration util**
@@ -52,7 +52,7 @@ const setup = {
 File: `config.js`:
 
 ```javascript
-import config from 'slimconf';
+import slim from 'slimconf';
 
 const setup = {
   env: {
@@ -63,7 +63,7 @@ const setup = {
   }
 };
 
-export default config(setup, ({ env }, on) => ({
+export default slim(setup, ({ env }, on) => ({
   logs: {
     levels: { console: 'debug', file: 'info' },
     transports: on.env({
