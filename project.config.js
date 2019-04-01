@@ -1,7 +1,7 @@
 const path = require('path');
-const { config } = require('slimconf');
+const { default: slim } = require('slimconf');
 
-module.exports = config(undefined, () => ({
+module.exports = slim({
   typescript: true,
   // Extensions allowed for each file type, as a comma separated string
   ext: {
@@ -20,4 +20,4 @@ module.exports = config(undefined, () => ({
     // Generate docs from TS on version bump. Boolean.
     docs: true
   }
-}));
+});
