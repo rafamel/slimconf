@@ -1,0 +1,307 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>slimconf 0.3.0</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">slimconf 0.3.0</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1> slimconf 0.3.0</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<h1 id="slimconf">slimconf</h1>
+				<p><a href="https://www.npmjs.com/package/slimconf"><img src="https://img.shields.io/npm/v/slimconf.svg" alt="Version"></a>
+					<a href="https://travis-ci.org/rafamel/slimconf"><img src="https://img.shields.io/travis/rafamel/slimconf.svg" alt="Build Status"></a>
+					<a href="https://coveralls.io/github/rafamel/slimconf"><img src="https://img.shields.io/coveralls/rafamel/slimconf.svg" alt="Coverage"></a>
+					<a href="https://david-dm.org/rafamel/slimconf"><img src="https://img.shields.io/david/rafamel/slimconf.svg" alt="Dependencies"></a>
+					<a href="https://snyk.io/test/npm/slimconf"><img src="https://img.shields.io/snyk/vulnerabilities/npm/slimconf.svg" alt="Vulnerabilities"></a>
+					<a href="https://github.com/rafamel/slimconf/blob/master/LICENSE"><img src="https://img.shields.io/github/license/rafamel/slimconf.svg" alt="License"></a>
+				<a href="https://www.npmjs.com/package/slimconf"><img src="https://img.shields.io/npm/types/slimconf.svg" alt="Types"></a></p>
+				<!-- markdownlint-disable MD036 -->
+				<p><strong>A slim configuration util</strong></p>
+				<!-- markdownlint-enable MD036 -->
+				<ul>
+					<li><a href="#install">Install</a></li>
+					<li><a href="#usage">Usage</a><ul>
+							<li><a href="#slim"><code>slim</code></a></li>
+							<li><a href="#requireenvvars-string-void"><code>requireEnv</code></a></li>
+						</ul>
+					</li>
+					<li><a href="https://rafamel.github.io/slimconf">Documentation</a></li>
+				</ul>
+				<h2 id="install">Install</h2>
+				<p><a href="https://www.npmjs.com/package/slimconf"><code>npm install slimconf</code></a></p>
+				<h2 id="usage">Usage</h2>
+				<h3 id="slim"><code>slim</code></h3>
+				<p><code>slim</code> is the default function exported by <code>slimconf</code> - <a href="https://rafamel.github.io/slimconf/globals.html#requireenv">see docs.</a></p>
+				<h4 id="with-no-environment-variables">With no environment variables</h4>
+				<p>When the configuration doesn&#39;t depend on environment variables, it&#39;s possible to just call <code>slim</code> as follows:</p>
+				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> slim <span class="hljs-keyword">from</span> <span class="hljs-string">'slimconf'</span>;
+
+<span class="hljs-keyword">const</span> config = slim({ <span class="hljs-attr">foo</span>: <span class="hljs-string">'bar'</span>, <span class="hljs-attr">baz</span>: <span class="hljs-string">'foobar'</span>, <span class="hljs-attr">barbaz</span>: { <span class="hljs-attr">foobaz</span>: <span class="hljs-string">'slim'</span> } });
+
+<span class="hljs-comment">// Get a path</span>
+config.get(<span class="hljs-string">'barbaz.foobaz'</span>); <span class="hljs-comment">// 'slim'</span>
+
+<span class="hljs-comment">// Set a value for a path</span>
+config.set(<span class="hljs-string">'foo'</span>, { <span class="hljs-attr">bar</span>: <span class="hljs-string">'baz'</span> }); <span class="hljs-comment">// { bar: 'baz' }</span>
+config.get(<span class="hljs-string">'foo.bar'</span>); <span class="hljs-comment">// 'baz'</span>
+
+<span class="hljs-comment">// Get the configuration object with no methods</span>
+config.pure(); <span class="hljs-comment">// { foo: { bar: 'baz' }, baz: 'foobar', barbaz: { foobaz: 'slim' } }</span></code></pre>
+				<h4 id="with-environment-variables">With environment variables</h4>
+				<p>When a configuration depends on environment variables, <code>slim</code> has the signature <code>slim(setup: ISetup, fn: TFn): TConfig</code>.</p>
+				<ul>
+					<li><code>setup</code> sets up the environment variables the configuration depends on - <a href="https://rafamel.github.io/slimconf/interfaces/isetup.html">see docs.</a></li>
+					<li><code>fn</code> should be a configuration object returning function - <a href="https://rafamel.github.io/slimconf/globals.html#tfn">see docs.</a></li>
+				</ul>
+				<h5 id="fundamentals">Fundamentals</h5>
+				<p>If our configuration depended on <code>process.env.NODE_ENV</code> and <code>process.env.FOO_ENV</code>, we&#39;d use <code>slim()</code> as follows:</p>
+				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> slim <span class="hljs-keyword">from</span> <span class="hljs-string">'slimconf'</span>;
+
+<span class="hljs-keyword">const</span> setup = {
+  <span class="hljs-attr">env</span>: process.env.NODE_ENV,
+  <span class="hljs-attr">fooenv</span>: process.env.FOO_ENV
+};
+
+<span class="hljs-keyword">const</span> config = slim(slim, (envs, on) =&gt; ({
+  envs, <span class="hljs-comment">// contains the current values for `env` and `fooenv`</span>
+  foo: <span class="hljs-string">'bar'</span>,
+  <span class="hljs-attr">baz</span>: on.env({
+    <span class="hljs-attr">default</span>: <span class="hljs-number">1</span>,
+    <span class="hljs-attr">production</span>: <span class="hljs-number">2</span>,
+    <span class="hljs-attr">development</span>: <span class="hljs-number">3</span>,
+    <span class="hljs-attr">test</span>: <span class="hljs-number">4</span>
+  }),
+  <span class="hljs-attr">foobar</span>: on.fooenv({
+    <span class="hljs-attr">default</span>: <span class="hljs-number">1</span>,
+    <span class="hljs-attr">lorem</span>: <span class="hljs-number">2</span>,
+    <span class="hljs-attr">ipsum</span>: <span class="hljs-number">3</span>
+  })
+}));
+
+<span class="hljs-comment">// Get a path</span>
+config.get(<span class="hljs-string">'baz'</span>); <span class="hljs-comment">// 1, 2, 3, or 4</span>
+
+<span class="hljs-comment">// Set a value for a path</span>
+config.set(<span class="hljs-string">'baz'</span>, { <span class="hljs-attr">bar</span>: <span class="hljs-string">'baz'</span> }); <span class="hljs-comment">// { bar: 'baz' }</span>
+config.get(<span class="hljs-string">'baz.bar'</span>); <span class="hljs-comment">// 'baz'</span>
+
+<span class="hljs-comment">// Get the configuration object with no methods</span>
+config.pure();
+
+<span class="hljs-comment">// Get the configuration for a different set of environment variables values</span>
+<span class="hljs-keyword">const</span> specific = config.environment({ <span class="hljs-attr">env</span>: <span class="hljs-string">'test'</span>, <span class="hljs-attr">fooenv</span>: <span class="hljs-string">'lorem'</span> });
+
+<span class="hljs-comment">// You can use all methods as usual</span>
+specific.pure(); <span class="hljs-comment">// { foo: 'bar', baz: 4, foobar: 2 }</span>
+specific.get(<span class="hljs-string">'envs'</span>); <span class="hljs-comment">// { env: 'test', fooenv: 'lorem' }</span></code></pre>
+				<h5 id="mapping-environment-variables">Mapping environment variables</h5>
+				<p>As an example of environment variables mapping, the following setup object maps to <code>&#39;development&#39;</code> when there&#39;s no <code>NODE_ENV</code>:</p>
+				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> setup = {
+  <span class="hljs-attr">fooenv</span>: process.env.MY_ENV_VARIABLE,
+  <span class="hljs-attr">env</span>: {
+    <span class="hljs-attr">from</span>: process.env.NODE_ENV,
+    <span class="hljs-attr">map</span>: <span class="hljs-function">(<span class="hljs-params">env</span>) =&gt;</span> env === <span class="hljs-string">'production'</span> || env === <span class="hljs-string">'test'</span> ? env : <span class="hljs-string">'development'</span>
+  }
+};
+<span class="hljs-keyword">const</span> config = slim(slim, (envs, on) =&gt; ({
+  <span class="hljs-attr">foo</span>: <span class="hljs-string">'bar'</span>,
+  <span class="hljs-attr">baz</span>: on.env({
+    <span class="hljs-attr">default</span>: <span class="hljs-number">1</span>,
+    <span class="hljs-attr">production</span>: <span class="hljs-number">2</span>,
+    <span class="hljs-attr">development</span>: <span class="hljs-number">3</span>,
+    <span class="hljs-attr">test</span>: <span class="hljs-number">4</span>
+  }),
+  <span class="hljs-attr">foobar</span>: on.fooenv({
+    <span class="hljs-attr">default</span>: <span class="hljs-number">1</span>,
+    <span class="hljs-attr">lorem</span>: <span class="hljs-number">2</span>,
+    <span class="hljs-attr">ipsum</span>: <span class="hljs-number">3</span>
+  })
+}));
+
+config
+  .environment({ <span class="hljs-attr">env</span>: <span class="hljs-literal">null</span>, <span class="hljs-attr">fooenv</span>: <span class="hljs-string">'ipsum'</span> })
+  .pure(); <span class="hljs-comment">// { foo: 'bar', baz: 3, foobar: 3 }</span></code></pre>
+				<h3 id="requireenv-vars-string-void"><code>requireEnv(...vars: string[]): void</code></h3>
+				<p>Requires the presence of a number of environment variables; if they are not present, it will throw - <a href="https://rafamel.github.io/slimconf/globals.html#requireenv">see docs.</a></p>
+				<p>As an example <code>requireEnv(&#39;NODE_ENV&#39;, &#39;MY_ENV_VARIABLE&#39;)</code> will throw if any of <code>process.env.NODE_ENV</code> and <code>process.env.MY_ENV_VARIABLE</code> don&#39;t exist.</p>
+				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { requireEnv } <span class="hljs-keyword">from</span> <span class="hljs-string">'slimconf'</span>;
+
+requireEnv(<span class="hljs-string">'NODE_ENV'</span>, <span class="hljs-string">'MY_ENV_VARIABLE'</span>);</code></pre>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/ibareconfig.html" class="tsd-kind-icon">IBare<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/iconfig.html" class="tsd-kind-icon">IConfig</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/ienveach.html" class="tsd-kind-icon">IEnv<wbr>Each</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/ienvsetup.html" class="tsd-kind-icon">IEnv<wbr>Setup</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/ioftype.html" class="tsd-kind-icon">IOf<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/isetup.html" class="tsd-kind-icon">ISetup</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="globals.html#tbareconfig" class="tsd-kind-icon">TBare<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="globals.html#tconfig" class="tsd-kind-icon">TConfig</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="globals.html#tenvassign" class="tsd-kind-icon">TEnv<wbr>Assign</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="globals.html#tfn" class="tsd-kind-icon">TFn</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="globals.html#ton" class="tsd-kind-icon">TOn</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#requireenv" class="tsd-kind-icon">require<wbr>Env</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter tsd-is-not-exported">
+						<a href="globals.html#slim" class="tsd-kind-icon">slim</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>
