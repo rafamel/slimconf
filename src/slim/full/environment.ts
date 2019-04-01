@@ -1,7 +1,8 @@
 import { TEnvFilter, ISetup, TFn, IOfType, TOn, TConfig } from '~/types';
 import hash from './hash';
-import get from './get';
-import set from './set';
+import get from '../get';
+import set from '../set';
+import verify from '../verify';
 
 export default function environment<S extends ISetup, C extends IOfType<any>>(
   environments: IOfType<TConfig<S, C>>,
@@ -40,18 +41,9 @@ export function create<S extends ISetup, C extends IOfType<any>>(
   fn: TFn<S, C>
 ): void {
   const configObj: any = fn(envs, on(envs));
-  if (
-    configObj.hasOwnProperty('get') ||
-    configObj.hasOwnProperty('set') ||
-    configObj.hasOwnProperty('pure') ||
-    configObj.hasOwnProperty('environment')
-  ) {
-    throw Error(
-      'slimconfig config can\'t have keys "get", "set", "pure", or "environment"'
-    );
-  }
-  environments[id] = {
-    ...configObj,
+  verify(configObj);
+
+  environments[id] = Object.assign({}, configObj, {
     get(path: string): any {
       return get(this, path);
     },
@@ -66,10 +58,10 @@ export function create<S extends ISetup, C extends IOfType<any>>(
       delete o.environment;
       return o;
     },
-    environment(filter: TEnvFilter<S>): TConfig<S, C> {
+    environment(filter?: TEnvFilter<S>): TConfig<S, C> {
       return environment(environments, initial, filter || initial, setup, fn);
     }
-  };
+  });
 }
 
 export function on<T extends IOfType<string>>(envs: T): TOn<T> {

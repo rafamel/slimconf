@@ -1,18 +1,16 @@
-import { ISetup, IOfType, TConfig, TEnvFilter, TFn } from '~/types';
-import environment from './environment';
+import { ISetup, IOfType, TConfig, TFn, TBareConfig } from '~/types';
+import full from './full';
+import bare from './bare';
 
-export default function slim<S extends ISetup, C extends IOfType<any>>(
+export default slim;
+function slim<S extends ISetup, C extends IOfType<any>>(
   setup: S,
   fn: TFn<S, C>
-): TConfig<S, C> {
-  if (!setup) setup = {} as S;
-  const environments: IOfType<TConfig<S, C>> = {};
-  const initial: TEnvFilter<S> = Object.entries(setup).reduce(
-    (acc: TEnvFilter<S>, [key, value]) => {
-      acc[key] = typeof value === 'object' ? value.default : value;
-      return acc;
-    },
-    {}
-  );
-  return environment(environments, initial, initial, setup, fn);
+): TConfig<S, C>;
+function slim<C extends IOfType<any>>(config: C): TBareConfig<C>;
+function slim<S extends ISetup, C extends IOfType<any>>(
+  a: S | C,
+  fn?: TFn<S, C>
+): TConfig<S, C> | TBareConfig<C> {
+  return fn ? full(a as S, fn) : bare(a as C);
 }
