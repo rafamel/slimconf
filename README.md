@@ -12,88 +12,130 @@
 **A slim configuration util**
 <!-- markdownlint-enable MD036 -->
 
+* [Install](#install)
+* [Usage](#usage)
+  * [`slim`](#slim)
+  * [`requireEnv`](#requireenvvars-string-void)
+* [Documentation](https://rafamel.github.io/slimconf)
+
 ## Install
 
 [`npm install slimconf`](https://www.npmjs.com/package/slimconf)
 
 ## Usage
 
-### `config(setup?: object, callback: Function): object`
+### `slim`
 
-* `setup`: *object, optional,* sets up the environment variables the configuration depends on.
-  * As an example, if it depended on `process.env.NODE_ENV` and `process.env.MY_ENV_VARIABLE`, we'd set it up as follows: `{ env: process.env.NODE_ENV, myEnvVar: process.env.MY_ENV_VARIABLE }`.
-  * We can also use it to map it in case of `undefined`. As an example, the following setup object maps to a `development` value when there's no `NODE_ENV`:
+`slim` is the default function exported by `slimconf` - [see docs.](https://rafamel.github.io/slimconf/globals.html#slim)
+
+#### With no environment variables
+
+When the configuration doesn't depend on environment variables, it's possible to just call `slim` as follows:
 
 ```javascript
-const setup = {
-  myEnvVar: process.env.MY_ENV_VARIABLE,
-  env: {
-    default: process.env.NODE_ENV,
-    map(env) {
-      return env === 'production' || env === 'test' ? env : 'development';
-    }
-  }
-};
+import slim from 'slimconf';
+
+const config = slim({ foo: 'bar', baz: 'foobar', barbaz: { foobaz: 'slim' } });
+
+// Get a path
+config.get('barbaz.foobaz'); // 'slim'
+
+// Set a value for a path
+config.set('foo', { bar: 'baz' }); // { bar: 'baz' }
+config.get('foo.bar'); // 'baz'
+
+// Get the configuration object with no methods
+config.pure(); // { foo: { bar: 'baz' }, baz: 'foobar', barbaz: { foobaz: 'slim' } }
 ```
 
-* `callback`: *function,* with signature `(obj: object, on: object): object`.
-  * `obj`: *object,* with the same keys of the `setup` object, and values of the current environment.
-  * `on`: *object,* with the same keys of the `setup` object, and values of a function taking an object that you can use to specify the values for each environment -the `default` key will be used if no specific value for an environment was specified.
+#### With environment variables
 
-`config()` will return an object with the same properties as its `callback`, with three additional methods:
-  
-* `get(path: string)`: Will return the value at `path` for the current environment, if it exists -otherwise it will throw. Example: `obj.get('logs.transports')`.
-* `set(path: string, value: any)`: Will set the value at `path` for the current environment, if it exists -otherwise it will throw. Example: `obj.set('logs.transports', { console: false, file: false })`.
-* `pure()`: Will return the configuration object without any of these method (`get()`, `set()`, `pure()`, and `environment()`).
-* `environment(obj: object)`: Will return the configuration for a specific environment that might not be the current. As an example, we could access the configuration for a production environment when in a development environment: `obj.environment({ env: 'production' })`.
+When a configuration depends on environment variables, `slim` has the signature `slim(setup: ISetup, fn: TFn): TConfig`.
 
-#### Usage example
+* `setup` sets up the environment variables the configuration depends on - [see docs.](https://rafamel.github.io/slimconf/interfaces/isetup.html)
+* `fn` should be a configuration object returning function - [see docs.](https://rafamel.github.io/slimconf/globals.html#tfn)
 
-File: `config.js`:
+##### Fundamentals
+
+If our configuration depended on `process.env.NODE_ENV` and `process.env.FOO_ENV`, we'd use `slim` as follows:
 
 ```javascript
 import slim from 'slimconf';
 
 const setup = {
-  env: {
-    default: process.env.NODE_ENV,
-    map(env) {
-      return env === 'production' || env === 'test' ? env : 'development';
-    }
-  }
+  env: process.env.NODE_ENV,
+  fooenv: process.env.FOO_ENV
 };
 
-export default slim(setup, ({ env }, on) => ({
-  logs: {
-    levels: { console: 'debug', file: 'info' },
-    transports: on.env({
-      default: { console: true, file: false },
-      production: { console: false, file: true },
-      test: { console: false, file: false }
-    })
-  }
-}))
+const config = slim(slim, (envs, on) => ({
+  envs, // contains the current values for `env` and `fooenv`
+  foo: 'bar',
+  baz: on.env({
+    default: 1,
+    production: 2,
+    development: 3,
+    test: 4
+  }),
+  foobar: on.fooenv({
+    default: 1,
+    lorem: 2,
+    ipsum: 3
+  })
+}));
+
+// Get a path
+config.get('baz'); // 1, 2, 3, or 4
+
+// Set a value for a path
+config.set('baz', { bar: 'baz' }); // { bar: 'baz' }
+config.get('baz.bar'); // 'baz'
+
+// Get the configuration object with no methods
+config.pure();
+
+// Get the configuration for a different set of environment variables values
+const specific = config.environment({ env: 'test', fooenv: 'lorem' });
+
+// You can use all methods as usual
+specific.pure(); // { foo: 'bar', baz: 4, foobar: 2 }
+specific.get('envs'); // { env: 'test', fooenv: 'lorem' }
 ```
 
-Some other file:
+##### Mapping environment variables
+
+As an example of environment variables mapping, the following setup object maps to `'development'` when there's no `NODE_ENV`:
 
 ```javascript
-import config from './config.js';
+const setup = {
+  fooenv: process.env.MY_ENV_VARIABLE,
+  env: {
+    from: process.env.NODE_ENV,
+    map: (env) => env === 'production' || env === 'test' ? env : 'development'
+  }
+};
+const config = slim(slim, (envs, on) => ({
+  foo: 'bar',
+  baz: on.env({
+    default: 1,
+    production: 2,
+    development: 3,
+    test: 4
+  }),
+  foobar: on.fooenv({
+    default: 1,
+    lorem: 2,
+    ipsum: 3
+  })
+}));
 
-// Logs transports for the current environment
-const logsTransports = config.get('logs.transports');
-
-// Say we're in development and want to access the production config
-const productionLogsTransports = config
-  .environment({ env: 'production' })
-  .get('logs.transports');
-
-// ...use logsTransports and productionLogsTransports somehow
+config
+  .environment({ env: null, fooenv: 'ipsum' })
+  .pure(); // { foo: 'bar', baz: 3, foobar: 3 }
 ```
 
 ### `requireEnv(...vars: string[]): void`
 
-Requires the presence of a number of environment variables; if they are not present, it will throw.
+Requires the presence of a number of environment variables; if they are not present, it will throw - [see docs.](https://rafamel.github.io/slimconf/globals.html#requireenv)
 
 As an example `requireEnv('NODE_ENV', 'MY_ENV_VARIABLE')` will throw if any of `process.env.NODE_ENV` and `process.env.MY_ENV_VARIABLE` don't exist.
 
