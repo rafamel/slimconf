@@ -22,3 +22,5 @@ transpiled
 typings
 JSON
 transpile
+slimconf
+util
