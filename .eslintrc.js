@@ -67,12 +67,6 @@ module.exports = {
       rules: {
         'babel/no-invalid-this': 1,
         'babel/semi': 1
-      },
-      settings: {
-        // babel-plugin-module-resolver
-        'import/resolver': {
-          'babel-module': {}
-        }
       }
     },
     /* TYPESCRIPT */
@@ -101,13 +95,7 @@ module.exports = {
         '@typescript-eslint/interface-name-prefix': [2, 'always'],
         '@typescript-eslint/no-use-before-define': [2, { functions: false }],
         '@typescript-eslint/array-type': [2, 'array-simple']
-      }),
-      settings: {
-        // eslint-import-resolver-typescript
-        'import/resolver': {
-          typescript: {}
-        }
-      }
+      })
     }
   ]
 };
