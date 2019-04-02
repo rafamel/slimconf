@@ -1,16 +1,39 @@
+<div align="center">
+  <br />
+  <a href="https://www.npmjs.com/package/slimconf" target="_blank">
+    <img alt="slimconf" width="350" src="https://raw.githubusercontent.com/rafamel/slimconf/master/scripts/assets/logo.png" />
+  </a>
+  <br />
+  <br />
+  <strong>A slim configuration util</strong>
+  <br />
+  <br />
+  <a href="https://www.npmjs.com/package/slimconf">
+    <img src="https://img.shields.io/npm/v/slimconf.svg" alt="Version">
+  </a>
+  <a href="https://www.npmjs.com/package/slimconf">
+    <img src="https://img.shields.io/npm/types/slimconf.svg" alt="Types">
+  </a>
+  <a href="https://travis-ci.org/rafamel/slimconf">
+    <img src="https://img.shields.io/travis/rafamel/slimconf.svg" alt="Build Status">
+  </a>
+  <a href="https://coveralls.io/github/rafamel/slimconf">
+    <img src="https://img.shields.io/coveralls/rafamel/slimconf.svg" alt="Coverage">
+  </a>
+  <a href="https://david-dm.org/rafamel/slimconf">
+    <img src="https://img.shields.io/david/rafamel/slimconf.svg" alt="Dependencies">
+  </a>
+  <a href="https://snyk.io/test/npm/slimconf">
+    <img src="https://img.shields.io/snyk/vulnerabilities/npm/slimconf.svg" alt="Vulnerabilities">
+  </a>
+  <a href="https://github.com/rafamel/slimconf/blob/master/LICENSE">
+    <img src="https://img.shields.io/github/license/rafamel/slimconf.svg" alt="License">
+  </a>
+  <br />
+  <br />
+</div>
+
 # slimconf
-
-[![Version](https://img.shields.io/npm/v/slimconf.svg)](https://www.npmjs.com/package/slimconf)
-[![Build Status](https://img.shields.io/travis/rafamel/slimconf.svg)](https://travis-ci.org/rafamel/slimconf)
-[![Coverage](https://img.shields.io/coveralls/rafamel/slimconf.svg)](https://coveralls.io/github/rafamel/slimconf)
-[![Dependencies](https://img.shields.io/david/rafamel/slimconf.svg)](https://david-dm.org/rafamel/slimconf)
-[![Vulnerabilities](https://img.shields.io/snyk/vulnerabilities/npm/slimconf.svg)](https://snyk.io/test/npm/slimconf)
-[![License](https://img.shields.io/github/license/rafamel/slimconf.svg)](https://github.com/rafamel/slimconf/blob/master/LICENSE)
-[![Types](https://img.shields.io/npm/types/slimconf.svg)](https://www.npmjs.com/package/slimconf)
-
-<!-- markdownlint-disable MD036 -->
-**A slim configuration util**
-<!-- markdownlint-enable MD036 -->
 
 * [Install](#install)
 * [Usage](#usage)
