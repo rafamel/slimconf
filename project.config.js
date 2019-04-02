@@ -11,7 +11,6 @@ module.exports = slim({
   // Paths used on build
   paths: {
     root: __dirname,
-    output: path.join(__dirname, 'lib'),
     docs: path.join(__dirname, 'docs')
   },
   release: {

@@ -10,7 +10,7 @@ module.exports = {
   collectCoverage: true,
   collectCoverageFrom: [`<rootDir>/src/**/*.{${EXT}}`],
   modulePathIgnorePatterns: [
-    '<rootDir>/lib',
+    '<rootDir>/pkg',
     '<rootDir>/src/@types',
     '<rootDir>/src/bin',
     '<rootDir>/src/.*/__mocks__'
