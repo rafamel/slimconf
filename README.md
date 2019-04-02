@@ -67,7 +67,7 @@ const setup = {
   fooenv: process.env.FOO_ENV
 };
 
-const config = slim(slim, (envs, on) => ({
+const config = slim(setup, (envs, on) => ({
   envs, // contains the current values for `env` and `fooenv`
   foo: 'bar',
   baz: on.env({
@@ -113,7 +113,7 @@ const setup = {
     map: (env) => env === 'production' || env === 'test' ? env : 'development'
   }
 };
-const config = slim(slim, (envs, on) => ({
+const config = slim(setup, (envs, on) => ({
   foo: 'bar',
   baz: on.env({
     default: 1,
