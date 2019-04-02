@@ -1,3 +1,12 @@
+# [0.5.0](https://github.com/rafamel/slimconf/compare/v0.4.0...v0.5.0) (2019-04-02)
+
+
+### Features
+
+* adds web, node, and esnext specific builds ([8deb1e5](https://github.com/rafamel/slimconf/commit/8deb1e5))
+
+
+
 # [0.4.0](https://github.com/rafamel/slimconf/compare/v0.3.0...v0.4.0) (2019-04-01)
 
 
