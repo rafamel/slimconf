@@ -48,9 +48,9 @@ export interface IDefinition {
 }
 
 /**
- * A configuration object returning function, receiving the values of each environment variable as a first argument, and a `ISelect` object as a second.
+ * A configuration object returning function, receiving a `TOn` object as the first argument, and the values for the environment variables as the second.
  */
-export type TFn<S, C> = (envs: { [P in keyof S]: string }, on: TOn<S>) => C;
+export type TFn<S, C> = (on: TOn<S>, vars: { [P in keyof S]: string }) => C;
 
 export interface IBareConfig<C> {
   /**

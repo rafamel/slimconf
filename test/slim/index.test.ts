@@ -53,7 +53,7 @@ describe(`bare`, () => {
 describe(`full`, () => {
   describe(`root`, () => {
     test(`succeeds`, () => {
-      const c = slim({ env: 'test' }, (_, on) => ({
+      const c = slim({ env: 'test' }, (on) => ({
         foo: on.env({ defaults: 1, production: 2 }),
         bar: on.env({ defaults: 3, test: 4 }),
         baz: 5,
@@ -81,21 +81,18 @@ describe(`full`, () => {
       ).toThrowError();
     });
     test(`succeeds with setup when undefined`, () => {
-      const c1 = slim({ env: undefined }, (_, on) => ({
+      const c1 = slim({ env: undefined }, (on) => ({
         foo: on.env({ defaults: 1, production: 2 }),
         bar: on.env({ defaults: 3, test: 4 }),
         baz: 5,
         barbaz: on.env({ test: 6 })
       }));
-      const c2 = slim(
-        { env: { from: null, map: () => undefined } },
-        (_, on) => ({
-          foo: on.env({ defaults: 1, production: 2 }),
-          bar: on.env({ defaults: 3, test: 4 }),
-          baz: 5,
-          barbaz: on.env({ test: 6 })
-        })
-      );
+      const c2 = slim({ env: { from: null, map: () => undefined } }, (on) => ({
+        foo: on.env({ defaults: 1, production: 2 }),
+        bar: on.env({ defaults: 3, test: 4 }),
+        baz: 5,
+        barbaz: on.env({ test: 6 })
+      }));
 
       [c1, c2].forEach((c) => {
         expect(c.foo).toBe(1);
@@ -108,7 +105,7 @@ describe(`full`, () => {
   describe(`rules`, () => {
     test(`doesn't use rule when no defaults`, () => {
       const rule = jest.fn();
-      const c = slim({ env: 'test' }, (_, on) => ({
+      const c = slim({ env: 'test' }, (on) => ({
         foo: on.env(rule, { test: {} })
       }));
       expect(rule).not.toHaveBeenCalled();
@@ -116,7 +113,7 @@ describe(`full`, () => {
     });
     test(`doesn't uses rule when no value`, () => {
       const rule = jest.fn();
-      const c = slim({ env: 'test' }, (_, on) => ({
+      const c = slim({ env: 'test' }, (on) => ({
         foo: on.env(rule, { defaults: {} })
       }));
       expect(rule).not.toHaveBeenCalled();
@@ -125,7 +122,7 @@ describe(`full`, () => {
     test(`uses rule when both values`, () => {
       const res = {};
       const rule = jest.fn().mockImplementation(() => res);
-      const c = slim({ env: 'test' }, (_, on) => ({
+      const c = slim({ env: 'test' }, (on) => ({
         foo: on.env(rule, { defaults: 1, test: 5 }),
         bar: on.env(rule, {
           defaults: { a: 1, b: { c: 2 } },
@@ -144,7 +141,7 @@ describe(`full`, () => {
   });
   describe(`get`, () => {
     test(`succeeds`, () => {
-      const c = slim({ env: 'test' }, (_, on) => ({
+      const c = slim({ env: 'test' }, (on) => ({
         foo: on.env({ defaults: { else: 1 }, production: 2 }),
         bar: { baz: on.env({ defaults: 3, test: 4 }) },
         barbaz: on.env({ production: 6 })
@@ -156,7 +153,7 @@ describe(`full`, () => {
       expect(c.get('barbaz')).toBeUndefined();
     });
     test(`fails`, () => {
-      const c = slim({ env: 'test' }, (_, on) => ({
+      const c = slim({ env: 'test' }, (on) => ({
         foo: on.env({ defaults: { else: 1 }, production: 2 }),
         bar: { baz: on.env({ defaults: 3, test: 4 }) }
       }));
@@ -168,7 +165,7 @@ describe(`full`, () => {
   });
   describe(`set`, () => {
     test(`succeeds`, () => {
-      const c = slim({ env: 'test' }, (_, on) => ({
+      const c = slim({ env: 'test' }, (on) => ({
         foo: on.env({ defaults: { else: 1 }, production: 2 }),
         bar: { baz: on.env({ defaults: 3, test: 4 }) },
         barbaz: on.env({ production: 6 })
@@ -180,7 +177,7 @@ describe(`full`, () => {
       expect(c.foo).toEqual({ bar: 'foobar' });
     });
     test(`fails`, () => {
-      const c = slim({ env: 'test' }, (_, on) => ({
+      const c = slim({ env: 'test' }, (on) => ({
         foo: on.env({ defaults: { else: 1 }, production: 2 }),
         bar: { baz: on.env({ defaults: 3, test: 4 }) },
         barbaz: on.env({ production: 6 })
@@ -193,7 +190,7 @@ describe(`full`, () => {
   });
   describe(`pure`, () => {
     test(`succeeds`, () => {
-      const c = slim({ env: 'test' }, (_, on) => ({
+      const c = slim({ env: 'test' }, (on) => ({
         foo: on.env({ defaults: 1, production: 2 }),
         bar: { baz: on.env({ defaults: 3, test: 4 }) },
         barbaz: on.env({ production: 6 })
@@ -213,7 +210,7 @@ describe(`full`, () => {
           }
         }
       };
-      const c1 = slim(setup, ({ env }, on) => ({
+      const c1 = slim(setup, (on, { env }) => ({
         foo: on.env({ defaults: 1, goodbye: 2 }),
         bar: on.env({ defaults: 3, test: 4 }),
         baz: 5,
@@ -234,7 +231,7 @@ describe(`full`, () => {
         },
         fooenv: 'one'
       };
-      const c1 = slim(setup, ({ env, fooenv }, on) => ({
+      const c1 = slim(setup, (on, { env, fooenv }) => ({
         foo: on.env({
           defaults: 1,
           goodbye: on.fooenv({ defaults: 10, one: 2 })
@@ -278,7 +275,7 @@ describe(`full`, () => {
       });
     });
     test(`succeeds wo/ filter`, () => {
-      const c1 = slim({ env: 'test' }, (_, on) => ({
+      const c1 = slim({ env: 'test' }, (on) => ({
         foo: on.env({
           defaults: { bar: 1, baz: 2 },
           test: { bar: 10 }
@@ -291,7 +288,7 @@ describe(`full`, () => {
       });
     });
     test(`recovers previous object if already created`, () => {
-      const ct1 = slim({ env: 'test' }, (_, on) => ({
+      const ct1 = slim({ env: 'test' }, (on) => ({
         foo: on.env({
           defaults: { bar: 1, baz: 2 },
           test: { bar: 10 }
@@ -309,7 +306,7 @@ describe(`full`, () => {
       expect(ce1).toBe(ce2);
     });
     test(`set succeeds`, () => {
-      const c1 = slim({ env: 'test' }, (_, on) => ({
+      const c1 = slim({ env: 'test' }, (on) => ({
         foo: on.env({
           defaults: { bar: 1, baz: 2 },
           test: { bar: 10 }

@@ -25,7 +25,7 @@ export default function environment<S extends ISetup, C extends IOfType<any>>(
   assign = initial === assign ? initial : Object.assign({}, initial, assign);
   const keys = Object.keys(setup);
 
-  const envs = keys.reduce((acc: { [P in keyof S]?: string }, key: string) => {
+  const vars = keys.reduce((acc: { [P in keyof S]?: string }, key: string) => {
     const value = setup[key];
     const map =
       typeof value === 'object' && value.map ? value.map : (x?: string) => x;
@@ -35,9 +35,9 @@ export default function environment<S extends ISetup, C extends IOfType<any>>(
     return acc;
   }, {}) as { [P in keyof S]: string };
 
-  const id = hash(envs);
+  const id = hash(vars);
   if (!environments.hasOwnProperty(id)) {
-    create(id, envs, environments, initial, setup, fn);
+    create(id, vars, environments, initial, setup, fn);
   }
 
   return environments[id];
@@ -45,13 +45,13 @@ export default function environment<S extends ISetup, C extends IOfType<any>>(
 
 export function create<S extends ISetup, C extends IOfType<any>>(
   id: string,
-  envs: { [P in keyof S]: string },
+  vars: { [P in keyof S]: string },
   environments: any,
   initial: TEnvAssign<S>,
   setup: S,
   fn: TFn<S, C>
 ): void {
-  const configObj: any = fn(envs, makeOn(envs));
+  const configObj: any = fn(makeOn(vars), vars);
   verify(configObj);
 
   environments[id] = Object.assign({}, configObj, {
@@ -76,9 +76,9 @@ export function create<S extends ISetup, C extends IOfType<any>>(
 }
 
 export function makeOn<S extends ISetup>(
-  envs: { [P in keyof S]: string }
+  vars: { [P in keyof S]: string }
 ): TOn<S> {
-  return Object.entries(envs).reduce(
+  return Object.entries(vars).reduce(
     (acc: TOn<S>, [key, val]) => {
       const fn: TDefineFn = function(
         a: TRule | IDefinition,
