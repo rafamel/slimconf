@@ -75,9 +75,11 @@ export function create<S extends ISetup, C extends IOfType<any>>(
   });
 }
 
-export function makeOn<T extends IOfType<string>>(envs: T): TOn<T> {
+export function makeOn<S extends ISetup>(
+  envs: { [P in keyof S]: string }
+): TOn<S> {
   return Object.entries(envs).reduce(
-    (acc: TOn<T>, [key, val]) => {
+    (acc: TOn<S>, [key, val]) => {
       const fn: TDefineFn = function(
         a: TRule | IDefinition,
         b?: IDefinition
@@ -92,6 +94,6 @@ export function makeOn<T extends IOfType<string>>(envs: T): TOn<T> {
       acc[key] = fn;
       return acc;
     },
-    {} as TOn<T>
+    {} as TOn<S>
   );
 }
