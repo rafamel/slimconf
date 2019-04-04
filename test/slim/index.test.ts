@@ -65,23 +65,6 @@ describe(`full`, () => {
       expect(c.baz).toBe(5);
       expect(c.barbaz).toBe(6);
     });
-    test(`on merges default object`, () => {
-      const c = slim({ env: 'test' }, (_, on) => ({
-        foo: on.env({ default: 1, production: { bar: 'baz' } }),
-        bar: on.env({ default: 3, test: { bar: 'baz' } }),
-        baz: on.env({ default: {}, test: { a: 1, b: 2 } }),
-        barbaz: on.env({ default: { a: 1, b: 2 }, test: {} }),
-        foobar: on.env({ default: { a: 1, b: 2 }, test: { b: 3, c: 4 } }),
-        foobaz: on.env({ default: { b: 3, c: 4 }, test: { a: 1, b: 2 } })
-      }));
-
-      expect(c.foo).toBe(1);
-      expect(c.bar).toEqual({ bar: 'baz' });
-      expect(c.baz).toEqual({ a: 1, b: 2 });
-      expect(c.barbaz).toEqual({ a: 1, b: 2 });
-      expect(c.foobar).toEqual({ a: 1, b: 3, c: 4 });
-      expect(c.foobaz).toEqual({ a: 1, b: 2, c: 4 });
-    });
     test(`fails with keys get, set, environment, pure`, () => {
       const setup = { env: 'test' };
       expect(() =>
@@ -120,6 +103,43 @@ describe(`full`, () => {
         expect(c.baz).toBe(5);
         expect(c.barbaz).toBeUndefined();
       });
+    });
+  });
+  describe(`rules`, () => {
+    test(`doesn't use rule when no default`, () => {
+      const rule = jest.fn();
+      const c = slim({ env: 'test' }, (_, on) => ({
+        foo: on.env(rule, { test: {} })
+      }));
+      expect(rule).not.toHaveBeenCalled();
+      expect(c.foo).toEqual({});
+    });
+    test(`doesn't uses rule when no value`, () => {
+      const rule = jest.fn();
+      const c = slim({ env: 'test' }, (_, on) => ({
+        foo: on.env(rule, { default: {} })
+      }));
+      expect(rule).not.toHaveBeenCalled();
+      expect(c.foo).toEqual({});
+    });
+    test(`uses rule when both values`, () => {
+      const res = {};
+      const rule = jest.fn().mockImplementation(() => res);
+      const c = slim({ env: 'test' }, (_, on) => ({
+        foo: on.env(rule, { default: 1, test: 5 }),
+        bar: on.env(rule, {
+          default: { a: 1, b: { c: 2 } },
+          test: { a: 2, b: { c: 3 } }
+        })
+      }));
+      expect(rule).toHaveBeenCalledTimes(2);
+      expect(rule).toHaveBeenCalledWith(1, 5);
+      expect(rule).toHaveBeenCalledWith(
+        { a: 1, b: { c: 2 } },
+        { a: 2, b: { c: 3 } }
+      );
+      expect(c.foo).toBe(res);
+      expect(c.bar).toBe(res);
     });
   });
   describe(`get`, () => {
@@ -267,21 +287,8 @@ describe(`full`, () => {
 
       expect(() => c1.environment({ env: 'else' }).environment()).not.toThrow();
       expect(c1.environment({ env: 'else' }).environment().foo).toEqual({
-        bar: 10,
-        baz: 2
+        bar: 10
       });
-    });
-    test(`merges default`, () => {
-      const c1 = slim({ env: 'test' }, (_, on) => ({
-        foo: on.env({
-          default: { bar: 1, baz: 2 },
-          test: { bar: 10 }
-        })
-      }));
-      const c2 = c1.environment({ env: 'else' });
-
-      expect(c1.foo).toEqual({ bar: 10, baz: 2 });
-      expect(c2.foo).toEqual({ bar: 1, baz: 2 });
     });
     test(`recovers previous object if already created`, () => {
       const ct1 = slim({ env: 'test' }, (_, on) => ({
@@ -311,7 +318,7 @@ describe(`full`, () => {
       c1.environment({ env: 'other' }).set('foo.bar', 11);
       const c2 = c1.environment({ env: 'other' });
 
-      expect(c1.foo).toEqual({ bar: 10, baz: 2 });
+      expect(c1.foo).toEqual({ bar: 10 });
       expect(c2.foo).toEqual({ bar: 11, baz: 2 });
     });
   });
