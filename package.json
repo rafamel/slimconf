@@ -16,6 +16,8 @@
     "start": "npm run watch",
     "build": "nps build",
     "build:force": "nps build.force",
+    "build:pack": "nps build.pack",
+    "build:types": "nps build.types",
     "publish": "nps publish",
     "watch": "nps watch",
     "fix": "nps fix",
@@ -53,7 +55,6 @@
     "@babel/preset-typescript": "^7.1.0",
     "@pika/pack": "^0.3.6",
     "@pika/plugin-build-node": "^0.3.14",
-    "@pika/plugin-build-types": "^0.3.14",
     "@pika/plugin-build-web": "^0.3.14",
     "@pika/plugin-standard-pkg": "^0.3.14",
     "@types/jest": "^24.0.9",
@@ -91,7 +92,7 @@
     "onchange": "^5.2.0",
     "prettier": "^1.16.4",
     "shx": "^0.3.2",
-    "slimconf": "^0.4.0",
+    "slimconf": "^0.5.0",
     "ttypescript": "^1.5.6",
     "typedoc": "^0.14.2",
     "typescript": "^3.3.4000"
@@ -129,9 +130,6 @@
       ],
       [
         "@pika/plugin-build-web"
-      ],
-      [
-        "@pika/plugin-build-types"
       ]
     ]
   }

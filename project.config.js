@@ -2,6 +2,9 @@ const path = require('path');
 const { default: slim } = require('slimconf');
 
 module.exports = slim({
+  // transpile straight up with babel.
+  // You should set @babel/preset-env with the proper target @ .babelrc
+  nodeOnly: false,
   typescript: true,
   // Extensions allowed for each file type, as a comma separated string
   ext: {
