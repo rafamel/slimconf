@@ -1,8 +1,19 @@
-import { TEnvAssign, ISetup, TFn, IOfType, TOn, TConfig } from '~/types';
+import {
+  TEnvAssign,
+  ISetup,
+  TFn,
+  IOfType,
+  TConfig,
+  IDefinition,
+  TRule,
+  TDefineFn,
+  TOn
+} from '~/types';
 import hash from './hash';
 import get from '../get';
 import set from '../set';
 import verify from '../verify';
+import rules from '../rules';
 
 export default function environment<S extends ISetup, C extends IOfType<any>>(
   environments: IOfType<TConfig<S, C>>,
@@ -40,7 +51,7 @@ export function create<S extends ISetup, C extends IOfType<any>>(
   setup: S,
   fn: TFn<S, C>
 ): void {
-  const configObj: any = fn(envs, on(envs));
+  const configObj: any = fn(envs, makeOn(envs));
   verify(configObj);
 
   environments[id] = Object.assign({}, configObj, {
@@ -64,16 +75,23 @@ export function create<S extends ISetup, C extends IOfType<any>>(
   });
 }
 
-export function on<T extends IOfType<string>>(envs: T): TOn<T> {
-  return Object.entries(envs).reduce((acc: any, [key, value]) => {
-    acc[key] = function on(obj: any) {
-      if (!obj.hasOwnProperty(value)) return obj.default;
+export function makeOn<T extends IOfType<string>>(envs: T): TOn<T> {
+  return Object.entries(envs).reduce(
+    (acc: TOn<T>, [key, val]) => {
+      const fn: TDefineFn = function(
+        a: TRule | IDefinition,
+        b?: IDefinition
+      ): any {
+        const rule = b ? (a as TRule) : rules.rank;
+        const obj = b || (a as IDefinition);
+        if (!obj.hasOwnProperty(val)) return obj.default;
+        if (!obj.hasOwnProperty('default')) return obj[val];
+        return rule(obj.default, obj[val]);
+      };
 
-      if (typeof obj[value] === 'object' && !Array.isArray(obj[value])) {
-        return { ...obj.default, ...obj[value] };
-      }
-      return obj[value];
-    };
-    return acc;
-  }, {});
+      acc[key] = fn;
+      return acc;
+    },
+    {} as TOn<T>
+  );
 }

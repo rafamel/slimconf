@@ -24,20 +24,31 @@ export interface IEnvSetup {
 }
 
 /**
- * Object with the sames keys as `ISetup`, and values of a function taking a `IEnvEach` object that you can use to specify the values for each environment -the `default` key will be used if no specific value for an environment was specified.
+ * Object with the sames keys as `ISetup`, that is, all the environment variable names the configuration depends on. It is used to define the values for each environment. See `TDefineFn`.
  */
-export type TOn<S> = { [P in keyof S]: (each: IEnvEach) => any };
+export type TOn<S> = { [P in keyof S]: TDefineFn };
 
 /**
- * See `TOn`.
+ * Specifies the values for each environment -the `default` key in `IDefinition` will be used if no specific value for an environment was specified. Optionally, you can also specify a merging rule as a first argument.
  */
-export interface IEnvEach {
+export type TDefineFn = ((definition: IDefinition) => any) &
+  ((rule: TRule, definition: IDefinition) => any);
+
+/**
+ * Used for object merging when both defaults and value exist. It can be passed as a first argument to `TDefineFn`. It is implemented by `rules`.
+ */
+export type TRule = (defaults: any, value: any) => any;
+
+/**
+ * See `TDefineFn`.
+ */
+export interface IDefinition {
   [id: string]: any;
   default?: any;
 }
 
 /**
- * A configuration object returning function, receiving the values of each environment variable as a first argument, and a `TOn` object as a second.
+ * A configuration object returning function, receiving the values of each environment variable as a first argument, and a `ISelect` object as a second.
  */
 export type TFn<S, C> = (envs: { [P in keyof S]: string }, on: TOn<S>) => C;
 
