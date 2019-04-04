@@ -54,8 +54,8 @@ describe(`full`, () => {
   describe(`root`, () => {
     test(`succeeds`, () => {
       const c = slim({ env: 'test' }, (_, on) => ({
-        foo: on.env({ default: 1, production: 2 }),
-        bar: on.env({ default: 3, test: 4 }),
+        foo: on.env({ defaults: 1, production: 2 }),
+        bar: on.env({ defaults: 3, test: 4 }),
         baz: 5,
         barbaz: on.env({ test: 6 })
       }));
@@ -82,16 +82,16 @@ describe(`full`, () => {
     });
     test(`succeeds with setup when undefined`, () => {
       const c1 = slim({ env: undefined }, (_, on) => ({
-        foo: on.env({ default: 1, production: 2 }),
-        bar: on.env({ default: 3, test: 4 }),
+        foo: on.env({ defaults: 1, production: 2 }),
+        bar: on.env({ defaults: 3, test: 4 }),
         baz: 5,
         barbaz: on.env({ test: 6 })
       }));
       const c2 = slim(
         { env: { from: null, map: () => undefined } },
         (_, on) => ({
-          foo: on.env({ default: 1, production: 2 }),
-          bar: on.env({ default: 3, test: 4 }),
+          foo: on.env({ defaults: 1, production: 2 }),
+          bar: on.env({ defaults: 3, test: 4 }),
           baz: 5,
           barbaz: on.env({ test: 6 })
         })
@@ -106,7 +106,7 @@ describe(`full`, () => {
     });
   });
   describe(`rules`, () => {
-    test(`doesn't use rule when no default`, () => {
+    test(`doesn't use rule when no defaults`, () => {
       const rule = jest.fn();
       const c = slim({ env: 'test' }, (_, on) => ({
         foo: on.env(rule, { test: {} })
@@ -117,7 +117,7 @@ describe(`full`, () => {
     test(`doesn't uses rule when no value`, () => {
       const rule = jest.fn();
       const c = slim({ env: 'test' }, (_, on) => ({
-        foo: on.env(rule, { default: {} })
+        foo: on.env(rule, { defaults: {} })
       }));
       expect(rule).not.toHaveBeenCalled();
       expect(c.foo).toEqual({});
@@ -126,9 +126,9 @@ describe(`full`, () => {
       const res = {};
       const rule = jest.fn().mockImplementation(() => res);
       const c = slim({ env: 'test' }, (_, on) => ({
-        foo: on.env(rule, { default: 1, test: 5 }),
+        foo: on.env(rule, { defaults: 1, test: 5 }),
         bar: on.env(rule, {
-          default: { a: 1, b: { c: 2 } },
+          defaults: { a: 1, b: { c: 2 } },
           test: { a: 2, b: { c: 3 } }
         })
       }));
@@ -145,8 +145,8 @@ describe(`full`, () => {
   describe(`get`, () => {
     test(`succeeds`, () => {
       const c = slim({ env: 'test' }, (_, on) => ({
-        foo: on.env({ default: { else: 1 }, production: 2 }),
-        bar: { baz: on.env({ default: 3, test: 4 }) },
+        foo: on.env({ defaults: { else: 1 }, production: 2 }),
+        bar: { baz: on.env({ defaults: 3, test: 4 }) },
         barbaz: on.env({ production: 6 })
       }));
 
@@ -157,8 +157,8 @@ describe(`full`, () => {
     });
     test(`fails`, () => {
       const c = slim({ env: 'test' }, (_, on) => ({
-        foo: on.env({ default: { else: 1 }, production: 2 }),
-        bar: { baz: on.env({ default: 3, test: 4 }) }
+        foo: on.env({ defaults: { else: 1 }, production: 2 }),
+        bar: { baz: on.env({ defaults: 3, test: 4 }) }
       }));
 
       expect(() => c.get('baz')).toThrowError();
@@ -169,8 +169,8 @@ describe(`full`, () => {
   describe(`set`, () => {
     test(`succeeds`, () => {
       const c = slim({ env: 'test' }, (_, on) => ({
-        foo: on.env({ default: { else: 1 }, production: 2 }),
-        bar: { baz: on.env({ default: 3, test: 4 }) },
+        foo: on.env({ defaults: { else: 1 }, production: 2 }),
+        bar: { baz: on.env({ defaults: 3, test: 4 }) },
         barbaz: on.env({ production: 6 })
       }));
 
@@ -181,8 +181,8 @@ describe(`full`, () => {
     });
     test(`fails`, () => {
       const c = slim({ env: 'test' }, (_, on) => ({
-        foo: on.env({ default: { else: 1 }, production: 2 }),
-        bar: { baz: on.env({ default: 3, test: 4 }) },
+        foo: on.env({ defaults: { else: 1 }, production: 2 }),
+        bar: { baz: on.env({ defaults: 3, test: 4 }) },
         barbaz: on.env({ production: 6 })
       }));
 
@@ -194,8 +194,8 @@ describe(`full`, () => {
   describe(`pure`, () => {
     test(`succeeds`, () => {
       const c = slim({ env: 'test' }, (_, on) => ({
-        foo: on.env({ default: 1, production: 2 }),
-        bar: { baz: on.env({ default: 3, test: 4 }) },
+        foo: on.env({ defaults: 1, production: 2 }),
+        bar: { baz: on.env({ defaults: 3, test: 4 }) },
         barbaz: on.env({ production: 6 })
       }));
 
@@ -214,8 +214,8 @@ describe(`full`, () => {
         }
       };
       const c1 = slim(setup, ({ env }, on) => ({
-        foo: on.env({ default: 1, goodbye: 2 }),
-        bar: on.env({ default: 3, test: 4 }),
+        foo: on.env({ defaults: 1, goodbye: 2 }),
+        bar: on.env({ defaults: 3, test: 4 }),
         baz: 5,
         env
       }));
@@ -236,10 +236,10 @@ describe(`full`, () => {
       };
       const c1 = slim(setup, ({ env, fooenv }, on) => ({
         foo: on.env({
-          default: 1,
-          goodbye: on.fooenv({ default: 10, one: 2 })
+          defaults: 1,
+          goodbye: on.fooenv({ defaults: 10, one: 2 })
         }),
-        bar: on.fooenv({ default: 3, one: 4 }),
+        bar: on.fooenv({ defaults: 3, one: 4 }),
         baz: 5,
         env,
         fooenv
@@ -280,7 +280,7 @@ describe(`full`, () => {
     test(`succeeds wo/ filter`, () => {
       const c1 = slim({ env: 'test' }, (_, on) => ({
         foo: on.env({
-          default: { bar: 1, baz: 2 },
+          defaults: { bar: 1, baz: 2 },
           test: { bar: 10 }
         })
       }));
@@ -293,7 +293,7 @@ describe(`full`, () => {
     test(`recovers previous object if already created`, () => {
       const ct1 = slim({ env: 'test' }, (_, on) => ({
         foo: on.env({
-          default: { bar: 1, baz: 2 },
+          defaults: { bar: 1, baz: 2 },
           test: { bar: 10 }
         })
       }));
@@ -311,7 +311,7 @@ describe(`full`, () => {
     test(`set succeeds`, () => {
       const c1 = slim({ env: 'test' }, (_, on) => ({
         foo: on.env({
-          default: { bar: 1, baz: 2 },
+          defaults: { bar: 1, baz: 2 },
           test: { bar: 10 }
         })
       }));

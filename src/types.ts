@@ -29,7 +29,7 @@ export interface IEnvSetup {
 export type TOn<S> = { [P in keyof S]: TDefineFn };
 
 /**
- * Specifies the values for each environment -the `default` key in `IDefinition` will be used if no specific value for an environment was specified. Optionally, you can also specify a merging rule as a first argument.
+ * Specifies the values for each environment -the `defaults` key in `IDefinition` will be used if no specific value for an environment was specified. Optionally, you can also specify a merging rule as a first argument.
  */
 export type TDefineFn = ((definition: IDefinition) => any) &
   ((rule: TRule, definition: IDefinition) => any);
@@ -44,7 +44,7 @@ export type TRule = (defaults: any, value: any) => any;
  */
 export interface IDefinition {
   [id: string]: any;
-  default?: any;
+  defaults?: any;
 }
 
 /**

@@ -31,7 +31,7 @@ export default function environment<S extends ISetup, C extends IOfType<any>>(
       typeof value === 'object' && value.map ? value.map : (x?: string) => x;
     const env = map(assign[key]);
     // eslint-disable-next-line eqeqeq
-    acc[key] = env == undefined ? 'default' : env;
+    acc[key] = env == undefined ? 'defaults' : env;
     return acc;
   }, {}) as { [P in keyof S]: string };
 
@@ -84,9 +84,9 @@ export function makeOn<T extends IOfType<string>>(envs: T): TOn<T> {
       ): any {
         const rule = b ? (a as TRule) : rules.rank;
         const obj = b || (a as IDefinition);
-        if (!obj.hasOwnProperty(val)) return obj.default;
-        if (!obj.hasOwnProperty('default')) return obj[val];
-        return rule(obj.default, obj[val]);
+        if (!obj.hasOwnProperty(val)) return obj.defaults;
+        if (!obj.hasOwnProperty('defaults')) return obj[val];
+        return rule(obj.defaults, obj[val]);
       };
 
       acc[key] = fn;
