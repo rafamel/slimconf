@@ -1,3 +1,28 @@
+# [0.6.0](https://github.com/rafamel/slimconf/compare/v0.5.0...v0.6.0) (2019-04-04)
+
+
+### Code Refactoring
+
+* **slim:** config callback w/ on as first argument and vars as second ([6029dd4](https://github.com/rafamel/slimconf/commit/6029dd4))
+* **slim:** default values are now obtained from a defaults key (instead of default) ([efdfbf7](https://github.com/rafamel/slimconf/commit/efdfbf7))
+
+
+### Features
+
+* **slim:** adds merge rules ([cab1205](https://github.com/rafamel/slimconf/commit/cab1205))
+
+
+### BREAKING CHANGES
+
+* **slim:** for configs depending on environment variables, now TOn is sent as a first argument
+to the callback and the environment variables values as a second argument.
+* **slim:** default values, previously obtained from `IDefinition.default`, should now be in a
+`defaults` key (note the final *s*). See `IDefinition`.
+* **slim:** The default behavior doesn't shallow merges the value for an environment with the
+default anymore. This can be now done via rules.
+
+
+
 # [0.5.0](https://github.com/rafamel/slimconf/compare/v0.4.0...v0.5.0) (2019-04-02)
 
 
