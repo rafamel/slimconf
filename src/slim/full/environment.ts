@@ -5,7 +5,7 @@ import {
   IOfType,
   TConfig,
   IDefinition,
-  TRule,
+  TStrategy,
   TDefineFn,
   TOn
 } from '~/types';
@@ -13,7 +13,6 @@ import hash from './hash';
 import get from '../get';
 import set from '../set';
 import verify from '../verify';
-import rules from '../rules';
 
 export default function environment<S extends ISetup, C extends IOfType<any>>(
   environments: IOfType<TConfig<S, C>>,
@@ -81,14 +80,14 @@ export function makeOn<S extends ISetup>(
   return Object.entries(vars).reduce(
     (acc: TOn<S>, [key, val]) => {
       const fn: TDefineFn = function(
-        a: TRule | IDefinition,
+        a: TStrategy | IDefinition,
         b?: IDefinition
       ): any {
-        const rule = b ? (a as TRule) : rules.rank;
+        const strategy = b ? (a as TStrategy) : (_: any, val: any) => val;
         const obj = b || (a as IDefinition);
         if (!obj.hasOwnProperty(val)) return obj.defaults;
         if (!obj.hasOwnProperty('defaults')) return obj[val];
-        return rule(obj.defaults, obj[val]);
+        return strategy(obj.defaults, obj[val]);
       };
 
       acc[key] = fn;

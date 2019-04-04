@@ -29,15 +29,15 @@ export interface IEnvSetup {
 export type TOn<S> = { [P in keyof S]: TDefineFn };
 
 /**
- * Specifies the values for each environment -the `defaults` key in `IDefinition` will be used if no specific value for an environment was specified. Optionally, you can also specify a merging rule as a first argument.
+ * Specifies the values for each environment -the `defaults` key in `IDefinition` will be used if no specific value for an environment was specified. Optionally, you can also specify a merging strategy as a first argument.
  */
 export type TDefineFn = ((definition: IDefinition) => any) &
-  ((rule: TRule, definition: IDefinition) => any);
+  ((strategy: TStrategy, definition: IDefinition) => any);
 
 /**
- * Used for object merging when both defaults and value exist. It can be passed as a first argument to `TDefineFn`. It is implemented by `rules`.
+ * Used for object merging when both defaults and a value for an environment exist. It can be passed as a first argument to `TDefineFn`. See `shallow`, `merge`, and `deep` for a set of available strategies.
  */
-export type TRule = (defaults: any, value: any) => any;
+export type TStrategy = (defaults: any, value: any) => any;
 
 /**
  * See `TDefineFn`.
