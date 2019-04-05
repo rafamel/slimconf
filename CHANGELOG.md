@@ -1,3 +1,12 @@
+## [0.7.1](https://github.com/rafamel/slimconf/compare/v0.7.0...v0.7.1) (2019-04-05)
+
+
+### Bug Fixes
+
+* **slim:** fixes var value being 'defaults' for undefined variables ([0853109](https://github.com/rafamel/slimconf/commit/0853109))
+
+
+
 # [0.7.0](https://github.com/rafamel/slimconf/compare/v0.6.0...v0.7.0) (2019-04-05)
 
 
