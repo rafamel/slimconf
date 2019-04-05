@@ -1,3 +1,28 @@
+# [0.7.0](https://github.com/rafamel/slimconf/compare/v0.6.0...v0.7.0) (2019-04-05)
+
+
+### Code Refactoring
+
+* **slim:** changes variable mapping api; renames type ISetup to IUse ([f2a6a42](https://github.com/rafamel/slimconf/commit/f2a6a42))
+* **strategies:** renames rules to strategies; exports them as named exports ([07eaa3a](https://github.com/rafamel/slimconf/commit/07eaa3a))
+
+
+### Features
+
+* **envs:** adds envs: convenience utilities for environment variables ([78f7696](https://github.com/rafamel/slimconf/commit/78f7696))
+* **fallback:** adds fallback ([aa4d71e](https://github.com/rafamel/slimconf/commit/aa4d71e))
+* **strategies:** prevents mutations from having an effect over defaults ([c5d25f5](https://github.com/rafamel/slimconf/commit/c5d25f5))
+
+
+### BREAKING CHANGES
+
+* **envs:** `requireEnv` is now `envs.assert`
+* **slim:** Mapping used to be done via an IEnvSetup object; the same result can no be achieved
+by using a TUseMap array. Previous type ISetup has also been renamed to IUse.
+* **strategies:** rules are now called strategies and are exported as named exports
+
+
+
 # [0.6.0](https://github.com/rafamel/slimconf/compare/v0.5.0...v0.6.0) (2019-04-04)
 
 
