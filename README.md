@@ -33,11 +33,13 @@
       * [`shallow`:](#shallow) shallow merge for objects.
       * [`merge`:](#merge) deep merge, excluding arrays.
       * [`deep`:](#deep) deep merge, including arrays concatenation.
-    * [`fallback`:](#fallback) fall back to a default if a value is not defined or is not in a set of allowed values.
     * [`envs`:](#envs) convenience utilities for environment variables.
       * [`assert`:](#assert) requires any number of environment variables to be defined.
       * [`constrain`:](#constrain) requires a variable to be defined or for its value to be in a set of allowed values.
       * [`get`:](#get) same as `constrain` while also returning the variable value.
+    * [`fallback`:](#fallback) fall back to a default if a value is not defined or is not in a set of allowed values.
+    * [`get`:](#get) get a value for a path while failing early.
+    * [`set`:](#set) set a value for a path while failing early.
 * [Documentation](https://rafamel.github.io/slimconf/globals.html)
 
 ## Install
@@ -261,6 +263,30 @@ deep(
 ); // { foo: { bar: 'baz', baz: 'bar' }, bar: [1, 2, 3, 4], baz: 'foobar' }
 ```
 
+#### `envs`
+
+A set of convenience utilities for environment variables. [See docs.](https://rafamel.github.io/slimconf/interfaces/ienvs.html)
+
+* **`assert`:** requires any number of environment variables to be defined; throws otherwise. [See docs.](https://rafamel.github.io/slimconf/interfaces/ienvs.html#assert)
+* **`constrain`:** requires an environment variable to be defined, throwing otherwise. If an array of allowed values are passed the value will be checked against them, throwing if its not contained in the array. [See docs.](https://rafamel.github.io/slimconf/interfaces/ienvs.html#constrain)
+* **`get`:** same as `constrain`, but it returns the environment variable value. [See docs.](https://rafamel.github.io/slimconf/interfaces/ienvs.html#get)
+
+```javascript
+import { envs } from 'slimconf';
+
+// Throws if undefined
+envs.assert('NODE_ENV', 'PUBLIC_URL');
+
+// Throws if undefined
+envs.constrain('NODE_ENV');
+
+// Throws if not 'production', 'development', or 'test'
+envs.constrain('NODE_ENV', ['production', 'development', 'test']);
+
+// Throws if undefined and assigns value
+const nodeEnv = envs.get('NODE_ENV');
+```
+
 #### `fallback`
 
 Returns a function that will return a fallback if a given value is `undefined` or, in its case, if it doesn't match a set of allowed values. It can be used [with `slim` for environment variables mapping](#mapping-environment-variables) or independently. [See docs.](https://rafamel.github.io/slimconf/globals.html#fallback)
@@ -281,41 +307,28 @@ fba('foo'); // development
 fba('production'); // production
 ```
 
-#### `envs`
+#### `get`
 
-A set of convenience utilities for environment variables. [See docs.](https://rafamel.github.io/slimconf/globals.html#envs)
-
-##### `assert`
-
-Requires any number of environment variables to be defined; throws otherwise. [See docs.](https://rafamel.github.io/slimconf/globals.html#assert)
+Returns the value at a path for an object, if it exists and it's defined -otherwise it will throw. [See docs.](https://rafamel.github.io/slimconf/globals.html#get)
 
 ```javascript
-import { envs } from 'slimconf';
+import { get } from 'slimconf';
 
-envs.assert('NODE_ENV', 'PUBLIC_URL');
+const obj = { foo: { bar: 'baz', foobar: undefined } };
+
+get(obj, 'foo.bar'); // baz
+get(obj, 'foo.foobar'); // Error
 ```
 
-##### `constrain`
+#### `set`
 
-Requires an environment variable to be defined, throwing otherwise. If an array of allowed values are passed the value will be checked against them, throwing if its not contained in the array. [See docs.](https://rafamel.github.io/slimconf/globals.html#constrain)
-
-```javascript
-import { envs } from 'slimconf';
-
-// Throws if undefined
-envs.constrain('NODE_ENV');
-
-// Throws if not 'production', 'development', or 'test'
-envs.constrain('NODE_ENV', ['production', 'development', 'test']);
-```
-
-##### `get`
-
-Same as `constrain`, but it returns the environment variable value. [See docs.](https://rafamel.github.io/slimconf/globals.html#get)
+Sets and returns a value at a path for an object, if it exists -otherwise it will throw. [See docs.](https://rafamel.github.io/slimconf/globals.html#set)
 
 ```javascript
-import { envs } from 'slimconf';
+import { set } from 'slimconf';
 
-// Throws if undefined
-const nodeEnv = envs.get('NODE_ENV');
+const obj = { foo: { bar: 'baz' } };
+
+set(obj, 'foo.bar', 'foobar'); // foobar
+obj.foo.bar; // foobar
 ```
