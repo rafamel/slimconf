@@ -51,8 +51,8 @@ export function create<U extends IUse, C extends IOfType<any>>(
   verify(configObj);
 
   environments[id] = Object.assign({}, configObj, {
-    get(path: string): any {
-      return get(this, path);
+    get(path: string, unsafe?: boolean): any {
+      return get(this, path, unsafe);
     },
     set<T>(path: string, value: T): T {
       return set(this, path, value);

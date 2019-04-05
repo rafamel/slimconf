@@ -19,8 +19,10 @@ describe(`bare`, () => {
   });
   describe(`get`, () => {
     test(`succeeds`, () => {
-      const c = slim({ foo: { bar: 1, baz: 2 }, barbaz: 3 });
+      const c = slim({ foo: { bar: 1, baz: 2 }, barbaz: undefined });
       expect(c.get('foo.bar')).toBe(1);
+      expect(() => c.get('barbaz')).toThrowError();
+      expect(c.get('barbaz', true)).toBe(undefined);
     });
     test(`fails`, () => {
       const c = slim({ foo: { bar: 1, baz: 2 }, barbaz: 3 });
@@ -153,7 +155,8 @@ describe(`full`, () => {
       expect(c.get('foo')).toEqual({ else: 1 });
       expect(c.get('foo.else')).toBe(1);
       expect(c.get('bar.baz')).toBe(4);
-      expect(c.get('barbaz')).toBeUndefined();
+      expect(() => c.get('barbaz')).toThrowError();
+      expect(c.get('barbaz', true)).toBeUndefined();
     });
     test(`fails`, () => {
       const c = slim({ env: 'test' }, (on) => ({

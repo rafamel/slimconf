@@ -8,8 +8,8 @@ export default function bare<C extends IOfType<any>>(
 ): TBareConfig<C> {
   verify(config);
   return Object.assign({}, config, {
-    get(path: string): any {
-      return get(this, path);
+    get(path: string, unsafe?: boolean): any {
+      return get(this, path, unsafe);
     },
     set<T>(path: string, value: T): T {
       return set(this, path, value);

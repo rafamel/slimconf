@@ -51,9 +51,9 @@ export type TFn<U, C> = (
 
 export interface IBareConfig<C> {
   /**
-   * Returns the value at `path` for the current environment, if it exists -otherwise it will throw. Example: `config.get('logs.transports')`.
+   * Returns the value at `path` for the current environment, if it exists and it's defined -otherwise it will throw. If `unsafe` is `true`, it won't throw when the key exists but the value is `undefined`. Example: `config.get('logs.transports')`.
    */
-  get: (path: string) => any;
+  get: (path: string, unsafe?: boolean) => any;
   /**
    * Sets and returns the value at `path` for the current environment, if it exists -otherwise it will throw. Example: `config.set('logs.transports', { console: false, file: false })`.
    */
