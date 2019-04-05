@@ -1,6 +1,6 @@
 import {
   TEnvAssign,
-  ISetup,
+  IUse,
   TFn,
   IOfType,
   TConfig,
@@ -14,41 +14,40 @@ import get from '../get';
 import set from '../set';
 import verify from '../verify';
 
-export default function environment<S extends ISetup, C extends IOfType<any>>(
-  environments: IOfType<TConfig<S, C>>,
-  initial: TEnvAssign<S>,
-  assign: TEnvAssign<S>,
-  setup: S,
-  fn: TFn<S, C>
-): TConfig<S, C> {
+export default function environment<U extends IUse, C extends IOfType<any>>(
+  environments: IOfType<TConfig<U, C>>,
+  initial: TEnvAssign<U>,
+  assign: TEnvAssign<U>,
+  use: U,
+  fn: TFn<U, C>
+): TConfig<U, C> {
   assign = initial === assign ? initial : Object.assign({}, initial, assign);
-  const keys = Object.keys(setup);
 
-  const vars = keys.reduce((acc: { [P in keyof S]?: string }, key: string) => {
-    const value = setup[key];
-    const map =
-      typeof value === 'object' && value.map ? value.map : (x?: string) => x;
+  const keys = Object.keys(assign);
+  const vars = keys.reduce((acc: { [P in keyof U]?: string }, key: string) => {
+    const value = use[key];
+    const map = Array.isArray(value) && value[1] ? value[1] : (x?: string) => x;
     const env = map(assign[key]);
     // eslint-disable-next-line eqeqeq
     acc[key] = env == undefined ? 'defaults' : env;
     return acc;
-  }, {}) as { [P in keyof S]: string };
+  }, {}) as { [P in keyof U]: string };
 
   const id = hash(vars);
   if (!environments.hasOwnProperty(id)) {
-    create(id, vars, environments, initial, setup, fn);
+    create(id, vars, environments, initial, use, fn);
   }
 
   return environments[id];
 }
 
-export function create<S extends ISetup, C extends IOfType<any>>(
+export function create<U extends IUse, C extends IOfType<any>>(
   id: string,
-  vars: { [P in keyof S]: string },
+  vars: { [P in keyof U]: string },
   environments: any,
-  initial: TEnvAssign<S>,
-  setup: S,
-  fn: TFn<S, C>
+  initial: TEnvAssign<U>,
+  use: U,
+  fn: TFn<U, C>
 ): void {
   const configObj: any = fn(makeOn(vars), vars);
   verify(configObj);
@@ -60,7 +59,7 @@ export function create<S extends ISetup, C extends IOfType<any>>(
     set<T>(path: string, value: T): T {
       return set(this, path, value);
     },
-    pure(this: TConfig<S, C>): C {
+    pure(this: TConfig<U, C>): C {
       const o = Object.assign({}, this);
       delete o.get;
       delete o.set;
@@ -68,17 +67,17 @@ export function create<S extends ISetup, C extends IOfType<any>>(
       delete o.environment;
       return o;
     },
-    environment(assign?: TEnvAssign<S>): TConfig<S, C> {
-      return environment(environments, initial, assign || initial, setup, fn);
+    environment(assign?: TEnvAssign<U>): TConfig<U, C> {
+      return environment(environments, initial, assign || initial, use, fn);
     }
   });
 }
 
-export function makeOn<S extends ISetup>(
-  vars: { [P in keyof S]: string }
-): TOn<S> {
+export function makeOn<U extends IUse>(
+  vars: { [P in keyof U]: string }
+): TOn<U> {
   return Object.entries(vars).reduce(
-    (acc: TOn<S>, [key, val]) => {
+    (acc: TOn<U>, [key, val]) => {
       const fn: TDefineFn = function(
         a: TStrategy | IDefinition,
         b?: IDefinition
@@ -93,6 +92,6 @@ export function makeOn<S extends ISetup>(
       acc[key] = fn;
       return acc;
     },
-    {} as TOn<S>
+    {} as TOn<U>
   );
 }

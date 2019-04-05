@@ -5,28 +5,22 @@ export interface IOfType<T> {
 /**
  * Sets up the environment variables the configuration depends on.
  */
-export interface ISetup {
-  [id: string]: undefined | string | IEnvSetup;
+export interface IUse {
+  [id: string]: string | undefined | TUseMap;
 }
 
 /**
- * Used to map an environment variable. As an example, the following setup object maps to `'development'` when there's no `NODE_ENV`:
- * ```javascript
- *  const node: IEnvSetup = {
- *    from: process.env.NODE_ENV,
- *    map: (env) => env === 'production' || env === 'test' ? env : 'development'
- *  };
- * ```
+ * Environment variable with default value and mapping for `IUse`. Using maps this way will allow for the map to also apply when using `TConfig.environment()`,
  */
-export interface IEnvSetup {
-  from: any;
-  map: (from?: any) => string | undefined;
-}
+export type TUseMap = [
+  string | undefined,
+  (value?: string) => string | undefined
+];
 
 /**
- * Object with the sames keys as `ISetup`, that is, all the environment variable names the configuration depends on. It is used to define the values for each environment. See `TDefineFn`.
+ * Object with the sames keys as `IUse`, that is, all the environment variable names the configuration depends on. It is used to define the values for each environment. See `TDefineFn`.
  */
-export type TOn<S> = { [P in keyof S]: TDefineFn };
+export type TOn<U> = { [P in keyof U]: TDefineFn };
 
 /**
  * Specifies the values for each environment -the `defaults` key in `IDefinition` will be used if no specific value for an environment was specified. Optionally, you can also specify a merging strategy as a first argument.
@@ -50,7 +44,10 @@ export interface IDefinition {
 /**
  * A configuration object returning function, receiving a `TOn` object as the first argument, and the values for the environment variables as the second.
  */
-export type TFn<S, C> = (on: TOn<S>, vars: { [P in keyof S]: string }) => C;
+export type TFn<U, C> = (
+  on: TOn<U>,
+  vars: { [P in keyof U]: string | undefined }
+) => C;
 
 export interface IBareConfig<C> {
   /**
@@ -72,16 +69,16 @@ export interface IBareConfig<C> {
  */
 export type TBareConfig<C> = { [P in keyof C]: C[P] } & IBareConfig<C>;
 
-export interface IConfig<S, C> extends IBareConfig<C> {
+export interface IConfig<U, C> extends IBareConfig<C> {
   /**
    * Returns the configuration for a specific environment that might not be the current. As an example, we could access the configuration for a production environment when in a development environment via `obj.environment({ env: 'production' })`.
    */
-  environment: (assign?: TEnvAssign<S>) => TConfig<S, C>;
+  environment: (assign?: TEnvAssign<U>) => TConfig<U, C>;
 }
 
 /**
  * The configuration object with additional methods - see `IConfig`.
  */
-export type TConfig<S, C> = { [P in keyof C]: C[P] } & IConfig<S, C>;
+export type TConfig<U, C> = { [P in keyof C]: C[P] } & IConfig<U, C>;
 
-export type TEnvAssign<S> = { [P in keyof S]?: string };
+export type TEnvAssign<U> = { [P in keyof U]?: string };
