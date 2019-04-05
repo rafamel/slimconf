@@ -1,14 +1,14 @@
 import { IOfType } from '~/types';
 
+const PROTECTED = ['get', 'set', 'pure', 'environment'];
+
 export default function verify(obj: IOfType<any>): void {
-  if (
-    obj.hasOwnProperty('get') ||
-    obj.hasOwnProperty('set') ||
-    obj.hasOwnProperty('pure') ||
-    obj.hasOwnProperty('environment')
-  ) {
-    throw Error(
-      `config can't have keys "get", "set", "pure", or "environment"`
-    );
+  for (let key of PROTECTED) {
+    if (obj.hasOwnProperty(key)) {
+      throw Error(
+        `config can't have key "${key}" -these are protected: ` +
+          PROTECTED.join(', ')
+      );
+    }
   }
 }
