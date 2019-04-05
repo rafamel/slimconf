@@ -1,4 +1,4 @@
 export { default } from './slim';
-export { default as requireEnv } from './require-env';
+export { default as envs } from './envs';
 export * from './strategies';
 export * from './types';
