@@ -1,4 +1,4 @@
-import { shallow, merge, deep } from '~/strategies';
+import { shallow, merge, deep } from '~/utils/strategies';
 
 describe(`shallow`, () => {
   test(`returns shallow merge`, () => {

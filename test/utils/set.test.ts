@@ -1,7 +1,10 @@
-import set from '~/slim/set';
+import set from '~/utils/set';
 
 test(`throws wo/ a path`, () => {
-  expect(() => set({}, '', 'foo')).toThrowError();
+  expect(() => set({}, '', 'bar')).toThrowError();
+});
+test(`throws for non objects`, () => {
+  expect(() => set(4, 'foo', 'bar')).toThrowError();
 });
 test(`succeeds for first level properties`, () => {
   const obj = { foo: 'bar', bar: { baz: 'barbaz' } };

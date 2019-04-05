@@ -1,4 +1,4 @@
-import fallback from '~/fallback';
+import fallback from '~/utils/fallback';
 
 describe(`shallow`, () => {
   test(`succeeds wo/ values`, () => {

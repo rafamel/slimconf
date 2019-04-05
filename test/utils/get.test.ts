@@ -1,7 +1,10 @@
-import get from '~/slim/get';
+import get from '~/utils/get';
 
 test(`throws wo/ a path`, () => {
   expect(() => get({}, '')).toThrowError();
+});
+test(`throws for non objects`, () => {
+  expect(() => get(4, 'foo')).toThrowError();
 });
 test(`succeeds for first level properties`, () => {
   const obj = {

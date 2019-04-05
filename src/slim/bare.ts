@@ -1,6 +1,5 @@
 import { IOfType, TBareConfig } from '~/types';
-import get from './get';
-import set from './set';
+import { get, set } from '~/utils';
 import verify from './verify';
 
 export default function bare<C extends IOfType<any>>(

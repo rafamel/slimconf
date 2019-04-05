@@ -1,7 +1,3 @@
-export interface IOfType<T> {
-  [key: string]: T;
-}
-
 /**
  * Sets up the environment variables the configuration depends on.
  */

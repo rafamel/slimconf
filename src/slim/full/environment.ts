@@ -10,8 +10,7 @@ import {
   TOn
 } from '~/types';
 import hash from './hash';
-import get from '../get';
-import set from '../set';
+import { get, set } from '~/utils';
 import verify from '../verify';
 
 export default function environment<U extends IUse, C extends IOfType<any>>(

@@ -1,4 +1,4 @@
-import envs from '~/envs';
+import envs from '~/utils/envs';
 
 describe(`assert`, () => {
   test(`Doesn't throw for existing environment variables`, () => {
