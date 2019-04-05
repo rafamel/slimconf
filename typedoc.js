@@ -18,8 +18,7 @@ module.exports = {
     '**/internal/**/*.ts',
     '**/slim/full/**/*.ts',
     '**/slim/bare.ts',
-    '**/slim/get.ts',
-    '**/slim/set.ts',
-    '**/slim/verify.ts'
+    '**/slim/verify.ts',
+    '**/utils/envs.ts'
   ]
 };
