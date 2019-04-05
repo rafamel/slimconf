@@ -27,9 +27,7 @@ export default function environment<U extends IUse, C extends IOfType<any>>(
   const vars = keys.reduce((acc: { [P in keyof U]?: string }, key: string) => {
     const value = use[key];
     const map = Array.isArray(value) && value[1] ? value[1] : (x?: string) => x;
-    const env = map(assign[key]);
-    // eslint-disable-next-line eqeqeq
-    acc[key] = env == undefined ? 'defaults' : env;
+    acc[key] = map(assign[key]);
     return acc;
   }, {}) as { [P in keyof U]: string };
 

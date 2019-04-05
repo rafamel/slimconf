@@ -81,17 +81,19 @@ describe(`full`, () => {
       ).toThrowError();
     });
     test(`succeeds with use when undefined`, () => {
-      const c1 = slim({ env: undefined }, (on) => ({
+      const c1 = slim({ env: undefined }, (on, vars) => ({
         foo: on.env({ defaults: 1, production: 2 }),
         bar: on.env({ defaults: 3, test: 4 }),
         baz: 5,
-        barbaz: on.env({ test: 6 })
+        barbaz: on.env({ test: 6 }),
+        vars
       }));
-      const c2 = slim({ env: [undefined, () => undefined] }, (on) => ({
+      const c2 = slim({ env: [undefined, () => undefined] }, (on, vars) => ({
         foo: on.env({ defaults: 1, production: 2 }),
         bar: on.env({ defaults: 3, test: 4 }),
         baz: 5,
-        barbaz: on.env({ test: 6 })
+        barbaz: on.env({ test: 6 }),
+        vars
       }));
 
       [c1, c2].forEach((c) => {
@@ -99,6 +101,7 @@ describe(`full`, () => {
         expect(c.bar).toBe(3);
         expect(c.baz).toBe(5);
         expect(c.barbaz).toBeUndefined();
+        expect(c.vars).toEqual({ env: undefined });
       });
     });
   });
