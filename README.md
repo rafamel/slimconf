@@ -25,19 +25,19 @@
 
 * [Install](#install)
 * [Usage](#usage)
-  * [`slim`](#slim)
+  * [`slim`:](#slim) core functionality.
     * [With no environment variables](#with-no-environment-variables)
     * [With environment variables](#with-environment-variables)
-  * [Utils](#utils)
-    * [Merge strategies](#merge-strategies)
-      * [`shallow`](#shallow)
-      * [`merge`](#merge)
-      * [`deep`](#deep)
-    * [`fallback`](#fallback)
-    * [`envs`](#envs)
-      * [`assert`](#assert)
-      * [`constrain`](#constrain)
-      * [`get`](#get)
+  * [Utils:](#utils) a set of helpful utilities.
+    * [Merge strategies:](#merge-strategies) merge defaults with environment dependent values.
+      * [`shallow`:](#shallow) shallow merge for objects.
+      * [`merge`:](#merge) deep merge, excluding arrays.
+      * [`deep`:](#deep) deep merge, including arrays concatenation.
+    * [`fallback`:](#fallback) fall back to a default if a value is not defined or is not in a set of allowed values.
+    * [`envs`:](#envs) convenience utilities for environment variables.
+      * [`assert`:](#assert) requires any number of environment variables to be defined.
+      * [`constrain`:](#constrain) requires a variable to be defined or for its value to be in a set of allowed values.
+      * [`get`:](#get) same as `constrain` while also returning the variable value.
 * [Documentation](https://rafamel.github.io/slimconf/globals.html)
 
 ## Install
@@ -297,7 +297,7 @@ envs.assert('NODE_ENV', 'PUBLIC_URL');
 
 ##### `constrain`
 
-Requires environment variable to be defined, throwing otherwise. If an array of allowed values are passed the value will be checked against them, throwing if its not contained in the array. [See docs.](https://rafamel.github.io/slimconf/globals.html#constrain)
+Requires an environment variable to be defined, throwing otherwise. If an array of allowed values are passed the value will be checked against them, throwing if its not contained in the array. [See docs.](https://rafamel.github.io/slimconf/globals.html#constrain)
 
 ```javascript
 import { envs } from 'slimconf';
