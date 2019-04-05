@@ -1,3 +1,19 @@
+# [0.8.0](https://github.com/rafamel/slimconf/compare/v0.7.1...v0.8.0) (2019-04-05)
+
+
+### Features
+
+* **get, set:** exports get and set to be used with any object ([3914e56](https://github.com/rafamel/slimconf/commit/3914e56))
+* **slim:** config.get throws for undefined values by default ([6ca3326](https://github.com/rafamel/slimconf/commit/6ca3326))
+
+
+### BREAKING CHANGES
+
+* **slim:** `IBareConfig.get` and `IConfig.get` will now also throw for `undefined` values by
+default -it only did when the key didn't exist before.
+
+
+
 ## [0.7.1](https://github.com/rafamel/slimconf/compare/v0.7.0...v0.7.1) (2019-04-05)
 
 
