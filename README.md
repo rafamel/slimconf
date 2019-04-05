@@ -1,45 +1,44 @@
+# slimconf
+
+[![Version](https://img.shields.io/npm/v/slimconf.svg)](https://www.npmjs.com/package/slimconf)
+[![Build Status](https://img.shields.io/travis/rafamel/slimconf.svg)](https://travis-ci.org/rafamel/slimconf)
+[![Coverage](https://img.shields.io/coveralls/rafamel/slimconf.svg)](https://coveralls.io/github/rafamel/slimconf)
+[![Dependencies](https://img.shields.io/david/rafamel/slimconf.svg)](https://david-dm.org/rafamel/slimconf)
+[![Vulnerabilities](https://img.shields.io/snyk/vulnerabilities/npm/slimconf.svg)](https://snyk.io/test/npm/slimconf)
+[![License](https://img.shields.io/github/license/rafamel/slimconf.svg)](https://github.com/rafamel/slimconf/blob/master/LICENSE)
+[![Types](https://img.shields.io/npm/types/slimconf.svg)](https://www.npmjs.com/package/slimconf)
+
 <div align="center">
+  <br />
   <br />
   <a href="https://www.npmjs.com/package/slimconf" target="_blank">
     <img alt="slimconf" width="350" src="https://raw.githubusercontent.com/rafamel/slimconf/master/scripts/assets/logo.png" />
   </a>
   <br />
   <br />
-  <strong>A slim configuration util</strong>
-  <br />
-  <br />
-  <a href="https://www.npmjs.com/package/slimconf">
-    <img src="https://img.shields.io/npm/v/slimconf.svg" alt="Version">
-  </a>
-  <a href="https://www.npmjs.com/package/slimconf">
-    <img src="https://img.shields.io/npm/types/slimconf.svg" alt="Types">
-  </a>
-  <a href="https://travis-ci.org/rafamel/slimconf">
-    <img src="https://img.shields.io/travis/rafamel/slimconf.svg" alt="Build Status">
-  </a>
-  <a href="https://coveralls.io/github/rafamel/slimconf">
-    <img src="https://img.shields.io/coveralls/rafamel/slimconf.svg" alt="Coverage">
-  </a>
-  <a href="https://david-dm.org/rafamel/slimconf">
-    <img src="https://img.shields.io/david/rafamel/slimconf.svg" alt="Dependencies">
-  </a>
-  <a href="https://snyk.io/test/npm/slimconf">
-    <img src="https://img.shields.io/snyk/vulnerabilities/npm/slimconf.svg" alt="Vulnerabilities">
-  </a>
-  <a href="https://github.com/rafamel/slimconf/blob/master/LICENSE">
-    <img src="https://img.shields.io/github/license/rafamel/slimconf.svg" alt="License">
-  </a>
+  <strong>A slim configuration util that fits both the thin and bulky</strong>
   <br />
   <br />
 </div>
 
-# slimconf
+## Table of Contents
 
 * [Install](#install)
 * [Usage](#usage)
   * [`slim`](#slim)
-  * [`requireEnv`](#requireenvvars-string-void)
-* [Documentation](https://rafamel.github.io/slimconf)
+    * [With no environment variables](#with-no-environment-variables)
+    * [With environment variables](#with-environment-variables)
+  * [Utils](#utils)
+    * [Merge strategies](#merge-strategies)
+      * [`shallow`](#shallow)
+      * [`merge`](#merge)
+      * [`deep`](#deep)
+    * [`fallback`](#fallback)
+    * [`envs`](#envs)
+      * [`assert`](#assert)
+      * [`constrain`](#constrain)
+      * [`get`](#get)
+* [Documentation](https://rafamel.github.io/slimconf/globals.html)
 
 ## Install
 
@@ -60,7 +59,7 @@ import slim from 'slimconf';
 
 const config = slim({ foo: 'bar', baz: 'foobar', barbaz: { foobaz: 'slim' } });
 
-// Get a path
+// Get a path safely -will throw if non existent
 config.get('barbaz.foobaz'); // 'slim'
 
 // Set a value for a path
@@ -73,9 +72,9 @@ config.pure(); // { foo: { bar: 'baz' }, baz: 'foobar', barbaz: { foobaz: 'slim'
 
 #### With environment variables
 
-When a configuration depends on environment variables, `slim` has the signature `slim(setup: ISetup, fn: TFn): TConfig`.
+When a configuration depends on environment variables, `slim` has the signature `slim(use: IUse, fn: TFn): TConfig`.
 
-* `setup` sets up the environment variables the configuration depends on -[see docs.](https://rafamel.github.io/slimconf/interfaces/isetup.html)
+* `use` passes up the environment variables the configuration depends on -[see docs.](https://rafamel.github.io/slimconf/interfaces/iuse.html)
 * `fn` should be a configuration object returning function -[see docs.](https://rafamel.github.io/slimconf/globals.html#tfn)
 
 ##### Fundamentals
@@ -125,18 +124,20 @@ specific.pure(); // { foo: 'bar', baz: 4, foobar: 2 }
 specific.get('vars'); // { env: 'test', fooenv: 'lorem' }
 ```
 
-##### Using rules
+##### Using merge strategies
 
-When defining the values for each environment, you can set up custom rules to merge with the `defaults` -see docs for [`TOn`](https://rafamel.github.io/slimconf/globals.html#ton), [`TDefineFn`](https://rafamel.github.io/slimconf/globals.html#tdefinefn), and [`TRule`.](https://rafamel.github.io/slimconf/globals.html#trule) `slimconf` also exports a set of common rules -[see docs:](https://rafamel.github.io/slimconf/globals.html#rules)
+When defining the values for each environment, you can set up custom strategies to merge with the `defaults` -see docs for [`TOn`](https://rafamel.github.io/slimconf/globals.html#ton), [`TDefineFn`](https://rafamel.github.io/slimconf/globals.html#tdefinefn), and [`TStrategy`.](https://rafamel.github.io/slimconf/globals.html#tstrategy)
+
+`slimconf` also exports a set of common strategies that can also be used independently to merge any two objects - see [merge strategies.](#merge-strategies)
 
 ```javascript
-import slim, { rules } from 'slimconf';
+import slim, { shallow, merge, deep } from 'slimconf';
 
 const config = slim(
   { env: process.env.NODE_ENV },
   (on, vars) => ({
     // Shallow merge
-    foo: on.env(rules.shallow, {
+    foo: on.env(shallow, {
       defaults: {
         ports: [3000],
         transports: { console: true, file: false },
@@ -148,7 +149,7 @@ const config = slim(
       }
     }),
     // Deep merge
-    bar: on.env(rules.merge, {
+    bar: on.env(merge, {
       defaults: {
         ports: [3000],
         transports: { console: true, file: false },
@@ -160,7 +161,7 @@ const config = slim(
       }
     }),
     // Deep merge with concatenated arrays
-    baz: on.env(rules.deep, {
+    baz: on.env(deep, {
       defaults: {
         ports: [3000],
         transports: { console: true, file: false },
@@ -177,30 +178,36 @@ const config = slim(
 
 ##### Mapping environment variables
 
-As an example of environment variables mapping, the following setup object maps to `'development'` when there's no `NODE_ENV`:
+When mapping environment variables, it is beneficial to use the built in api for it, as it will allow for the map to also apply when using `TConfig.environment()` -see [`TConfig`](https://rafamel.github.io/slimconf/globals.html#tconfig) and [`IConfig`.](https://rafamel.github.io/slimconf/interfaces/iconfig.html)
+
+As an example, the following setup object maps to `'development'` whenever the `NODE_ENV` variable is not `'production'` or `'test'`. `slimconf` also exports the [`fallback`](#fallback) function for precisely this use case.
 
 ```javascript
-import slim from 'slimconf';
+import slim, { fallback } from 'slimconf';
 
-const setup = {
-  fooenv: process.env.MY_ENV_VARIABLE,
-  env: {
-    from: process.env.NODE_ENV,
-    map: (env) => env === 'production' || env === 'test' ? env : 'development'
-  }
+const use = {
+  nodeEnv: [
+    process.env.NODE_ENV,
+    (use) => use === 'production' || use === 'test' ? use : 'development'
+  ],
+  // 'nodeEnv' and 'env' are equivalent
+  env: [
+    process.env.NODE_ENV,
+    fallback('development', ['production', 'test'])
+  ]
 };
-const config = slim(setup, (on, vars) => ({
-  foo: 'bar',
-  baz: on.env({
+const config = slim(use, (on, vars) => ({
+  bar: on.node({
     defaults: 1,
     production: 2,
     development: 3,
     test: 4
   }),
-  foobar: on.fooenv({
+  baz: on.env({
     defaults: 1,
-    lorem: 2,
-    ipsum: 3
+    production: 2,
+    development: 3,
+    test: 4
   })
 }));
 
@@ -209,14 +216,106 @@ config
   .pure(); // { foo: 'bar', baz: 3, foobar: 3 }
 ```
 
-### `requireEnv(...vars: string[]): void`
+### Utils
 
-Requires the presence of a number of environment variables; if they are not present, it will throw -[see docs.](https://rafamel.github.io/slimconf/globals.html#requireenv)
+#### Merge strategies
 
-As an example `requireEnv('NODE_ENV', 'MY_ENV_VARIABLE')` will throw if any of `process.env.NODE_ENV` and `process.env.MY_ENV_VARIABLE` don't exist.
+Merge strategies [can be used with `slim`](#using-merge-strategies) or independently to merge any two objects.
+
+##### `shallow`
+
+Shallow merge for objects -[see docs.](https://rafamel.github.io/slimconf/globals.html#shallow)
 
 ```javascript
-import { requireEnv } from 'slimconf';
+import { shallow } from 'slimconf';
 
-requireEnv('NODE_ENV', 'MY_ENV_VARIABLE');
+shallow(
+  { foo: { bar: 'baz' }, bar: [1, 2], baz: 'foobar' },
+  { foo: { baz: 'bar' }, bar: [3, 4] },
+); // { foo: { baz: 'bar' }, bar: [3, 4], baz: 'foobar' }
+```
+
+##### `merge`
+
+Deep merge for objects, excluding arrays -[see docs.](https://rafamel.github.io/slimconf/globals.html#merge)
+
+```javascript
+import { merge } from 'slimconf';
+
+merge(
+  { foo: { bar: 'baz' }, bar: [1, 2], baz: 'foobar' },
+  { foo: { baz: 'bar' }, bar: [3, 4] },
+); // { foo: { bar: 'baz', baz: 'bar' }, bar: [3, 4], baz: 'foobar' }
+```
+
+##### `deep`
+
+Deep merge for objects, including array concatenation -[see docs.](https://rafamel.github.io/slimconf/globals.html#deep)
+
+```javascript
+import { deep } from 'slimconf';
+
+deep(
+  { foo: { bar: 'baz' }, bar: [1, 2], baz: 'foobar' },
+  { foo: { baz: 'bar' }, bar: [3, 4] },
+); // { foo: { bar: 'baz', baz: 'bar' }, bar: [1, 2, 3, 4], baz: 'foobar' }
+```
+
+#### `fallback`
+
+Returns a function that will return a fallback if a given value is `undefined` or, in its case, if it doesn't match a set of allowed values. It can be used [with `slim` for environment variables mapping](#mapping-environment-variables) or independently. [See docs.](https://rafamel.github.io/slimconf/globals.html#fallback)
+
+```javascript
+import { fallback } from 'slimconf';
+
+// Sets 'development' as fallback if value is not defined
+const fb = fallback('development');
+fb(); // development
+fb('foo') // foo
+
+// Sets 'development' as fallback if value is not 'production' or 'test'
+const fba = fallback('development', ['production', 'test']);
+
+fba(); // development
+fba('foo'); // development
+fba('production'); // production
+```
+
+#### `envs`
+
+A set of convenience utilities for environment variables. [See docs.](https://rafamel.github.io/slimconf/globals.html#envs)
+
+##### `assert`
+
+Requires any number of environment variables to be defined; throws otherwise. [See docs.](https://rafamel.github.io/slimconf/globals.html#assert)
+
+```javascript
+import { envs } from 'slimconf';
+
+envs.assert('NODE_ENV', 'PUBLIC_URL');
+```
+
+##### `constrain`
+
+Requires environment variable to be defined, throwing otherwise. If an array of allowed values are passed the value will be checked against them, throwing if its not contained in the array. [See docs.](https://rafamel.github.io/slimconf/globals.html#constrain)
+
+```javascript
+import { envs } from 'slimconf';
+
+// Throws if undefined
+envs.constrain('NODE_ENV');
+
+// Throws if not 'production', 'development', or 'test'
+envs.constrain('NODE_ENV', ['production', 'development', 'test']);
+```
+
+##### `get`
+
+Same as `constrain`, but it returns the environment variable value. [See docs.](https://rafamel.github.io/slimconf/globals.html#get)
+
+```javascript
+import { envs } from 'slimconf';
+
+// Throws if undefined
+const nodeEnv = envs.get('NODE_ENV');
 ```
