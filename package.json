@@ -1,6 +1,6 @@
 {
   "name": "slimconf",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "author": "Rafa Mel",
   "description": "A slim configuration util that fits both the thin and bulky",
   "keywords": [

@@ -1,3 +1,12 @@
+# [0.9.0](https://github.com/rafamel/slimconf/compare/v0.8.0...v0.9.0) (2019-04-12)
+
+
+### Features
+
+* **slim:** supports string, number, boolean, and null types for IUse and TUseMap values ([d5b9589](https://github.com/rafamel/slimconf/commit/d5b9589))
+
+
+
 # [0.8.0](https://github.com/rafamel/slimconf/compare/v0.7.1...v0.8.0) (2019-04-05)
 
 
