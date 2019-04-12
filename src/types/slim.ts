@@ -2,16 +2,18 @@
  * Sets up the environment variables the configuration depends on.
  */
 export interface IUse {
-  [id: string]: string | undefined | TUseMap;
+  [id: string]: TUseType | TUseMap;
 }
 
 /**
  * Environment variable with default value and mapping for `IUse`. Using maps this way will allow for the map to also apply when using `TConfig.environment()`,
  */
-export type TUseMap = [
-  string | undefined,
-  (value?: string) => string | undefined
-];
+export type TUseMap = [any, (value?: any) => TUseType];
+
+/**
+ * Types that can be used on `IUse` and `TUseMap`. All but `undefined` will map to their *string* equivalent for `IDefinition` -`true` will recover the `'true'` property, if it exists, and so on. See `TOn` and `TDefineFn`.
+ */
+export type TUseType = string | number | boolean | null | undefined;
 
 /**
  * Object with the sames keys as `IUse`, that is, all the environment variable names the configuration depends on. It is used to define the values for each environment. See `TDefineFn`.
@@ -40,10 +42,7 @@ export interface IDefinition {
 /**
  * A configuration object returning function, receiving a `TOn` object as the first argument, and the values for the environment variables as the second.
  */
-export type TFn<U, C> = (
-  on: TOn<U>,
-  vars: { [P in keyof U]: string | undefined }
-) => C;
+export type TFn<U, C> = (on: TOn<U>, vars: { [P in keyof U]: TUseType }) => C;
 
 export interface IBareConfig<C> {
   /**
@@ -77,4 +76,4 @@ export interface IConfig<U, C> extends IBareConfig<C> {
  */
 export type TConfig<U, C> = { [P in keyof C]: C[P] } & IConfig<U, C>;
 
-export type TEnvAssign<U> = { [P in keyof U]?: string };
+export type TEnvAssign<U> = { [P in keyof U]?: TUseType };
