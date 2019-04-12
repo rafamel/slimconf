@@ -1,4 +1,5 @@
 import slim from '~/slim';
+import { TOn } from '~/types';
 
 describe(`bare`, () => {
   describe(`root`, () => {
@@ -315,6 +316,83 @@ describe(`full`, () => {
 
       expect(c1.foo).toEqual({ bar: 10 });
       expect(c2.foo).toEqual({ bar: 11, baz: 2 });
+    });
+  });
+  describe(`use is not a string: TUseType`, () => {
+    test(`number`, () => {
+      const fn = (on: TOn<any>, vars: any): any => ({
+        vars,
+        foo: on.env({
+          defaults: { bar: 1 },
+          2: { bar: 2 }
+        })
+      });
+      const c1 = slim({ env: 2 }, fn);
+      const c2 = slim({ env: [null, (x) => (x === null ? 2 : x)] }, fn);
+
+      [c1, c2].forEach((c) => {
+        expect(c.pure()).toEqual({ vars: { env: 2 }, foo: { bar: 2 } });
+        expect(c.environment({ env: 10 }).pure()).toEqual({
+          vars: { env: 10 },
+          foo: { bar: 1 }
+        });
+        expect(c.environment({ env: undefined }).pure()).toEqual({
+          vars: { env: undefined },
+          foo: { bar: 1 }
+        });
+      });
+    });
+    test(`boolean`, () => {
+      const fn = (on: TOn<any>, vars: any): any => ({
+        vars,
+        foo: on.env({
+          defaults: { bar: 1 },
+          true: { bar: 2 },
+          false: { bar: 3 }
+        })
+      });
+      const c1 = slim({ env: true }, fn);
+      const c2 = slim({ env: false }, fn);
+      const c3 = slim({ env: [null, (x) => (x === null ? true : x)] }, fn);
+      const c4 = slim({ env: [null, (x) => (x === null ? false : x)] }, fn);
+
+      [c1, c3].forEach((c) => {
+        expect(c.pure()).toEqual({ vars: { env: true }, foo: { bar: 2 } });
+        expect(c.environment({ env: undefined }).pure()).toEqual({
+          vars: { env: undefined },
+          foo: { bar: 1 }
+        });
+      });
+      [c2, c4].forEach((c) => {
+        expect(c.pure()).toEqual({ vars: { env: false }, foo: { bar: 3 } });
+        expect(c.environment({ env: undefined }).pure()).toEqual({
+          vars: { env: undefined },
+          foo: { bar: 1 }
+        });
+      });
+    });
+    test(`null`, () => {
+      const fn = (on: TOn<any>, vars: any): any => ({
+        vars,
+        foo: on.env({
+          defaults: { bar: 1 },
+          null: { bar: 2 }
+        })
+      });
+      const c1 = slim({ env: null }, fn);
+      const c2 = slim({ env: [true, (x) => (x === true ? null : x)] }, fn);
+
+      [c1, c2].forEach((c) => {
+        expect(c.pure()).toEqual({ vars: { env: null }, foo: { bar: 2 } });
+        expect(c.environment({ env: false }).pure()).toEqual({
+          vars: { env: false },
+          foo: { bar: 1 }
+        });
+        expect(c.environment({ env: undefined }).pure()).toEqual({
+          vars: { env: undefined },
+          foo: { bar: 1 }
+        });
+      });
     });
   });
 });
