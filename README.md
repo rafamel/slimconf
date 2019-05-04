@@ -1,8 +1,8 @@
 # slimconf
 
 [![Version](https://img.shields.io/npm/v/slimconf.svg)](https://www.npmjs.com/package/slimconf)
-[![Build Status](https://img.shields.io/travis/rafamel/slimconf.svg)](https://travis-ci.org/rafamel/slimconf)
-[![Coverage](https://img.shields.io/coveralls/rafamel/slimconf.svg)](https://coveralls.io/github/rafamel/slimconf)
+[![Build Status](https://img.shields.io/travis/rafamel/slimconf/master.svg)](https://travis-ci.org/rafamel/slimconf)
+[![Coverage](https://img.shields.io/coveralls/rafamel/slimconf/master.svg)](https://coveralls.io/github/rafamel/slimconf)
 [![Dependencies](https://img.shields.io/david/rafamel/slimconf.svg)](https://david-dm.org/rafamel/slimconf)
 [![Vulnerabilities](https://img.shields.io/snyk/vulnerabilities/npm/slimconf.svg)](https://snyk.io/test/npm/slimconf)
 [![License](https://img.shields.io/github/license/rafamel/slimconf.svg)](https://github.com/rafamel/slimconf/blob/master/LICENSE)
