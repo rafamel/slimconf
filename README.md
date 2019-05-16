@@ -12,7 +12,7 @@
   <br />
   <br />
   <a href="https://www.npmjs.com/package/slimconf" target="_blank">
-    <img alt="slimconf" width="350" src="https://raw.githubusercontent.com/rafamel/slimconf/master/scripts/assets/logo.png" />
+    <img alt="slimconf" width="350" src="https://raw.githubusercontent.com/rafamel/slimconf/master/assets/logo.png" />
   </a>
   <br />
   <br />
@@ -20,6 +20,8 @@
   <br />
   <br />
 </div>
+
+If you find it useful, consider [starring the project](https://github.com/rafamel/slimconf) 💪 and/or following [its author](https://github.com/rafamel) ❤️ -there's more on the way!
 
 ## Table of Contents
 
