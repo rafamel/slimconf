@@ -1,19 +1,23 @@
-# [0.9.0](https://github.com/rafamel/slimconf/compare/v0.8.0...v0.9.0) (2019-04-12)
+## [0.9.1](https://github.com/rafamel/ts-project/compare/v0.9.0...v0.9.1) (2019-05-16)
+
+
+
+# [0.9.0](https://github.com/rafamel/ts-project/compare/v0.8.0...v0.9.0) (2019-04-12)
 
 
 ### Features
 
-* **slim:** supports string, number, boolean, and null types for IUse and TUseMap values ([d5b9589](https://github.com/rafamel/slimconf/commit/d5b9589))
+* **slim:** supports string, number, boolean, and null types for IUse and TUseMap values ([d5b9589](https://github.com/rafamel/ts-project/commit/d5b9589))
 
 
 
-# [0.8.0](https://github.com/rafamel/slimconf/compare/v0.7.1...v0.8.0) (2019-04-05)
+# [0.8.0](https://github.com/rafamel/ts-project/compare/v0.7.1...v0.8.0) (2019-04-05)
 
 
 ### Features
 
-* **get, set:** exports get and set to be used with any object ([3914e56](https://github.com/rafamel/slimconf/commit/3914e56))
-* **slim:** config.get throws for undefined values by default ([6ca3326](https://github.com/rafamel/slimconf/commit/6ca3326))
+* **get, set:** exports get and set to be used with any object ([3914e56](https://github.com/rafamel/ts-project/commit/3914e56))
+* **slim:** config.get throws for undefined values by default ([6ca3326](https://github.com/rafamel/ts-project/commit/6ca3326))
 
 
 ### BREAKING CHANGES
@@ -23,29 +27,29 @@ default -it only did when the key didn't exist before.
 
 
 
-## [0.7.1](https://github.com/rafamel/slimconf/compare/v0.7.0...v0.7.1) (2019-04-05)
+## [0.7.1](https://github.com/rafamel/ts-project/compare/v0.7.0...v0.7.1) (2019-04-05)
 
 
 ### Bug Fixes
 
-* **slim:** fixes var value being 'defaults' for undefined variables ([0853109](https://github.com/rafamel/slimconf/commit/0853109))
+* **slim:** fixes var value being 'defaults' for undefined variables ([0853109](https://github.com/rafamel/ts-project/commit/0853109))
 
 
 
-# [0.7.0](https://github.com/rafamel/slimconf/compare/v0.6.0...v0.7.0) (2019-04-05)
+# [0.7.0](https://github.com/rafamel/ts-project/compare/v0.6.0...v0.7.0) (2019-04-05)
 
 
 ### Code Refactoring
 
-* **slim:** changes variable mapping api; renames type ISetup to IUse ([f2a6a42](https://github.com/rafamel/slimconf/commit/f2a6a42))
-* **strategies:** renames rules to strategies; exports them as named exports ([07eaa3a](https://github.com/rafamel/slimconf/commit/07eaa3a))
+* **slim:** changes variable mapping api; renames type ISetup to IUse ([f2a6a42](https://github.com/rafamel/ts-project/commit/f2a6a42))
+* **strategies:** renames rules to strategies; exports them as named exports ([07eaa3a](https://github.com/rafamel/ts-project/commit/07eaa3a))
 
 
 ### Features
 
-* **envs:** adds envs: convenience utilities for environment variables ([78f7696](https://github.com/rafamel/slimconf/commit/78f7696))
-* **fallback:** adds fallback ([aa4d71e](https://github.com/rafamel/slimconf/commit/aa4d71e))
-* **strategies:** prevents mutations from having an effect over defaults ([c5d25f5](https://github.com/rafamel/slimconf/commit/c5d25f5))
+* **envs:** adds envs: convenience utilities for environment variables ([78f7696](https://github.com/rafamel/ts-project/commit/78f7696))
+* **fallback:** adds fallback ([aa4d71e](https://github.com/rafamel/ts-project/commit/aa4d71e))
+* **strategies:** prevents mutations from having an effect over defaults ([c5d25f5](https://github.com/rafamel/ts-project/commit/c5d25f5))
 
 
 ### BREAKING CHANGES
@@ -57,18 +61,18 @@ by using a TUseMap array. Previous type ISetup has also been renamed to IUse.
 
 
 
-# [0.6.0](https://github.com/rafamel/slimconf/compare/v0.5.0...v0.6.0) (2019-04-04)
+# [0.6.0](https://github.com/rafamel/ts-project/compare/v0.5.0...v0.6.0) (2019-04-04)
 
 
 ### Code Refactoring
 
-* **slim:** config callback w/ on as first argument and vars as second ([6029dd4](https://github.com/rafamel/slimconf/commit/6029dd4))
-* **slim:** default values are now obtained from a defaults key (instead of default) ([efdfbf7](https://github.com/rafamel/slimconf/commit/efdfbf7))
+* **slim:** config callback w/ on as first argument and vars as second ([6029dd4](https://github.com/rafamel/ts-project/commit/6029dd4))
+* **slim:** default values are now obtained from a defaults key (instead of default) ([efdfbf7](https://github.com/rafamel/ts-project/commit/efdfbf7))
 
 
 ### Features
 
-* **slim:** adds merge rules ([cab1205](https://github.com/rafamel/slimconf/commit/cab1205))
+* **slim:** adds merge rules ([cab1205](https://github.com/rafamel/ts-project/commit/cab1205))
 
 
 ### BREAKING CHANGES
@@ -82,28 +86,28 @@ default anymore. This can be now done via rules.
 
 
 
-# [0.5.0](https://github.com/rafamel/slimconf/compare/v0.4.0...v0.5.0) (2019-04-02)
+# [0.5.0](https://github.com/rafamel/ts-project/compare/v0.4.0...v0.5.0) (2019-04-02)
 
 
 ### Features
 
-* adds web, node, and esnext specific builds ([8deb1e5](https://github.com/rafamel/slimconf/commit/8deb1e5))
+* adds web, node, and esnext specific builds ([8deb1e5](https://github.com/rafamel/ts-project/commit/8deb1e5))
 
 
 
-# [0.4.0](https://github.com/rafamel/slimconf/compare/v0.3.0...v0.4.0) (2019-04-01)
+# [0.4.0](https://github.com/rafamel/ts-project/compare/v0.3.0...v0.4.0) (2019-04-01)
 
 
 ### Code Refactoring
 
-* exports config as default on entry point ([8d29e13](https://github.com/rafamel/slimconf/commit/8d29e13))
+* exports config as default on entry point ([8d29e13](https://github.com/rafamel/ts-project/commit/8d29e13))
 
 
 ### Features
 
-* **slim:** allows first argument as a configuration object (no setup) ([be53ecc](https://github.com/rafamel/slimconf/commit/be53ecc))
-* **slim:** improves typings; uses object hash to id filters; splits up slim functions ([075cb3a](https://github.com/rafamel/slimconf/commit/075cb3a))
-* renames IEnvSetup.default to IEnvSetup.from ([2790ad6](https://github.com/rafamel/slimconf/commit/2790ad6))
+* **slim:** allows first argument as a configuration object (no setup) ([be53ecc](https://github.com/rafamel/ts-project/commit/be53ecc))
+* **slim:** improves typings; uses object hash to id filters; splits up slim functions ([075cb3a](https://github.com/rafamel/ts-project/commit/075cb3a))
+* renames IEnvSetup.default to IEnvSetup.from ([2790ad6](https://github.com/rafamel/ts-project/commit/2790ad6))
 
 
 ### BREAKING CHANGES
@@ -118,23 +122,23 @@ function as second argument.
 
 
 
-# [0.3.0](https://github.com/rafamel/slimconf/compare/v0.2.1...v0.3.0) (2019-01-11)
+# [0.3.0](https://github.com/rafamel/ts-project/compare/v0.2.1...v0.3.0) (2019-01-11)
 
 
 
-## [0.2.1](https://github.com/rafamel/slimconf/compare/v0.2.0...v0.2.1) (2019-01-10)
+## [0.2.1](https://github.com/rafamel/ts-project/compare/v0.2.0...v0.2.1) (2019-01-10)
 
 
 
-# [0.2.0](https://github.com/rafamel/slimconf/compare/v0.1.0...v0.2.0) (2019-01-10)
+# [0.2.0](https://github.com/rafamel/ts-project/compare/v0.1.0...v0.2.0) (2019-01-10)
 
 
 
-# [0.1.0](https://github.com/rafamel/slimconf/compare/v0.0.2...v0.1.0) (2018-12-08)
+# [0.1.0](https://github.com/rafamel/ts-project/compare/v0.0.2...v0.1.0) (2018-12-08)
 
 
 
-## [0.0.2](https://github.com/rafamel/slimconf/compare/v0.0.1...v0.0.2) (2018-12-07)
+## [0.0.2](https://github.com/rafamel/ts-project/compare/v0.0.1...v0.0.2) (2018-12-07)
 
 
 
