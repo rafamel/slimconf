@@ -23,32 +23,29 @@
 
 If you find it useful, consider [starring the project](https://github.com/rafamel/slimconf) 💪 and/or following [its author](https://github.com/rafamel) ❤️ -there's more on the way!
 
-## Table of Contents
-
-* [Install](#install)
-* [Usage](#usage)
-  * [`slim`:](#slim) core functionality.
-    * [With no environment variables](#with-no-environment-variables)
-    * [With environment variables](#with-environment-variables)
-  * [Utils:](#utils) a set of helpful utilities.
-    * [Merge strategies:](#merge-strategies) merge defaults with environment dependent values.
-      * [`shallow`:](#shallow) shallow merge for objects.
-      * [`merge`:](#merge) deep merge, excluding arrays.
-      * [`deep`:](#deep) deep merge, including arrays concatenation.
-    * [`envs`:](#envs) convenience utilities for environment variables.
-      * [`assert`:](#assert) requires any number of environment variables to be defined.
-      * [`constrain`:](#constrain) requires a variable to be defined or for its value to be in a set of allowed values.
-      * [`get`:](#get) same as `constrain` while also returning the variable value.
-    * [`fallback`:](#fallback) fall back to a default if a value is not defined or is not in a set of allowed values.
-    * [`get`:](#get) get a value for a path while failing early.
-    * [`set`:](#set) set a value for a path while failing early.
-* [Documentation](https://rafamel.github.io/slimconf/globals.html)
-
 ## Install
 
 [`npm install slimconf`](https://www.npmjs.com/package/slimconf)
 
 ## Usage
+
+[Documentation](https://rafamel.github.io/slimconf/globals.html)
+
+* [`slim`:](#slim) core functionality.
+  * [With no environment variables](#with-no-environment-variables)
+  * [With environment variables](#with-environment-variables)
+* [Utils:](#utils) a set of helpful utilities.
+  * [Merge strategies:](#merge-strategies) merge defaults with environment dependent values.
+    * [`shallow`:](#shallow) shallow merge for objects.
+    * [`merge`:](#merge) deep merge, excluding arrays.
+    * [`deep`:](#deep) deep merge, including arrays concatenation.
+  * [`envs`:](#envs) convenience utilities for environment variables.
+    * [`assert`:](#assert) requires any number of environment variables to be defined.
+    * [`constrain`:](#constrain) requires a variable to be defined or for its value to be in a set of allowed values.
+    * [`get`:](#get) same as `constrain` while also returning the variable value.
+  * [`fallback`:](#fallback) fall back to a default if a value is not defined or is not in a set of allowed values.
+  * [`get`:](#get) get a value for a path while failing early.
+  * [`set`:](#set) set a value for a path while failing early.
 
 ### `slim`
 
