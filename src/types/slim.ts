@@ -21,27 +21,27 @@ export type TUseType = string | number | boolean | null | undefined;
 export type TOn<U> = { [P in keyof U]: TDefineFn };
 
 /**
- * Specifies the values for each environment -the `defaults` key in `IDefinition` will be used if no specific value for an environment was specified. Optionally, you can also specify a merging strategy as a first argument.
+ * Specifies the values for each environment -the `default` key in `IDefinition` will be used if no specific value for an environment was specified. Optionally, you can also specify a merging strategy as a first argument.
  */
 export type TDefineFn = ((definition: IDefinition) => any) &
   ((strategy: TStrategy, definition: IDefinition) => any);
 
 /**
- * Used for object merging when both defaults and a value for an environment exist. It can be passed as a first argument to `TDefineFn`. It should be either one of the preset strategies (`'shallow'`, `'merge'`, `'deep'`) or a `TStrategyFn` function. See [`merge-strategies`](https://www.npmjs.com/package/merge-strategies) for further details on the preset strategies.
+ * Used for object merging when both a default and a value for an environment exist. It can be passed as a first argument to `TDefineFn`. It should be either one of the preset strategies (`'shallow'`, `'merge'`, `'deep'`) or a `TStrategyFn` function. See [`merge-strategies`](https://www.npmjs.com/package/merge-strategies) for further details on the preset strategies.
  */
 export type TStrategy = 'shallow' | 'merge' | 'deep' | TStrategyFn;
 
 /**
  * A `TStrategy` as a function. It should take any two values as arguments, and return a result.
  */
-export type TStrategyFn = (defaults: any, value: any) => any;
+export type TStrategyFn = (a: any, b: any) => any;
 
 /**
  * See `TDefineFn`.
  */
 export interface IDefinition {
   [id: string]: any;
-  defaults?: any;
+  default?: any;
 }
 
 /**

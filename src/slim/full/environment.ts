@@ -89,22 +89,22 @@ export function makeOn<U extends IUse>(
         const obj = b || (a as IDefinition);
 
         if (value === undefined || !obj.hasOwnProperty(value)) {
-          return obj.defaults;
+          return obj.default;
         }
-        if (!obj.hasOwnProperty('defaults')) return obj[value];
+        if (!obj.hasOwnProperty('default')) return obj[value];
         if (typeof strategy === 'string') {
           switch (strategy) {
             case 'shallow':
-              return shallow(obj.defaults, obj[value]);
+              return shallow(obj.default, obj[value]);
             case 'merge':
-              return merge(obj.defaults, obj[value]);
+              return merge(obj.default, obj[value]);
             case 'deep':
-              return deep(obj.defaults, obj[value]);
+              return deep(obj.default, obj[value]);
             default:
               throw Error(`Strategy "${strategy}" doesn't exist`);
           }
         } else {
-          return strategy(obj.defaults, obj[value]);
+          return strategy(obj.default, obj[value]);
         }
       };
 
