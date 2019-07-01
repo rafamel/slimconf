@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>slimconf 0.9.1</title>
+	<title>slimconf 0.10.0</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">slimconf 0.9.1</a>
+					<a href="index.html" class="title">slimconf 0.10.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -54,7 +54,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1> slimconf 0.9.1</h1>
+			<h1> slimconf 0.10.0</h1>
 		</div>
 	</div>
 </header>
@@ -83,40 +83,29 @@
 					<br />
 				</div>
 				<p>If you find it useful, consider <a href="https://github.com/rafamel/slimconf">starring the project</a> 💪 and/or following <a href="https://github.com/rafamel">its author</a> ❤️ -there&#39;s more on the way!</p>
-				<h2 id="table-of-contents">Table of Contents</h2>
-				<ul>
-					<li><a href="#install">Install</a></li>
-					<li><a href="#usage">Usage</a><ul>
-							<li><a href="#slim"><code>slim</code>:</a> core functionality.<ul>
-									<li><a href="#with-no-environment-variables">With no environment variables</a></li>
-									<li><a href="#with-environment-variables">With environment variables</a></li>
-								</ul>
-							</li>
-							<li><a href="#utils">Utils:</a> a set of helpful utilities.<ul>
-									<li><a href="#merge-strategies">Merge strategies:</a> merge defaults with environment dependent values.<ul>
-											<li><a href="#shallow"><code>shallow</code>:</a> shallow merge for objects.</li>
-											<li><a href="#merge"><code>merge</code>:</a> deep merge, excluding arrays.</li>
-											<li><a href="#deep"><code>deep</code>:</a> deep merge, including arrays concatenation.</li>
-										</ul>
-									</li>
-									<li><a href="#envs"><code>envs</code>:</a> convenience utilities for environment variables.<ul>
-											<li><a href="#assert"><code>assert</code>:</a> requires any number of environment variables to be defined.</li>
-											<li><a href="#constrain"><code>constrain</code>:</a> requires a variable to be defined or for its value to be in a set of allowed values.</li>
-											<li><a href="#get"><code>get</code>:</a> same as <code>constrain</code> while also returning the variable value.</li>
-										</ul>
-									</li>
-									<li><a href="#fallback"><code>fallback</code>:</a> fall back to a default if a value is not defined or is not in a set of allowed values.</li>
-									<li><a href="#get"><code>get</code>:</a> get a value for a path while failing early.</li>
-									<li><a href="#set"><code>set</code>:</a> set a value for a path while failing early.</li>
-								</ul>
-							</li>
-						</ul>
-					</li>
-					<li><a href="https://rafamel.github.io/slimconf/globals.html">Documentation</a></li>
-				</ul>
 				<h2 id="install">Install</h2>
 				<p><a href="https://www.npmjs.com/package/slimconf"><code>npm install slimconf</code></a></p>
 				<h2 id="usage">Usage</h2>
+				<p><a href="https://rafamel.github.io/slimconf/globals.html">Documentation</a></p>
+				<ul>
+					<li><a href="#slim"><code>slim</code>:</a> core functionality.<ul>
+							<li><a href="#with-no-environment-variables">With no environment variables</a></li>
+							<li><a href="#with-environment-variables">With environment variables</a></li>
+						</ul>
+					</li>
+					<li><a href="#utils">Utils:</a> a set of helpful utilities.<ul>
+							<li><a href="#envs"><code>envs</code>:</a> convenience utilities for environment variables.<ul>
+									<li><a href="#assert"><code>assert</code>:</a> requires any number of environment variables to be defined.</li>
+									<li><a href="#constrain"><code>constrain</code>:</a> requires a variable to be defined or for its value to be in a set of allowed values.</li>
+									<li><a href="#get"><code>get</code>:</a> same as <code>constrain</code> while also returning the variable value.</li>
+								</ul>
+							</li>
+							<li><a href="#fallback"><code>fallback</code>:</a> fall back to a default if a value is not defined or is not in a set of allowed values.</li>
+							<li><a href="#get"><code>get</code>:</a> get a value for a path while failing early.</li>
+							<li><a href="#set"><code>set</code>:</a> set a value for a path while failing early.</li>
+						</ul>
+					</li>
+				</ul>
 				<h3 id="slim"><code>slim</code></h3>
 				<p><code>slim</code> is the default function exported by <code>slimconf</code> -<a href="https://rafamel.github.io/slimconf/globals.html#slim">see docs.</a></p>
 				<h4 id="with-no-environment-variables">With no environment variables</h4>
@@ -153,13 +142,13 @@ config.pure(); <span class="hljs-comment">// { foo: { bar: 'baz' }, baz: 'foobar
     vars, <span class="hljs-comment">// contains the current values for `env` and `fooenv`</span>
     foo: <span class="hljs-string">'bar'</span>,
     <span class="hljs-attr">baz</span>: on.env({
-      <span class="hljs-attr">defaults</span>: <span class="hljs-number">1</span>,
+      <span class="hljs-attr">default</span>: <span class="hljs-number">1</span>,
       <span class="hljs-attr">production</span>: <span class="hljs-number">2</span>,
       <span class="hljs-attr">development</span>: <span class="hljs-number">3</span>,
       <span class="hljs-attr">test</span>: <span class="hljs-number">4</span>
     }),
     <span class="hljs-attr">foobar</span>: on.fooenv({
-      <span class="hljs-attr">defaults</span>: <span class="hljs-number">1</span>,
+      <span class="hljs-attr">default</span>: <span class="hljs-number">1</span>,
       <span class="hljs-attr">lorem</span>: <span class="hljs-number">2</span>,
       <span class="hljs-attr">ipsum</span>: <span class="hljs-number">3</span>
     })
@@ -183,16 +172,16 @@ config.pure();
 specific.pure(); <span class="hljs-comment">// { foo: 'bar', baz: 4, foobar: 2 }</span>
 specific.get(<span class="hljs-string">'vars'</span>); <span class="hljs-comment">// { env: 'test', fooenv: 'lorem' }</span></code></pre>
 				<h5 id="using-merge-strategies">Using merge strategies</h5>
-				<p>When defining the values for each environment, you can set up custom strategies to merge with the <code>defaults</code> -see docs for <a href="https://rafamel.github.io/slimconf/globals.html#ton"><code>TOn</code></a>, <a href="https://rafamel.github.io/slimconf/globals.html#tdefinefn"><code>TDefineFn</code></a>, and <a href="https://rafamel.github.io/slimconf/globals.html#tstrategy"><code>TStrategy</code>.</a></p>
-				<p><code>slimconf</code> also exports a set of common strategies that can also be used independently to merge any two objects - see <a href="#merge-strategies">merge strategies.</a></p>
-				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> slim, { shallow, merge, deep } <span class="hljs-keyword">from</span> <span class="hljs-string">'slimconf'</span>;
+				<p>When defining the values for each environment, you can set up custom strategies to merge with the <code>default</code> -see docs for <a href="https://rafamel.github.io/slimconf/globals.html#ton"><code>TOn</code></a> and <a href="https://rafamel.github.io/slimconf/globals.html#tdefinefn"><code>TDefineFn</code></a>.</p>
+				<p><code>slimconf</code> has a set of common strategies that can be used -see <a href="https://rafamel.github.io/slimconf/globals.html#tstrategy"><code>TStrategy</code></a>- or you can pass your own as a function -see <a href="https://rafamel.github.io/slimconf/globals.html#tstrategyfn"><code>TStrategyFn</code>.</a></p>
+				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> slim <span class="hljs-keyword">from</span> <span class="hljs-string">'slimconf'</span>;
 
 <span class="hljs-keyword">const</span> config = slim(
   { <span class="hljs-attr">env</span>: process.env.NODE_ENV },
   (on, vars) =&gt; ({
     <span class="hljs-comment">// Shallow merge</span>
-    foo: on.env(shallow, {
-      <span class="hljs-attr">defaults</span>: {
+    foo: on.env(<span class="hljs-string">'shallow'</span>, {
+      <span class="hljs-attr">default</span>: {
         <span class="hljs-attr">ports</span>: [<span class="hljs-number">3000</span>],
         <span class="hljs-attr">transports</span>: { <span class="hljs-attr">console</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">file</span>: <span class="hljs-literal">false</span> },
         <span class="hljs-attr">levels</span>: { <span class="hljs-attr">console</span>: <span class="hljs-string">'debug'</span>, <span class="hljs-attr">file</span>: <span class="hljs-string">'info'</span> }
@@ -203,8 +192,8 @@ specific.get(<span class="hljs-string">'vars'</span>); <span class="hljs-comment
       }
     }),
     <span class="hljs-comment">// Deep merge</span>
-    bar: on.env(merge, {
-      <span class="hljs-attr">defaults</span>: {
+    bar: on.env(<span class="hljs-string">'merge'</span>, {
+      <span class="hljs-attr">default</span>: {
         <span class="hljs-attr">ports</span>: [<span class="hljs-number">3000</span>],
         <span class="hljs-attr">transports</span>: { <span class="hljs-attr">console</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">file</span>: <span class="hljs-literal">false</span> },
         <span class="hljs-attr">levels</span>: { <span class="hljs-attr">console</span>: <span class="hljs-string">'debug'</span>, <span class="hljs-attr">file</span>: <span class="hljs-string">'info'</span> }
@@ -215,8 +204,8 @@ specific.get(<span class="hljs-string">'vars'</span>); <span class="hljs-comment
       }
     }),
     <span class="hljs-comment">// Deep merge with concatenated arrays</span>
-    baz: on.env(deep, {
-      <span class="hljs-attr">defaults</span>: {
+    baz: on.env(<span class="hljs-string">'deep'</span>, {
+      <span class="hljs-attr">default</span>: {
         <span class="hljs-attr">ports</span>: [<span class="hljs-number">3000</span>],
         <span class="hljs-attr">transports</span>: { <span class="hljs-attr">console</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">file</span>: <span class="hljs-literal">false</span> },
         <span class="hljs-attr">levels</span>: { <span class="hljs-attr">console</span>: <span class="hljs-string">'debug'</span>, <span class="hljs-attr">file</span>: <span class="hljs-string">'info'</span> }
@@ -246,13 +235,13 @@ specific.get(<span class="hljs-string">'vars'</span>); <span class="hljs-comment
 };
 <span class="hljs-keyword">const</span> config = slim(use, (on, vars) =&gt; ({
   <span class="hljs-attr">bar</span>: on.node({
-    <span class="hljs-attr">defaults</span>: <span class="hljs-number">1</span>,
+    <span class="hljs-attr">default</span>: <span class="hljs-number">1</span>,
     <span class="hljs-attr">production</span>: <span class="hljs-number">2</span>,
     <span class="hljs-attr">development</span>: <span class="hljs-number">3</span>,
     <span class="hljs-attr">test</span>: <span class="hljs-number">4</span>
   }),
   <span class="hljs-attr">baz</span>: on.env({
-    <span class="hljs-attr">defaults</span>: <span class="hljs-number">1</span>,
+    <span class="hljs-attr">default</span>: <span class="hljs-number">1</span>,
     <span class="hljs-attr">production</span>: <span class="hljs-number">2</span>,
     <span class="hljs-attr">development</span>: <span class="hljs-number">3</span>,
     <span class="hljs-attr">test</span>: <span class="hljs-number">4</span>
@@ -263,32 +252,6 @@ config
   .environment({ <span class="hljs-attr">env</span>: <span class="hljs-literal">null</span>, <span class="hljs-attr">fooenv</span>: <span class="hljs-string">'ipsum'</span> })
   .pure(); <span class="hljs-comment">// { foo: 'bar', baz: 3, foobar: 3 }</span></code></pre>
 				<h3 id="utils">Utils</h3>
-				<h4 id="merge-strategies">Merge strategies</h4>
-				<p>Merge strategies <a href="#using-merge-strategies">can be used with <code>slim</code></a> or independently to merge any two objects.</p>
-				<h5 id="shallow"><code>shallow</code></h5>
-				<p>Shallow merge for objects -<a href="https://rafamel.github.io/slimconf/globals.html#shallow">see docs.</a></p>
-				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { shallow } <span class="hljs-keyword">from</span> <span class="hljs-string">'slimconf'</span>;
-
-shallow(
-  { <span class="hljs-attr">foo</span>: { <span class="hljs-attr">bar</span>: <span class="hljs-string">'baz'</span> }, <span class="hljs-attr">bar</span>: [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], <span class="hljs-attr">baz</span>: <span class="hljs-string">'foobar'</span> },
-  { <span class="hljs-attr">foo</span>: { <span class="hljs-attr">baz</span>: <span class="hljs-string">'bar'</span> }, <span class="hljs-attr">bar</span>: [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>] },
-); <span class="hljs-comment">// { foo: { baz: 'bar' }, bar: [3, 4], baz: 'foobar' }</span></code></pre>
-				<h5 id="merge"><code>merge</code></h5>
-				<p>Deep merge for objects, excluding arrays -<a href="https://rafamel.github.io/slimconf/globals.html#merge">see docs.</a></p>
-				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { merge } <span class="hljs-keyword">from</span> <span class="hljs-string">'slimconf'</span>;
-
-merge(
-  { <span class="hljs-attr">foo</span>: { <span class="hljs-attr">bar</span>: <span class="hljs-string">'baz'</span> }, <span class="hljs-attr">bar</span>: [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], <span class="hljs-attr">baz</span>: <span class="hljs-string">'foobar'</span> },
-  { <span class="hljs-attr">foo</span>: { <span class="hljs-attr">baz</span>: <span class="hljs-string">'bar'</span> }, <span class="hljs-attr">bar</span>: [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>] },
-); <span class="hljs-comment">// { foo: { bar: 'baz', baz: 'bar' }, bar: [3, 4], baz: 'foobar' }</span></code></pre>
-				<h5 id="deep"><code>deep</code></h5>
-				<p>Deep merge for objects, including array concatenation -<a href="https://rafamel.github.io/slimconf/globals.html#deep">see docs.</a></p>
-				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { deep } <span class="hljs-keyword">from</span> <span class="hljs-string">'slimconf'</span>;
-
-deep(
-  { <span class="hljs-attr">foo</span>: { <span class="hljs-attr">bar</span>: <span class="hljs-string">'baz'</span> }, <span class="hljs-attr">bar</span>: [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], <span class="hljs-attr">baz</span>: <span class="hljs-string">'foobar'</span> },
-  { <span class="hljs-attr">foo</span>: { <span class="hljs-attr">baz</span>: <span class="hljs-string">'bar'</span> }, <span class="hljs-attr">bar</span>: [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>] },
-); <span class="hljs-comment">// { foo: { bar: 'baz', baz: 'bar' }, bar: [1, 2, 3, 4], baz: 'foobar' }</span></code></pre>
 				<h4 id="envs"><code>envs</code></h4>
 				<p>A set of convenience utilities for environment variables. <a href="https://rafamel.github.io/slimconf/interfaces/ienvs.html">See docs.</a></p>
 				<ul>
@@ -392,13 +355,13 @@ obj.foo.bar; // foobar</code></pre>
 						<a href="globals.html#tstrategy" class="tsd-kind-icon">TStrategy</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#tstrategyfn" class="tsd-kind-icon">TStrategy<wbr>Fn</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
 						<a href="globals.html#tusemap" class="tsd-kind-icon">TUse<wbr>Map</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="globals.html#tusetype" class="tsd-kind-icon">TUse<wbr>Type</a>
-					</li>
-					<li class=" tsd-kind-function tsd-has-type-parameter">
-						<a href="globals.html#deep" class="tsd-kind-icon">deep</a>
 					</li>
 					<li class=" tsd-kind-function tsd-has-type-parameter">
 						<a href="globals.html#fallback" class="tsd-kind-icon">fallback</a>
@@ -407,13 +370,7 @@ obj.foo.bar; // foobar</code></pre>
 						<a href="globals.html#get" class="tsd-kind-icon">get</a>
 					</li>
 					<li class=" tsd-kind-function tsd-has-type-parameter">
-						<a href="globals.html#merge" class="tsd-kind-icon">merge</a>
-					</li>
-					<li class=" tsd-kind-function tsd-has-type-parameter">
 						<a href="globals.html#set" class="tsd-kind-icon">set</a>
-					</li>
-					<li class=" tsd-kind-function tsd-has-type-parameter">
-						<a href="globals.html#shallow" class="tsd-kind-icon">shallow</a>
 					</li>
 					<li class=" tsd-kind-function tsd-has-type-parameter tsd-is-not-exported">
 						<a href="globals.html#slim" class="tsd-kind-icon">slim</a>

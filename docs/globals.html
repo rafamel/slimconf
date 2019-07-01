@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>slimconf 0.9.1</title>
+	<title>slimconf 0.10.0</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">slimconf 0.9.1</a>
+					<a href="index.html" class="title">slimconf 0.10.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -54,7 +54,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1> slimconf 0.9.1</h1>
+			<h1> slimconf 0.10.0</h1>
 		</div>
 	</div>
 </header>
@@ -86,6 +86,7 @@
 								<li class="tsd-kind-type-alias tsd-has-type-parameter"><a href="globals.html#tfn" class="tsd-kind-icon">TFn</a></li>
 								<li class="tsd-kind-type-alias tsd-has-type-parameter"><a href="globals.html#ton" class="tsd-kind-icon">TOn</a></li>
 								<li class="tsd-kind-type-alias"><a href="globals.html#tstrategy" class="tsd-kind-icon">TStrategy</a></li>
+								<li class="tsd-kind-type-alias"><a href="globals.html#tstrategyfn" class="tsd-kind-icon">TStrategy<wbr>Fn</a></li>
 								<li class="tsd-kind-type-alias"><a href="globals.html#tusemap" class="tsd-kind-icon">TUse<wbr>Map</a></li>
 								<li class="tsd-kind-type-alias"><a href="globals.html#tusetype" class="tsd-kind-icon">TUse<wbr>Type</a></li>
 							</ul>
@@ -93,12 +94,9 @@
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-has-type-parameter"><a href="globals.html#deep" class="tsd-kind-icon">deep</a></li>
 								<li class="tsd-kind-function tsd-has-type-parameter"><a href="globals.html#fallback" class="tsd-kind-icon">fallback</a></li>
 								<li class="tsd-kind-function"><a href="globals.html#get" class="tsd-kind-icon">get</a></li>
-								<li class="tsd-kind-function tsd-has-type-parameter"><a href="globals.html#merge" class="tsd-kind-icon">merge</a></li>
 								<li class="tsd-kind-function tsd-has-type-parameter"><a href="globals.html#set" class="tsd-kind-icon">set</a></li>
-								<li class="tsd-kind-function tsd-has-type-parameter"><a href="globals.html#shallow" class="tsd-kind-icon">shallow</a></li>
 								<li class="tsd-kind-function tsd-has-type-parameter tsd-is-not-exported"><a href="globals.html#slim" class="tsd-kind-icon">slim</a></li>
 							</ul>
 						</section>
@@ -113,7 +111,7 @@
 					<div class="tsd-signature tsd-kind-icon">TBare<wbr>Config<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> &amp; </span><a href="interfaces/ibareconfig.html" class="tsd-signature-type">IBareConfig</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">C</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/rafamel/slimconf/blob/8fb2296/src/types/slim.ts#L65">types/slim.ts:65</a></li>
+							<li>Defined in <a href="https://github.com/rafamel/slimconf/blob/3666d0d/src/types/slim.ts#L70">types/slim.ts:70</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -128,7 +126,7 @@
 					<div class="tsd-signature tsd-kind-icon">TConfig<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> &amp; </span><a href="interfaces/iconfig.html" class="tsd-signature-type">IConfig</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">U</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">C</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/rafamel/slimconf/blob/8fb2296/src/types/slim.ts#L77">types/slim.ts:77</a></li>
+							<li>Defined in <a href="https://github.com/rafamel/slimconf/blob/3666d0d/src/types/slim.ts#L82">types/slim.ts:82</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -143,12 +141,12 @@
 					<div class="tsd-signature tsd-kind-icon">TDefine<wbr>Fn<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/rafamel/slimconf/blob/8fb2296/src/types/slim.ts#L26">types/slim.ts:26</a></li>
+							<li>Defined in <a href="https://github.com/rafamel/slimconf/blob/3666d0d/src/types/slim.ts#L26">types/slim.ts:26</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Specifies the values for each environment -the <code>defaults</code> key in <code>IDefinition</code> will be used if no specific value for an environment was specified. Optionally, you can also specify a merging strategy as a first argument.</p>
+							<p>Specifies the values for each environment -the <code>default</code> key in <code>IDefinition</code> will be used if no specific value for an environment was specified. Optionally, you can also specify a merging strategy as a first argument.</p>
 						</div>
 					</div>
 				</section>
@@ -158,7 +156,7 @@
 					<div class="tsd-signature tsd-kind-icon">TEnv<wbr>Assign<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/rafamel/slimconf/blob/8fb2296/src/types/slim.ts#L79">types/slim.ts:79</a></li>
+							<li>Defined in <a href="https://github.com/rafamel/slimconf/blob/3666d0d/src/types/slim.ts#L84">types/slim.ts:84</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -173,7 +171,7 @@
 					<div class="tsd-signature tsd-kind-icon">TFn<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/rafamel/slimconf/blob/8fb2296/src/types/slim.ts#L45">types/slim.ts:45</a></li>
+							<li>Defined in <a href="https://github.com/rafamel/slimconf/blob/3666d0d/src/types/slim.ts#L50">types/slim.ts:50</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -214,7 +212,7 @@
 					<div class="tsd-signature tsd-kind-icon">TOn<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/rafamel/slimconf/blob/8fb2296/src/types/slim.ts#L21">types/slim.ts:21</a></li>
+							<li>Defined in <a href="https://github.com/rafamel/slimconf/blob/3666d0d/src/types/slim.ts#L21">types/slim.ts:21</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -231,15 +229,30 @@
 				<section class="tsd-panel tsd-member tsd-kind-type-alias">
 					<a name="tstrategy" class="tsd-anchor"></a>
 					<h3>TStrategy</h3>
-					<div class="tsd-signature tsd-kind-icon">TStrategy<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
+					<div class="tsd-signature tsd-kind-icon">TStrategy<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"shallow"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"merge"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"deep"</span><span class="tsd-signature-symbol"> | </span><a href="globals.html#tstrategyfn" class="tsd-signature-type">TStrategyFn</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/rafamel/slimconf/blob/8fb2296/src/types/slim.ts#L32">types/slim.ts:32</a></li>
+							<li>Defined in <a href="https://github.com/rafamel/slimconf/blob/3666d0d/src/types/slim.ts#L32">types/slim.ts:32</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Used for object merging when both defaults and a value for an environment exist. It can be passed as a first argument to <code>TDefineFn</code>. See <code>shallow</code>, <code>merge</code>, and <code>deep</code> for a set of available strategies.</p>
+							<p>Used for object merging when both a default and a value for an environment exist. It can be passed as a first argument to <code>TDefineFn</code>. It should be either one of the preset strategies (<code>&#39;shallow&#39;</code>, <code>&#39;merge&#39;</code>, <code>&#39;deep&#39;</code>) or a <code>TStrategyFn</code> function. See <a href="https://www.npmjs.com/package/merge-strategies"><code>merge-strategies</code></a> for further details on the preset strategies.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias">
+					<a name="tstrategyfn" class="tsd-anchor"></a>
+					<h3>TStrategy<wbr>Fn</h3>
+					<div class="tsd-signature tsd-kind-icon">TStrategy<wbr>Fn<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/rafamel/slimconf/blob/3666d0d/src/types/slim.ts#L37">types/slim.ts:37</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A <code>TStrategy</code> as a function. It should take any two values as arguments, and return a result.</p>
 						</div>
 					</div>
 					<div class="tsd-type-declaration">
@@ -247,17 +260,17 @@
 						<ul class="tsd-parameters">
 							<li class="tsd-parameter-siganture">
 								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias tsd-is-not-exported">
-									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>defaults<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>a<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, b<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
 								</ul>
 								<ul class="tsd-descriptions">
 									<li class="tsd-description">
 										<h4 class="tsd-parameters-title">Parameters</h4>
 										<ul class="tsd-parameters">
 											<li>
-												<h5>defaults: <span class="tsd-signature-type">any</span></h5>
+												<h5>a: <span class="tsd-signature-type">any</span></h5>
 											</li>
 											<li>
-												<h5>value: <span class="tsd-signature-type">any</span></h5>
+												<h5>b: <span class="tsd-signature-type">any</span></h5>
 											</li>
 										</ul>
 										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
@@ -273,7 +286,7 @@
 					<div class="tsd-signature tsd-kind-icon">TUse<wbr>Map<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/rafamel/slimconf/blob/8fb2296/src/types/slim.ts#L11">types/slim.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/rafamel/slimconf/blob/3666d0d/src/types/slim.ts#L11">types/slim.ts:11</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -288,7 +301,7 @@
 					<div class="tsd-signature tsd-kind-icon">TUse<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/rafamel/slimconf/blob/8fb2296/src/types/slim.ts#L16">types/slim.ts:16</a></li>
+							<li>Defined in <a href="https://github.com/rafamel/slimconf/blob/3666d0d/src/types/slim.ts#L16">types/slim.ts:16</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -301,51 +314,6 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-has-type-parameter">
-					<a name="deep" class="tsd-anchor"></a>
-					<h3>deep</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-has-type-parameter">
-						<li class="tsd-signature tsd-kind-icon">deep&lt;T, D&gt;<span class="tsd-signature-symbol">(</span>defaults<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">D</span>, value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">D</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/rafamel/slimconf/blob/8fb2296/src/utils/strategies.ts#L32">utils/strategies.ts:32</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>If both the <code>defaults</code> and <code>value</code> are objects, they will be deep merged. Arrays will be concatenated. Mutations to the returned object won&#39;t have an effect over <code>defaults</code>.</p>
-								</div>
-							</div>
-							<h4 class="tsd-type-parameters-title">Type parameters</h4>
-							<ul class="tsd-type-parameters">
-								<li>
-									<h4>T</h4>
-								</li>
-								<li>
-									<h4>D</h4>
-								</li>
-							</ul>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>defaults: <span class="tsd-signature-type">D</span></h5>
-								</li>
-								<li>
-									<h5>value: <span class="tsd-signature-type">T</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span>
-								<span class="tsd-signature-symbol"> | </span>
-								<span class="tsd-signature-type">T</span>
-								<span class="tsd-signature-symbol"> &amp; </span>
-								<span class="tsd-signature-type">D</span>
-							</h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-has-type-parameter">
 					<a name="fallback" class="tsd-anchor"></a>
 					<h3>fallback</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-has-type-parameter">
@@ -355,7 +323,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rafamel/slimconf/blob/8fb2296/src/utils/fallback.ts#L7">utils/fallback.ts:7</a></li>
+									<li>Defined in <a href="https://github.com/rafamel/slimconf/blob/3666d0d/src/utils/fallback.ts#L7">utils/fallback.ts:7</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -398,7 +366,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rafamel/slimconf/blob/8fb2296/src/utils/get.ts#L4">utils/get.ts:4</a></li>
+									<li>Defined in <a href="https://github.com/rafamel/slimconf/blob/3666d0d/src/utils/get.ts#L4">utils/get.ts:4</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -423,51 +391,6 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-has-type-parameter">
-					<a name="merge" class="tsd-anchor"></a>
-					<h3>merge</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-has-type-parameter">
-						<li class="tsd-signature tsd-kind-icon">merge&lt;T, D&gt;<span class="tsd-signature-symbol">(</span>defaults<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">D</span>, value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">D</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/rafamel/slimconf/blob/8fb2296/src/utils/strategies.ts#L19">utils/strategies.ts:19</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>If both <code>defaults</code> and <code>value</code> are objects, they will be deep merged. Arrays won&#39;t be merged. Mutations to the returned object won&#39;t have an effect over <code>defaults</code>.</p>
-								</div>
-							</div>
-							<h4 class="tsd-type-parameters-title">Type parameters</h4>
-							<ul class="tsd-type-parameters">
-								<li>
-									<h4>T</h4>
-								</li>
-								<li>
-									<h4>D</h4>
-								</li>
-							</ul>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>defaults: <span class="tsd-signature-type">D</span></h5>
-								</li>
-								<li>
-									<h5>value: <span class="tsd-signature-type">T</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span>
-								<span class="tsd-signature-symbol"> | </span>
-								<span class="tsd-signature-type">T</span>
-								<span class="tsd-signature-symbol"> &amp; </span>
-								<span class="tsd-signature-type">D</span>
-							</h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-has-type-parameter">
 					<a name="set" class="tsd-anchor"></a>
 					<h3>set</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-has-type-parameter">
@@ -477,7 +400,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rafamel/slimconf/blob/8fb2296/src/utils/set.ts#L4">utils/set.ts:4</a></li>
+									<li>Defined in <a href="https://github.com/rafamel/slimconf/blob/3666d0d/src/utils/set.ts#L4">utils/set.ts:4</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -507,51 +430,6 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-has-type-parameter">
-					<a name="shallow" class="tsd-anchor"></a>
-					<h3>shallow</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-has-type-parameter">
-						<li class="tsd-signature tsd-kind-icon">shallow&lt;T, D&gt;<span class="tsd-signature-symbol">(</span>defaults<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">D</span>, value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">D</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/rafamel/slimconf/blob/8fb2296/src/utils/strategies.ts#L7">utils/strategies.ts:7</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>If both <code>defaults</code> and <code>value</code> are objects, they will be shallow merged. Mutations to the returned object won&#39;t have an effect over <code>defaults</code>.</p>
-								</div>
-							</div>
-							<h4 class="tsd-type-parameters-title">Type parameters</h4>
-							<ul class="tsd-type-parameters">
-								<li>
-									<h4>T</h4>
-								</li>
-								<li>
-									<h4>D</h4>
-								</li>
-							</ul>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>defaults: <span class="tsd-signature-type">D</span></h5>
-								</li>
-								<li>
-									<h5>value: <span class="tsd-signature-type">T</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span>
-								<span class="tsd-signature-symbol"> | </span>
-								<span class="tsd-signature-type">T</span>
-								<span class="tsd-signature-symbol"> &amp; </span>
-								<span class="tsd-signature-type">D</span>
-							</h4>
-						</li>
-					</ul>
-				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-has-type-parameter tsd-is-not-exported">
 					<a name="slim" class="tsd-anchor"></a>
 					<h3>slim</h3>
@@ -563,7 +441,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rafamel/slimconf/blob/8fb2296/src/slim/slim.ts#L6">slim/slim.ts:6</a></li>
+									<li>Defined in <a href="https://github.com/rafamel/slimconf/blob/3666d0d/src/slim/slim.ts#L6">slim/slim.ts:6</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -594,7 +472,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rafamel/slimconf/blob/8fb2296/src/slim/slim.ts#L10">slim/slim.ts:10</a></li>
+									<li>Defined in <a href="https://github.com/rafamel/slimconf/blob/3666d0d/src/slim/slim.ts#L10">slim/slim.ts:10</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -670,13 +548,13 @@
 						<a href="globals.html#tstrategy" class="tsd-kind-icon">TStrategy</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#tstrategyfn" class="tsd-kind-icon">TStrategy<wbr>Fn</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
 						<a href="globals.html#tusemap" class="tsd-kind-icon">TUse<wbr>Map</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="globals.html#tusetype" class="tsd-kind-icon">TUse<wbr>Type</a>
-					</li>
-					<li class=" tsd-kind-function tsd-has-type-parameter">
-						<a href="globals.html#deep" class="tsd-kind-icon">deep</a>
 					</li>
 					<li class=" tsd-kind-function tsd-has-type-parameter">
 						<a href="globals.html#fallback" class="tsd-kind-icon">fallback</a>
@@ -685,13 +563,7 @@
 						<a href="globals.html#get" class="tsd-kind-icon">get</a>
 					</li>
 					<li class=" tsd-kind-function tsd-has-type-parameter">
-						<a href="globals.html#merge" class="tsd-kind-icon">merge</a>
-					</li>
-					<li class=" tsd-kind-function tsd-has-type-parameter">
 						<a href="globals.html#set" class="tsd-kind-icon">set</a>
-					</li>
-					<li class=" tsd-kind-function tsd-has-type-parameter">
-						<a href="globals.html#shallow" class="tsd-kind-icon">shallow</a>
 					</li>
 					<li class=" tsd-kind-function tsd-has-type-parameter tsd-is-not-exported">
 						<a href="globals.html#slim" class="tsd-kind-icon">slim</a>

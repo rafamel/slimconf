@@ -1,3 +1,21 @@
+# [0.10.0](https://github.com/rafamel/slimconf/compare/v0.9.1...v0.10.0) (2019-07-01)
+
+
+### Code Refactoring
+
+* changes default value keys from "defaults" to "default" ([be23c68](https://github.com/rafamel/slimconf/commit/be23c68))
+* uses merge-strategies ([b89833c](https://github.com/rafamel/slimconf/commit/b89833c))
+
+
+### BREAKING CHANGES
+
+* Default values on IDefinition should now be in the "default" key instead of
+"defaults"
+* slimconf does no longer export merge strategies shallow, merge, and deep; TOn can
+take one of them as a string ("shallow", "merge", or "deep"), or a TStrategyFn function.
+
+
+
 ## [0.9.1](https://github.com/rafamel/ts-project/compare/v0.9.0...v0.9.1) (2019-05-16)
 
 
