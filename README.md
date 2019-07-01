@@ -35,10 +35,6 @@ If you find it useful, consider [starring the project](https://github.com/rafame
   * [With no environment variables](#with-no-environment-variables)
   * [With environment variables](#with-environment-variables)
 * [Utils:](#utils) a set of helpful utilities.
-  * [Merge strategies:](#merge-strategies) merge defaults with environment dependent values.
-    * [`shallow`:](#shallow) shallow merge for objects.
-    * [`merge`:](#merge) deep merge, excluding arrays.
-    * [`deep`:](#deep) deep merge, including arrays concatenation.
   * [`envs`:](#envs) convenience utilities for environment variables.
     * [`assert`:](#assert) requires any number of environment variables to be defined.
     * [`constrain`:](#constrain) requires a variable to be defined or for its value to be in a set of allowed values.
@@ -94,13 +90,13 @@ const config = slim(
     vars, // contains the current values for `env` and `fooenv`
     foo: 'bar',
     baz: on.env({
-      defaults: 1,
+      default: 1,
       production: 2,
       development: 3,
       test: 4
     }),
     foobar: on.fooenv({
-      defaults: 1,
+      default: 1,
       lorem: 2,
       ipsum: 3
     })
@@ -127,19 +123,19 @@ specific.get('vars'); // { env: 'test', fooenv: 'lorem' }
 
 ##### Using merge strategies
 
-When defining the values for each environment, you can set up custom strategies to merge with the `defaults` -see docs for [`TOn`](https://rafamel.github.io/slimconf/globals.html#ton), [`TDefineFn`](https://rafamel.github.io/slimconf/globals.html#tdefinefn), and [`TStrategy`.](https://rafamel.github.io/slimconf/globals.html#tstrategy)
+When defining the values for each environment, you can set up custom strategies to merge with the `default` -see docs for [`TOn`](https://rafamel.github.io/slimconf/globals.html#ton) and [`TDefineFn`](https://rafamel.github.io/slimconf/globals.html#tdefinefn).
 
-`slimconf` also exports a set of common strategies that can also be used independently to merge any two objects - see [merge strategies.](#merge-strategies)
+`slimconf` has a set of common strategies that can be used -see [`TStrategy`](https://rafamel.github.io/slimconf/globals.html#tstrategy)- or you can pass your own as a function -see [`TStrategyFn`.](https://rafamel.github.io/slimconf/globals.html#tstrategyfn)
 
 ```javascript
-import slim, { shallow, merge, deep } from 'slimconf';
+import slim from 'slimconf';
 
 const config = slim(
   { env: process.env.NODE_ENV },
   (on, vars) => ({
     // Shallow merge
-    foo: on.env(shallow, {
-      defaults: {
+    foo: on.env('shallow', {
+      default: {
         ports: [3000],
         transports: { console: true, file: false },
         levels: { console: 'debug', file: 'info' }
@@ -150,8 +146,8 @@ const config = slim(
       }
     }),
     // Deep merge
-    bar: on.env(merge, {
-      defaults: {
+    bar: on.env('merge', {
+      default: {
         ports: [3000],
         transports: { console: true, file: false },
         levels: { console: 'debug', file: 'info' }
@@ -162,8 +158,8 @@ const config = slim(
       }
     }),
     // Deep merge with concatenated arrays
-    baz: on.env(deep, {
-      defaults: {
+    baz: on.env('deep', {
+      default: {
         ports: [3000],
         transports: { console: true, file: false },
         levels: { console: 'debug', file: 'info' }
@@ -199,13 +195,13 @@ const use = {
 };
 const config = slim(use, (on, vars) => ({
   bar: on.node({
-    defaults: 1,
+    default: 1,
     production: 2,
     development: 3,
     test: 4
   }),
   baz: on.env({
-    defaults: 1,
+    default: 1,
     production: 2,
     development: 3,
     test: 4
@@ -218,49 +214,6 @@ config
 ```
 
 ### Utils
-
-#### Merge strategies
-
-Merge strategies [can be used with `slim`](#using-merge-strategies) or independently to merge any two objects.
-
-##### `shallow`
-
-Shallow merge for objects -[see docs.](https://rafamel.github.io/slimconf/globals.html#shallow)
-
-```javascript
-import { shallow } from 'slimconf';
-
-shallow(
-  { foo: { bar: 'baz' }, bar: [1, 2], baz: 'foobar' },
-  { foo: { baz: 'bar' }, bar: [3, 4] },
-); // { foo: { baz: 'bar' }, bar: [3, 4], baz: 'foobar' }
-```
-
-##### `merge`
-
-Deep merge for objects, excluding arrays -[see docs.](https://rafamel.github.io/slimconf/globals.html#merge)
-
-```javascript
-import { merge } from 'slimconf';
-
-merge(
-  { foo: { bar: 'baz' }, bar: [1, 2], baz: 'foobar' },
-  { foo: { baz: 'bar' }, bar: [3, 4] },
-); // { foo: { bar: 'baz', baz: 'bar' }, bar: [3, 4], baz: 'foobar' }
-```
-
-##### `deep`
-
-Deep merge for objects, including array concatenation -[see docs.](https://rafamel.github.io/slimconf/globals.html#deep)
-
-```javascript
-import { deep } from 'slimconf';
-
-deep(
-  { foo: { bar: 'baz' }, bar: [1, 2], baz: 'foobar' },
-  { foo: { baz: 'bar' }, bar: [3, 4] },
-); // { foo: { bar: 'baz', baz: 'bar' }, bar: [1, 2, 3, 4], baz: 'foobar' }
-```
 
 #### `envs`
 
