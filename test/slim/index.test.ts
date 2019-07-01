@@ -144,6 +144,47 @@ describe(`full`, () => {
       expect(c.foo).toBe(res);
       expect(c.bar).toBe(res);
     });
+    test(`shallow strategy`, () => {
+      const c = slim({ env: 'test' }, (on) => ({
+        foo: on.env('shallow', {
+          defaults: { a: 1, c: 3, d: { e: 1, g: [1, 2] } },
+          test: { b: 2, c: 4, d: { f: 1, g: [3, 4] } }
+        })
+      }));
+      expect(c.foo).toEqual({ a: 1, b: 2, c: 4, d: { f: 1, g: [3, 4] } });
+    });
+    test(`merge strategy`, () => {
+      const c = slim({ env: 'test' }, (on) => ({
+        foo: on.env('merge', {
+          defaults: { a: 1, c: 3, d: { e: 1, g: [1, 2] } },
+          test: { b: 2, c: 4, d: { f: 1, g: [3, 4] } }
+        })
+      }));
+      expect(c.foo).toEqual({ a: 1, b: 2, c: 4, d: { e: 1, f: 1, g: [3, 4] } });
+    });
+    test(`deep strategy`, () => {
+      const c = slim({ env: 'test' }, (on) => ({
+        foo: on.env('deep', {
+          defaults: { a: 1, c: 3, d: { e: 1, g: [1, 2] } },
+          test: { b: 2, c: 4, d: { f: 1, g: [3, 4] } }
+        })
+      }));
+      expect(c.foo).toEqual({
+        a: 1,
+        b: 2,
+        c: 4,
+        d: { e: 1, f: 1, g: [1, 2, 3, 4] }
+      });
+    });
+    test(`fails on non-existent strategy`, () => {
+      expect(() =>
+        slim({ env: 'test' }, (on) => ({
+          foo: on.env('err' as any, { defaults: { a: 1 }, test: { b: 2 } })
+        }))
+      ).toThrowErrorMatchingInlineSnapshot(
+        `"Strategy \\"err\\" doesn't exist"`
+      );
+    });
   });
   describe(`get`, () => {
     test(`succeeds`, () => {
@@ -328,7 +369,7 @@ describe(`full`, () => {
         })
       });
       const c1 = slim({ env: 2 }, fn);
-      const c2 = slim({ env: [null, (x) => (x === null ? 2 : x)] }, fn);
+      const c2 = slim({ env: [null, (x: any) => (x === null ? 2 : x)] }, fn);
 
       [c1, c2].forEach((c) => {
         expect(c.pure()).toEqual({ vars: { env: 2 }, foo: { bar: 2 } });
@@ -353,8 +394,11 @@ describe(`full`, () => {
       });
       const c1 = slim({ env: true }, fn);
       const c2 = slim({ env: false }, fn);
-      const c3 = slim({ env: [null, (x) => (x === null ? true : x)] }, fn);
-      const c4 = slim({ env: [null, (x) => (x === null ? false : x)] }, fn);
+      const c3 = slim({ env: [null, (x: any) => (x === null ? true : x)] }, fn);
+      const c4 = slim(
+        { env: [null, (x: any) => (x === null ? false : x)] },
+        fn
+      );
 
       [c1, c3].forEach((c) => {
         expect(c.pure()).toEqual({ vars: { env: true }, foo: { bar: 2 } });
@@ -380,7 +424,7 @@ describe(`full`, () => {
         })
       });
       const c1 = slim({ env: null }, fn);
-      const c2 = slim({ env: [true, (x) => (x === true ? null : x)] }, fn);
+      const c2 = slim({ env: [true, (x: any) => (x === true ? null : x)] }, fn);
 
       [c1, c2].forEach((c) => {
         expect(c.pure()).toEqual({ vars: { env: null }, foo: { bar: 2 } });

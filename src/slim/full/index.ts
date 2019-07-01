@@ -8,7 +8,7 @@ export default function full<U extends IUse, C extends IOfType<any>>(
   const environments: IOfType<TConfig<U, C>> = {};
   const initial: TEnvAssign<U> = Object.entries(use).reduce(
     (acc: TEnvAssign<U>, [key, value]) => {
-      acc[key] = Array.isArray(value) ? value[0] : value;
+      acc[key as keyof U] = Array.isArray(value) ? value[0] : value;
       return acc;
     },
     {}

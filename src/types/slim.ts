@@ -27,9 +27,14 @@ export type TDefineFn = ((definition: IDefinition) => any) &
   ((strategy: TStrategy, definition: IDefinition) => any);
 
 /**
- * Used for object merging when both defaults and a value for an environment exist. It can be passed as a first argument to `TDefineFn`. See `shallow`, `merge`, and `deep` for a set of available strategies.
+ * Used for object merging when both defaults and a value for an environment exist. It can be passed as a first argument to `TDefineFn`. It should be either one of the preset strategies (`'shallow'`, `'merge'`, `'deep'`) or a `TStrategyFn` function. See [`merge-strategies`](https://www.npmjs.com/package/merge-strategies) for further details on the preset strategies.
  */
-export type TStrategy = (defaults: any, value: any) => any;
+export type TStrategy = 'shallow' | 'merge' | 'deep' | TStrategyFn;
+
+/**
+ * A `TStrategy` as a function. It should take any two values as arguments, and return a result.
+ */
+export type TStrategyFn = (defaults: any, value: any) => any;
 
 /**
  * See `TDefineFn`.
