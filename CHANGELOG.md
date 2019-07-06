@@ -1,3 +1,13 @@
+## [0.10.1](https://github.com/rafamel/slimconf/compare/v0.10.0...v0.10.1) (2019-07-06)
+
+
+### Bug Fixes
+
+* updates riseup development dependencies (fixes esnext and module builds) ([c851c79](https://github.com/rafamel/slimconf/commit/c851c79))
+* **deps:** updates dependencies ([3333cec](https://github.com/rafamel/slimconf/commit/3333cec))
+
+
+
 # [0.10.0](https://github.com/rafamel/slimconf/compare/v0.9.1...v0.10.0) (2019-07-01)
 
 
