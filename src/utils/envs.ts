@@ -1,6 +1,6 @@
 import { IEnvs } from '~/types';
 
-const envs: IEnvs = { assert, constrain, get };
+const envs: IEnvs = { assert, constrain, get, bool };
 export default envs;
 
 function assert(...arr: string[]): IEnvs {
@@ -27,4 +27,10 @@ function get(src: string, values?: Array<string | undefined>): any {
     }
   }
   return value;
+}
+
+function bool(src: string): boolean {
+  const value = process.env[src];
+
+  return Boolean(value && value !== '0' && value.toLowerCase() !== 'false');
 }

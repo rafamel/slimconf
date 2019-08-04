@@ -16,4 +16,8 @@ export interface IEnvs {
    */
   get(src: string, values?: string[]): string;
   get(src: string, values?: Array<string | undefined>): string | undefined;
+  /**
+   * It will obtain the environment variable `src` and return `false` if it's `undefined`, an empty string, `'0'`, or `'false'` (case insensitive); `true` otherwise.
+   */
+  bool(src: string): boolean;
 }

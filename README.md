@@ -39,6 +39,7 @@ If you find it useful, consider [starring the project](https://github.com/rafame
     * [`assert`:](#assert) requires any number of environment variables to be defined.
     * [`constrain`:](#constrain) requires a variable to be defined or for its value to be in a set of allowed values.
     * [`get`:](#get) same as `constrain` while also returning the variable value.
+    * [`bool`:](#bool) evaluates an environment variable as a boolean.
   * [`fallback`:](#fallback) fall back to a default if a value is not defined or is not in a set of allowed values.
   * [`get`:](#get) get a value for a path while failing early.
   * [`set`:](#set) set a value for a path while failing early.
@@ -222,6 +223,7 @@ A set of convenience utilities for environment variables. [See docs.](https://ra
 * **`assert`:** requires any number of environment variables to be defined; throws otherwise. [See docs.](https://rafamel.github.io/slimconf/interfaces/ienvs.html#assert)
 * **`constrain`:** requires an environment variable to be defined, throwing otherwise. If an array of allowed values are passed the value will be checked against them, throwing if its not contained in the array. [See docs.](https://rafamel.github.io/slimconf/interfaces/ienvs.html#constrain)
 * **`get`:** same as `constrain`, but it returns the environment variable value. [See docs.](https://rafamel.github.io/slimconf/interfaces/ienvs.html#get)
+* **`bool`:** it will obtain the environment variable `src` and return `false` if it's `undefined`, an empty string, `'0'`, or `'false'` (case insensitive); `true` otherwise. [See docs.](https://rafamel.github.io/slimconf/interfaces/ienvs.html#bool)
 
 ```javascript
 import { envs } from 'slimconf';
@@ -237,6 +239,9 @@ envs.constrain('NODE_ENV', ['production', 'development', 'test']);
 
 // Throws if undefined and assigns value
 const nodeEnv = envs.get('NODE_ENV');
+
+// Treated as boolean
+const isActive = envs.bool('IS_ACTIVE');
 ```
 
 #### `fallback`

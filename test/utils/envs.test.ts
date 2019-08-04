@@ -25,3 +25,26 @@ describe(`constrain`, () => {
     expect(() => envs.constrain('NODE_ENV', ['foo', 'bar'])).toThrowError();
   });
 });
+describe(`bool`, () => {
+  test(`false`, () => {
+    expect(envs.bool('BOOL_ENV_VAR')).toBe(false);
+    process.env['BOOL_ENV_VAR'] = '';
+    expect(envs.bool('BOOL_ENV_VAR')).toBe(false);
+    process.env['BOOL_ENV_VAR'] = '0';
+    expect(envs.bool('BOOL_ENV_VAR')).toBe(false);
+    process.env['BOOL_ENV_VAR'] = 'false';
+    expect(envs.bool('BOOL_ENV_VAR')).toBe(false);
+    process.env['BOOL_ENV_VAR'] = 'FALSE';
+    expect(envs.bool('BOOL_ENV_VAR')).toBe(false);
+  });
+  test(`true`, () => {
+    process.env['BOOL_ENV_VAR'] = '1';
+    expect(envs.bool('BOOL_ENV_VAR')).toBe(true);
+    process.env['BOOL_ENV_VAR'] = 'true';
+    expect(envs.bool('BOOL_ENV_VAR')).toBe(true);
+    process.env['BOOL_ENV_VAR'] = 'TRUE';
+    expect(envs.bool('BOOL_ENV_VAR')).toBe(true);
+    process.env['BOOL_ENV_VAR'] = 'random';
+    expect(envs.bool('BOOL_ENV_VAR')).toBe(true);
+  });
+});
