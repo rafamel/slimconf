@@ -36,10 +36,10 @@ If you find it useful, consider [starring the project](https://github.com/rafame
   * [With environment variables](#with-environment-variables)
 * [Utils:](#utils) a set of helpful utilities.
   * [`envs`:](#envs) convenience utilities for environment variables.
-    * [`assert`:](#assert) requires any number of environment variables to be defined.
-    * [`constrain`:](#constrain) requires a variable to be defined or for its value to be in a set of allowed values.
-    * [`get`:](#get) same as `constrain` while also returning the variable value.
-    * [`bool`:](#bool) evaluates an environment variable as a boolean.
+    * `assert`: requires any number of environment variables to be defined.
+    * `constrain`: requires a variable to be defined or for its value to be in a set of allowed values.
+    * `get`: same as `constrain` while also returning the variable value.
+    * `bool`: evaluates an environment variable as a boolean.
   * [`fallback`:](#fallback) fall back to a default if a value is not defined or is not in a set of allowed values.
   * [`get`:](#get) get a value for a path while failing early.
   * [`set`:](#set) set a value for a path while failing early.
