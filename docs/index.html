@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>slimconf 0.10.1</title>
+	<title>slimconf 0.11.0</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">slimconf 0.10.1</a>
+					<a href="index.html" class="title">slimconf 0.11.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -54,7 +54,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1> slimconf 0.10.1</h1>
+			<h1> slimconf 0.11.0</h1>
 		</div>
 	</div>
 </header>
@@ -62,7 +62,9 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<h1 id="slimconf">slimconf</h1>
+				<a href="#slimconf" id="slimconf" style="color: inherit; text-decoration: none;">
+					<h1>slimconf</h1>
+				</a>
 				<p><a href="https://www.npmjs.com/package/slimconf"><img src="https://img.shields.io/npm/v/slimconf.svg" alt="Version"></a>
 					<a href="https://travis-ci.org/rafamel/slimconf"><img src="https://img.shields.io/travis/rafamel/slimconf/master.svg" alt="Build Status"></a>
 					<a href="https://coveralls.io/github/rafamel/slimconf"><img src="https://img.shields.io/coveralls/rafamel/slimconf/master.svg" alt="Coverage"></a>
@@ -83,9 +85,13 @@
 					<br />
 				</div>
 				<p>If you find it useful, consider <a href="https://github.com/rafamel/slimconf">starring the project</a> 💪 and/or following <a href="https://github.com/rafamel">its author</a> ❤️ -there&#39;s more on the way!</p>
-				<h2 id="install">Install</h2>
+				<a href="#install" id="install" style="color: inherit; text-decoration: none;">
+					<h2>Install</h2>
+				</a>
 				<p><a href="https://www.npmjs.com/package/slimconf"><code>npm install slimconf</code></a></p>
-				<h2 id="usage">Usage</h2>
+				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+					<h2>Usage</h2>
+				</a>
 				<p><a href="https://rafamel.github.io/slimconf/globals.html">Documentation</a></p>
 				<ul>
 					<li><a href="#slim"><code>slim</code>:</a> core functionality.<ul>
@@ -95,9 +101,10 @@
 					</li>
 					<li><a href="#utils">Utils:</a> a set of helpful utilities.<ul>
 							<li><a href="#envs"><code>envs</code>:</a> convenience utilities for environment variables.<ul>
-									<li><a href="#assert"><code>assert</code>:</a> requires any number of environment variables to be defined.</li>
-									<li><a href="#constrain"><code>constrain</code>:</a> requires a variable to be defined or for its value to be in a set of allowed values.</li>
-									<li><a href="#get"><code>get</code>:</a> same as <code>constrain</code> while also returning the variable value.</li>
+									<li><code>assert</code>: requires any number of environment variables to be defined.</li>
+									<li><code>constrain</code>: requires a variable to be defined or for its value to be in a set of allowed values.</li>
+									<li><code>get</code>: same as <code>constrain</code> while also returning the variable value.</li>
+									<li><code>bool</code>: evaluates an environment variable as a boolean.</li>
 								</ul>
 							</li>
 							<li><a href="#fallback"><code>fallback</code>:</a> fall back to a default if a value is not defined or is not in a set of allowed values.</li>
@@ -106,9 +113,13 @@
 						</ul>
 					</li>
 				</ul>
-				<h3 id="slim"><code>slim</code></h3>
+				<a href="#codeslimcode" id="codeslimcode" style="color: inherit; text-decoration: none;">
+					<h3><code>slim</code></h3>
+				</a>
 				<p><code>slim</code> is the default function exported by <code>slimconf</code> -<a href="https://rafamel.github.io/slimconf/globals.html#slim">see docs.</a></p>
-				<h4 id="with-no-environment-variables">With no environment variables</h4>
+				<a href="#with-no-environment-variables" id="with-no-environment-variables" style="color: inherit; text-decoration: none;">
+					<h4>With no environment variables</h4>
+				</a>
 				<p>When the configuration doesn&#39;t depend on environment variables, it&#39;s possible to just call <code>slim</code> as follows:</p>
 				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> slim <span class="hljs-keyword">from</span> <span class="hljs-string">'slimconf'</span>;
 
@@ -123,13 +134,17 @@ config.get(<span class="hljs-string">'foo.bar'</span>); <span class="hljs-commen
 
 <span class="hljs-comment">// Get the configuration object with no methods</span>
 config.pure(); <span class="hljs-comment">// { foo: { bar: 'baz' }, baz: 'foobar', barbaz: { foobaz: 'slim' } }</span></code></pre>
-				<h4 id="with-environment-variables">With environment variables</h4>
+				<a href="#with-environment-variables" id="with-environment-variables" style="color: inherit; text-decoration: none;">
+					<h4>With environment variables</h4>
+				</a>
 				<p>When a configuration depends on environment variables, <code>slim</code> has the signature <code>slim(use: IUse, fn: TFn): TConfig</code>.</p>
 				<ul>
 					<li><code>use</code> passes up the environment variables the configuration depends on -<a href="https://rafamel.github.io/slimconf/interfaces/iuse.html">see docs.</a></li>
 					<li><code>fn</code> should be a configuration object returning function -<a href="https://rafamel.github.io/slimconf/globals.html#tfn">see docs.</a></li>
 				</ul>
-				<h5 id="fundamentals">Fundamentals</h5>
+				<a href="#fundamentals" id="fundamentals" style="color: inherit; text-decoration: none;">
+					<h5>Fundamentals</h5>
+				</a>
 				<p>If our configuration depended on <code>process.env.NODE_ENV</code> and <code>process.env.FOO_ENV</code>, we&#39;d use <code>slim</code> as follows:</p>
 				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> slim <span class="hljs-keyword">from</span> <span class="hljs-string">'slimconf'</span>;
 
@@ -171,7 +186,9 @@ config.pure();
 <span class="hljs-comment">// You can use all methods as usual</span>
 specific.pure(); <span class="hljs-comment">// { foo: 'bar', baz: 4, foobar: 2 }</span>
 specific.get(<span class="hljs-string">'vars'</span>); <span class="hljs-comment">// { env: 'test', fooenv: 'lorem' }</span></code></pre>
-				<h5 id="using-merge-strategies">Using merge strategies</h5>
+				<a href="#using-merge-strategies" id="using-merge-strategies" style="color: inherit; text-decoration: none;">
+					<h5>Using merge strategies</h5>
+				</a>
 				<p>When defining the values for each environment, you can set up custom strategies to merge with the <code>default</code> -see docs for <a href="https://rafamel.github.io/slimconf/globals.html#ton"><code>TOn</code></a> and <a href="https://rafamel.github.io/slimconf/globals.html#tdefinefn"><code>TDefineFn</code></a>.</p>
 				<p><code>slimconf</code> has a set of common strategies that can be used -see <a href="https://rafamel.github.io/slimconf/globals.html#tstrategy"><code>TStrategy</code></a>- or you can pass your own as a function -see <a href="https://rafamel.github.io/slimconf/globals.html#tstrategyfn"><code>TStrategyFn</code>.</a></p>
 				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> slim <span class="hljs-keyword">from</span> <span class="hljs-string">'slimconf'</span>;
@@ -217,7 +234,9 @@ specific.get(<span class="hljs-string">'vars'</span>); <span class="hljs-comment
     })
   })
 );</code></pre>
-				<h5 id="mapping-environment-variables">Mapping environment variables</h5>
+				<a href="#mapping-environment-variables" id="mapping-environment-variables" style="color: inherit; text-decoration: none;">
+					<h5>Mapping environment variables</h5>
+				</a>
 				<p>When mapping environment variables, it is beneficial to use the built in api for it, as it will allow for the map to also apply when using <code>TConfig.environment()</code> -see <a href="https://rafamel.github.io/slimconf/globals.html#tconfig"><code>TConfig</code></a> and <a href="https://rafamel.github.io/slimconf/interfaces/iconfig.html"><code>IConfig</code>.</a></p>
 				<p>As an example, the following setup object maps to <code>&#39;development&#39;</code> whenever the <code>NODE_ENV</code> variable is not <code>&#39;production&#39;</code> or <code>&#39;test&#39;</code>. <code>slimconf</code> also exports the <a href="#fallback"><code>fallback</code></a> function for precisely this use case.</p>
 				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> slim, { fallback } <span class="hljs-keyword">from</span> <span class="hljs-string">'slimconf'</span>;
@@ -251,13 +270,18 @@ specific.get(<span class="hljs-string">'vars'</span>); <span class="hljs-comment
 config
   .environment({ <span class="hljs-attr">env</span>: <span class="hljs-literal">null</span>, <span class="hljs-attr">fooenv</span>: <span class="hljs-string">'ipsum'</span> })
   .pure(); <span class="hljs-comment">// { foo: 'bar', baz: 3, foobar: 3 }</span></code></pre>
-				<h3 id="utils">Utils</h3>
-				<h4 id="envs"><code>envs</code></h4>
+				<a href="#utils" id="utils" style="color: inherit; text-decoration: none;">
+					<h3>Utils</h3>
+				</a>
+				<a href="#codeenvscode" id="codeenvscode" style="color: inherit; text-decoration: none;">
+					<h4><code>envs</code></h4>
+				</a>
 				<p>A set of convenience utilities for environment variables. <a href="https://rafamel.github.io/slimconf/interfaces/ienvs.html">See docs.</a></p>
 				<ul>
 					<li><strong><code>assert</code>:</strong> requires any number of environment variables to be defined; throws otherwise. <a href="https://rafamel.github.io/slimconf/interfaces/ienvs.html#assert">See docs.</a></li>
 					<li><strong><code>constrain</code>:</strong> requires an environment variable to be defined, throwing otherwise. If an array of allowed values are passed the value will be checked against them, throwing if its not contained in the array. <a href="https://rafamel.github.io/slimconf/interfaces/ienvs.html#constrain">See docs.</a></li>
 					<li><strong><code>get</code>:</strong> same as <code>constrain</code>, but it returns the environment variable value. <a href="https://rafamel.github.io/slimconf/interfaces/ienvs.html#get">See docs.</a></li>
+					<li><strong><code>bool</code>:</strong> it will obtain the environment variable <code>src</code> and return <code>false</code> if it&#39;s <code>undefined</code>, an empty string, <code>&#39;0&#39;</code>, or <code>&#39;false&#39;</code> (case insensitive); <code>true</code> otherwise. <a href="https://rafamel.github.io/slimconf/interfaces/ienvs.html#bool">See docs.</a></li>
 				</ul>
 				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { envs } <span class="hljs-keyword">from</span> <span class="hljs-string">'slimconf'</span>;
 
@@ -271,8 +295,13 @@ envs.constrain(<span class="hljs-string">'NODE_ENV'</span>);
 envs.constrain(<span class="hljs-string">'NODE_ENV'</span>, [<span class="hljs-string">'production'</span>, <span class="hljs-string">'development'</span>, <span class="hljs-string">'test'</span>]);
 
 <span class="hljs-comment">// Throws if undefined and assigns value</span>
-<span class="hljs-keyword">const</span> nodeEnv = envs.get(<span class="hljs-string">'NODE_ENV'</span>);</code></pre>
-				<h4 id="fallback"><code>fallback</code></h4>
+<span class="hljs-keyword">const</span> nodeEnv = envs.get(<span class="hljs-string">'NODE_ENV'</span>);
+
+<span class="hljs-comment">// Treated as boolean</span>
+<span class="hljs-keyword">const</span> isActive = envs.bool(<span class="hljs-string">'IS_ACTIVE'</span>);</code></pre>
+				<a href="#codefallbackcode" id="codefallbackcode" style="color: inherit; text-decoration: none;">
+					<h4><code>fallback</code></h4>
+				</a>
 				<p>Returns a function that will return a fallback if a given value is <code>undefined</code> or, in its case, if it doesn&#39;t match a set of allowed values. It can be used <a href="#mapping-environment-variables">with <code>slim</code> for environment variables mapping</a> or independently. <a href="https://rafamel.github.io/slimconf/globals.html#fallback">See docs.</a></p>
 				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { fallback } <span class="hljs-keyword">from</span> <span class="hljs-string">'slimconf'</span>;
 
@@ -287,7 +316,9 @@ fb(<span class="hljs-string">'foo'</span>) <span class="hljs-comment">// foo</sp
 fba(); <span class="hljs-comment">// development</span>
 fba(<span class="hljs-string">'foo'</span>); <span class="hljs-comment">// development</span>
 fba(<span class="hljs-string">'production'</span>); <span class="hljs-comment">// production</span></code></pre>
-				<h4 id="get"><code>get</code></h4>
+				<a href="#codegetcode" id="codegetcode" style="color: inherit; text-decoration: none;">
+					<h4><code>get</code></h4>
+				</a>
 				<p>Returns the value at a path for an object, if it exists and it&#39;s defined -otherwise it will throw. <a href="https://rafamel.github.io/slimconf/globals.html#get">See docs.</a></p>
 				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-keyword">get</span> } from 'slimconf';
 
@@ -295,7 +326,9 @@ const obj = { foo: { <span class="hljs-attr">bar</span>: <span class="hljs-strin
 
 <span class="hljs-keyword">get</span>(obj, 'foo.bar'); // baz
 <span class="hljs-keyword">get</span>(obj, 'foo.foobar'); // Error</code></pre>
-				<h4 id="set"><code>set</code></h4>
+				<a href="#codesetcode" id="codesetcode" style="color: inherit; text-decoration: none;">
+					<h4><code>set</code></h4>
+				</a>
 				<p>Sets and returns a value at a path for an object, if it exists -otherwise it will throw. <a href="https://rafamel.github.io/slimconf/globals.html#set">See docs.</a></p>
 				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-keyword">set</span> } from 'slimconf';
 
@@ -392,6 +425,7 @@ obj.foo.bar; // foobar</code></pre>
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
 				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
@@ -440,7 +474,7 @@ obj.foo.bar; // foobar</code></pre>
 	</div>
 </footer>
 <div class="container tsd-generator">
-	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
 <script src="assets/js/main.js"></script>

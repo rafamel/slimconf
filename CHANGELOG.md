@@ -1,3 +1,12 @@
+# [0.11.0](https://github.com/rafamel/slimconf/compare/v0.10.1...v0.11.0) (2019-08-04)
+
+
+### Features
+
+* **envs:** adds envs.bool ([b0c5cb2](https://github.com/rafamel/slimconf/commit/b0c5cb2))
+
+
+
 ## [0.10.1](https://github.com/rafamel/slimconf/compare/v0.10.0...v0.10.1) (2019-07-06)
 
 
