@@ -11,9 +11,9 @@ export default function fallback<T, U>(
 ) {
   return (value?: T | U): T | U => {
     if (allow) {
-      for (let allowed of allow) {
+      for (const allowed of allow) {
         if (deep ? isequal(allowed, value) : allowed === value) {
-          return value as (T | U);
+          return value as T | U;
         }
       }
       return fallback;

@@ -36,7 +36,7 @@ export default function environment<U extends IUse, C extends IOfType<any>>(
   ) as { [P in keyof U]: TUseType };
 
   const id = hash(vars);
-  if (!environments.hasOwnProperty(id)) {
+  if (!Object.hasOwnProperty.call(environments, id)) {
     create(id, vars, environments, initial, use, fn);
   }
 
@@ -88,10 +88,10 @@ export function makeOn<U extends IUse>(
         const strategy = !b ? (_: any, val: any) => val : (a as TStrategy);
         const obj = b || (a as IDefinition);
 
-        if (value === undefined || !obj.hasOwnProperty(value)) {
+        if (value === undefined || !Object.hasOwnProperty.call(obj, value)) {
           return obj.default;
         }
-        if (!obj.hasOwnProperty('default')) return obj[value];
+        if (!Object.hasOwnProperty.call(obj, 'default')) return obj[value];
         if (typeof strategy === 'string') {
           switch (strategy) {
             case 'shallow':

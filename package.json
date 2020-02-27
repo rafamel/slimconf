@@ -10,7 +10,7 @@
     "instance"
   ],
   "engines": {
-    "node": ">=8"
+    "node": ">=12"
   },
   "main": "pkg/dist/index.js",
   "types": "pkg/dist/index.d.ts",
@@ -25,7 +25,6 @@
     "clean": "kpo clean --",
     "clean:build": "kpo clean:build --",
     "clean:modules": "kpo clean:modules --",
-    "pre-commit": "kpo pre-commit --",
     "prepublishOnly": "kpo prepublishOnly --",
     "preversion": "kpo preversion --",
     "version": "kpo version --",
@@ -36,6 +35,7 @@
     "lint:code": "kpo lint:code --",
     "lint:types": "kpo lint:types --",
     "test": "kpo test --",
+    "verify": "kpo verify --",
     "validate": "kpo validate --",
     "docs": "kpo docs --",
     "build:pack": "kpo build:pack --",
@@ -54,28 +54,30 @@
     "url": "https://github.com/rafamel/slimconf/issues"
   },
   "devDependencies": {
-    "@babel/cli": "^7.5.5",
     "@pika/pack": "^0.4.0",
-    "@pika/plugin-build-web": "^0.5.1",
-    "@pika/plugin-standard-pkg": "^0.5.1",
-    "@riseup/library": "^0.2.0",
-    "@riseup/tooling": "^0.2.0",
-    "@types/jest": "^24.0.16",
-    "@zerollup/ts-transform-paths": "^1.7.3",
-    "coveralls": "^3.0.5",
-    "husky": "^3.0.2",
-    "jest-cli": "^24.8.0",
-    "kpo": "^0.11.0",
+    "@pika/plugin-build-web": "^0.8.1",
+    "@pika/plugin-standard-pkg": "^0.8.1",
+    "@riseup/library": "^0.5.0",
+    "@riseup/tooling": "^0.5.0",
+    "@types/jest": "^25.1.3",
+    "@types/lodash.isequal": "^4.5.5",
+    "@types/object-hash": "^1.3.1",
+    "@zerollup/ts-transform-paths": "^1.7.11",
+    "coveralls": "^3.0.7",
+    "husky": "^4.2.3",
+    "kpo": "^0.11.1",
     "onchange": "^6.0.0",
-    "prettier": "^1.18.2",
-    "typescript": "^3.5.3"
+    "typescript": "^3.8.2"
   },
   "dependencies": {
-    "@types/lodash.isequal": "^4.5.5",
-    "@types/object-hash": "^1.3.0",
     "lodash.isequal": "^4.5.0",
-    "merge-strategies": "^0.1.4",
-    "object-hash": "^1.3.1"
+    "merge-strategies": "^0.1.6",
+    "object-hash": "^2.0.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "kpo verify"
+    }
   },
   "@pika/pack": {
     "pipeline": [
@@ -92,10 +94,5 @@
         "@pika/plugin-build-web"
       ]
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "kpo pre-commit"
-    }
   }
 }

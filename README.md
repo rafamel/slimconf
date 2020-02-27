@@ -21,8 +21,6 @@
   <br />
 </div>
 
-If you find it useful, consider [starring the project](https://github.com/rafamel/slimconf) 💪 and/or following [its author](https://github.com/rafamel) ❤️ -there's more on the way!
-
 ## Install
 
 [`npm install slimconf`](https://www.npmjs.com/package/slimconf)

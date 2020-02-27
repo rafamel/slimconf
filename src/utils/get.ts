@@ -15,7 +15,7 @@ export default function get(obj: any, path: string, unsafe?: boolean): any {
 
 export function trunk(obj: any, strArr: string[]): any {
   const str = String(strArr.shift());
-  if (obj.hasOwnProperty(str)) {
+  if (Object.hasOwnProperty.call(obj, str)) {
     return strArr.length ? trunk(obj[str], strArr) : obj[str];
   }
   throw Error(`key ${str} doesn't exist`);

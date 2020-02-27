@@ -10,7 +10,7 @@ export default function set<T>(obj: any, path: string, value: T): T {
 /** @hidden */
 export function trunk<T>(obj: any, strArr: string[], value: T): T {
   const str = String(strArr.shift());
-  if (obj.hasOwnProperty(str)) {
+  if (Object.hasOwnProperty.call(obj, str)) {
     return strArr.length ? trunk(obj[str], strArr, value) : (obj[str] = value);
   }
   throw Error(`key ${str} doesn't exist`);
